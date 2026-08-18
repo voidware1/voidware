@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOID — Games</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050505;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(circle at center, rgba(255,255,255,.035), transparent 35%),
+        linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.55));
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero {
+    max-width: 850px;
+    animation: appear 1.2s ease forwards;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    background: rgba(255,255,255,.035);
+    backdrop-filter: blur(10px);
+    color: #aaa;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(60px, 11vw, 140px);
+    line-height: .85;
+    letter-spacing: -7px;
+    font-weight: 800;
+    background: linear-gradient(180deg, #ffffff 20%, #777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    margin: 28px auto 35px;
+    max-width: 600px;
+    color: #888;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.enter {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 28px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.06);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .25s ease;
+    backdrop-filter: blur(12px);
+}
+
+.enter:hover {
+    transform: translateY(-3px);
+    background: white;
+    color: black;
+    box-shadow: 0 10px 40px rgba(255,255,255,.12);
+}
+
+.arrow {
+    transition: .25s ease;
+}
+
+.enter:hover .arrow {
+    transform: translateX(5px);
+}
+
+.footer {
+    position: fixed;
+    z-index: 3;
+    bottom: 22px;
+    width: 100%;
+    text-align: center;
+    color: #444;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+<div class="overlay"></div>
+
+<main class="content">
+    <section class="hero">
+
+        <div class="badge">Welcome</div>
+
+        <h1>VOID</h1>
+
+        <p class="subtitle">
+            A simple place to play.  
+            Fast. Clean. Minimal.
+        </p>
+
+        <!-- Change this link to your built-in games/navigation page -->
+        <a href="games.html" class="enter">
+            Enter Library
+            <span class="arrow">→</span>
+        </a>
+
+    </section>
+</main>
+
+<div class="footer">
+    PLAY • EXPLORE • ENJOY
+</div>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let mouse = {
+    x: null,
+    y: null,
+    radius: 130
+};
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize", resize);
+
+window.addEventListener("mousemove", e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+window.addEventListener("mouseleave", () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
+resize();
+
+const amount = Math.min(
+    150,
+    Math.floor((window.innerWidth * window.innerHeight) / 9000)
+);
+
+for (let i = 0; i < amount; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.8 + .4,
+        speedX: (Math.random() - .5) * .35,
+        speedY: (Math.random() - .5) * .35
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let p of particles) {
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width)
+            p.speedX *= -1;
+
+        if (p.y < 0 || p.y > canvas.height)
+            p.speedY *= -1;
+
+        if (mouse.x !== null) {
+            let dx = mouse.x - p.x;
+            let dy = mouse.y - p.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius) {
+                p.x -= dx / distance * 0.25;
+                p.y -= dy / distance * 0.25;
+            }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,.55)";
+        ctx.fill();
+    }
+
+    // Connect nearby particles
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+
+            let dx = particles[i].x - particles[j].x;
+            let dy = particles[i].y - particles[j].y;
+
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 100) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+
+                ctx.strokeStyle =
+                    `rgba(255,255,255,${0.08 * (1 - distance / 100)})`;
+
+                ctx.lineWidth = .5;
+                ctx.stroke();
+            }
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
