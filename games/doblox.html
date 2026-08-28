@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doblox — Voidware</title>
+<meta name="game-title" content="Doblox">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Doblox</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!DOCTYPE html&gt;
+
+
+&lt;!-- Ultimate Game Stash file--&gt; 
+&lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
+
+
+
+&lt;html lang=&quot;en-us&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;/&gt;
+    &lt;title&gt;google.com&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/bubbls/robobs@main/style.css&quot;/&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.jsdelivr.net/gh/bubbls/robobs@main/Web%20Audio%20Plugin/howler.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.jsdelivr.net/gh/bubbls/robobs@b685f532590449e8ed9fa5158ffd37fa7d7c1a0d/Web%20Audio%20Plugin/WebAudio.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        window.SDK_OPTIONS = {
+            gameId: &quot;jp112o3o4hzgrnc7zaewjkrfk282pul8&quot;,
+            onEvent: function (a) {
+                switch (a.name) {
+                    case &quot;SDK_GAME_PAUSE&quot;:
+                        console.log(&quot;Oyun duraklatıldı, ses kapatılıyor...&quot;);
+                        if (typeof myGameInstance !== 'undefined' &amp;&amp; myGameInstance) {
+                            myGameInstance.SendMessage('AudioManager', 'MuteAudio');
+                        }
+                        break;
+                    case &quot;SDK_GAME_START&quot;:
+                        console.log(&quot;Reklam bitti, oyun devam ediyor...&quot;);
+                        if (typeof myGameInstance !== 'undefined' &amp;&amp; myGameInstance) {
+                            myGameInstance.SendMessage('AudioManager', 'UnmuteAudio');
+                        }
+                        break;
+                    case &quot;SDK_READY&quot;:
+                        console.log(&quot;SDK hazır.&quot;);
+                        break;
+                }
+            }
+        };
+        (function (a, b, c) {
+            var d = a.getElementsByTagName(b)[0];
+            a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = &quot;https://cdn.jsdelivr.net/gh/testamalame/sef@main/sedk.js&quot;, d.parentNode.insertBefore(a, d));
+        })(document, &quot;script&quot;, &quot;gamemonetize-sdk&quot;);
+    &lt;/script&gt;
+    &lt;style&gt;
+        canvas:focus {
+            outline: none;
+        }
+        html, body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            height: 100%;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;dark&quot;&gt;b
+    &lt;div id=&quot;unity-container&quot; class=&quot;unity-desktop&quot;&gt;
+        &lt;canvas id=&quot;unity-canvas&quot; tabindex=&quot;-1&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;loading-cover&quot; style=&quot;display:none;&quot;&gt;
+        &lt;div id=&quot;unity-loading-bar&quot;&gt;
+            &lt;div id=&quot;unity-logo&quot;&gt;&lt;img src=&quot;&quot;/&gt;&lt;/div&gt;
+            &lt;div id=&quot;unity-progress-bar-empty&quot; style=&quot;display: none;&quot;&gt;
+                &lt;div id=&quot;unity-progress-bar-full&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        const hideFullScreenButton = &quot;&quot;;
+        const buildUrl = &quot;https://cdn.jsdelivr.net/gh/bubbls/robobs@main/Build/&quot;;
+
+        const dataParts = [
+            &quot;FameGame.data.gz.part000.gz&quot;,
+            &quot;FameGame.data.gz.part001.gz&quot;,
+            &quot;FameGame.data.gz.part002.gz&quot;
+        ].map(part =&gt; buildUrl + &quot;/&quot; + part);
+
+        const wasmParts = [
+            &quot;FameGame.wasm.gz.part000.gz&quot;,
+            &quot;FameGame.wasm.gz.part001.gz&quot;,
+            &quot;FameGame.wasm.gz.part002.gz&quot;,
+            &quot;FameGame.wasm.gz.part003.gz&quot;
+        ].map(part =&gt; buildUrl + &quot;/&quot; + part);
+
+        async function combineParts(parts) {
+            try {
+                const buffers = await Promise.all(
+                    parts.map(part =&gt;
+                        fetch(part).then(response =&gt; {
+                            if (!response.ok) throw new Error(`Failed to load ${part}`);
+                            return response.arrayBuffer();
+                        })
+                    )
+                );
+                const totalSize = buffers.reduce((sum, buffer) =&gt; sum + buffer.byteLength, 0);
+                const combinedArray = new Uint8Array(totalSize);
+                let offset = 0;
+                for (const buffer of buffers) {
+                    combinedArray.set(new Uint8Array(buffer), offset);
+                    offset += buffer.byteLength;
+                }
+                const blob = new Blob([combinedArray], { type: 'application/octet-stream' });
+                return URL.createObjectURL(blob);
+            } catch (error) {
+                console.error(&quot;Part birleştirme hatası:&quot;, error);
+                throw error;
+            }
+        }
+
+        const config = {
+            dataUrl: &quot;&quot;,
+            frameworkUrl: buildUrl + &quot;/FameGame.framework.js&quot;,
+            codeUrl: &quot;&quot;,
+            streamingAssetsUrl: &quot;https://cdn.jsdelivr.net/gh/bubbls/robobs@tree/main/StreamingAssets&quot;,
+            companyName: &quot;DefaultCompany&quot;,
+            productName: &quot;HZ&quot;,
+            productVersion: &quot;0.1&quot;
+        };
+
+        const loaderUrl = buildUrl + &quot;/FameGame.loader.js&quot;;
+
+        const container = document.querySelector(&quot;#unity-container&quot;);
+        const canvas = document.querySelector(&quot;#unity-canvas&quot;);
+        const loadingCover = document.querySelector(&quot;#loading-cover&quot;);
+        const progressBarEmpty = document.querySelector(&quot;#unity-progress-bar-empty&quot;);
+        const progressBarFull = document.querySelector(&quot;#unity-progress-bar-full&quot;);
+        const spinner = document.querySelector('.spinner');
+
+        let isAdShown = false;
+
+        function showAdOnClick() {
+            if (!isAdShown &amp;&amp; typeof sdk !== 'undefined' &amp;&amp; typeof sdk.showBanner !== 'undefined') {
+                sdk.showBanner();
+                isAdShown = true;
+                console.log(&quot;Reklam çağrıldı.&quot;);
+            } else {
+                console.warn(&quot;SDK veya showBanner tanımlı değil.&quot;);
+            }
+        }
+
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            container.className = &quot;unity-mobile&quot;;
+        }
+
+        loadingCover.style.background = &quot;url('https://cdn.jsdelivr.net/gh/classrooms-1/ohanganamaranes@main/background.jpg') center / cover&quot;;
+        loadingCover.style.display = &quot;&quot;;
+
+        document.addEventListener('contextmenu', event =&gt; event.preventDefault());
+
+        function FocusGame() {
+            window.focus();
+            canvas.focus();
+        }
+
+        window.addEventListener('pointerdown', FocusGame);
+        window.addEventListener('touchstart', FocusGame);
+
+        let StartUnityInstance;
+        let myGameInstance;
+        let ysdk = null;
+
+        let environmentData = {
+            language: &quot;en&quot;,
+            domain: &quot;default_domain&quot;,
+            deviceType: &quot;desktop&quot;,
+            isMobile: false,
+            isDesktop: true,
+            isTablet: false,
+            isTV: false,
+            appID: &quot;default_app_id&quot;,
+            browserLang: navigator.language || &quot;en&quot;,
+            payload: null,
+            promptCanShow: false,
+            reviewCanShow: false,
+            platform: navigator.platform,
+            browser: (function() {
+                let userAgent = navigator.userAgent;
+                if (userAgent.includes(&quot;YaBrowser&quot;)) return &quot;Yandex&quot;;
+                if (userAgent.includes(&quot;OPR&quot;) || userAgent.includes(&quot;Opera&quot;)) return &quot;Opera&quot;;
+                if (userAgent.includes(&quot;Firefox&quot;)) return &quot;Firefox&quot;;
+                if (userAgent.includes(&quot;MSIE&quot;) || userAgent.includes(&quot;Trident&quot;)) return &quot;IE&quot;;
+                if (userAgent.includes(&quot;Edge&quot;)) return &quot;Edge&quot;;
+                if (userAgent.includes(&quot;Chrome&quot;)) return &quot;Chrome&quot;;
+                if (userAgent.includes(&quot;Safari&quot;)) return &quot;Safari&quot;;
+                return &quot;Other&quot;;
+            })()
+        };
+
+        let cloudSaves = 'noData';
+        let paymentsData = 'none';
+        let playerData = 'noData';
+        let player = null;
+        let payments = null;
+        let initGame = false;
+        let nowFullAdOpen = false;
+
+        function GetPayments() { console.warn(&quot;GetPayments is not implemented&quot;); return Promise.resolve(&quot;none&quot;); }
+        function BuyPayments() { console.warn(&quot;GetPayments is not implemented&quot;); return Promise.resolve(&quot;none&quot;); }
+        function SaveCloud() { console.warn(&quot;SaveCloud is not implemented&quot;); }
+        function LoadCloud() { console.warn(&quot;LoadCloud is not implemented&quot;); return Promise.resolve(&quot;noData&quot;); }
+        function InitPlayer() { console.warn(&quot;InitPlayer is not implemented&quot;); return Promise.resolve(&quot;noData&quot;); }
+
+        function FullAdShow() {
+            try {
+                if (!nowFullAdOpen) {
+                    nowFullAdOpen = true;
+                    if (initGame) {
+                        myGameInstance.SendMessage(&quot;YandexGame&quot;, &quot;OpenFullAd&quot;);
+                    }
+                    setTimeout(() =&gt; {
+                        nowFullAdOpen = false;
+                        if (initGame) {
+                            myGameInstance.SendMessage(&quot;YandexGame&quot;, &quot;CloseFullAd&quot;, &quot;true&quot;);
+                        }
+                        FocusGame();
+                    }, 500);
+                }
+            } catch (error) {}
+        }
+
+        function RewardedShow(rewardId) {
+            try {
+                myGameInstance.SendMessage(&quot;YandexGame&quot;, &quot;RewardVideo&quot;, rewardId);
+                function closeRewardedAd() {
+                    myGameInstance.SendMessage(&quot;YandexGame&quot;, &quot;CloseRewardVideo&quot;);
+                    FocusGame();
+                }
+                closeRewardedAd();
+            } catch (error) {}
+        }
+
+        function StickyAdActivity() { console.warn(&quot;StickyAdActivity is not implemented&quot;); }
+        function Review() { console.warn(&quot;Review is not implemented&quot;); }
+        function PromptShow() { console.warn(&quot;PromptShow is not implemented&quot;); }
+        function InitLeaderboards() { console.warn(&quot;InitLeaderboards is not implemented&quot;); }
+        function GetLeaderboardScores() { console.warn(&quot;GetLeaderboardScores is not implemented&quot;); }
+        function SetLeaderboardScores() { console.warn(&quot;SetLeaderboardScores is not implemented&quot;); }
+        function ConsumePurchase() { console.warn(&quot;ConsumePurchase is not implemented&quot;); }
+        function ConsumePurchases() { console.warn(&quot;ConsumePurchases is not implemented&quot;); }
+
+        try {
+            const script = document.createElement(&quot;script&quot;);
+            script.src = loaderUrl;
+            script.onload = async () =&gt; {
+                try {
+                    config.dataUrl = await combineParts(dataParts);
+                    config.codeUrl = await combineParts(wasmParts);
+                    StartUnityInstance = function () {
+                        createUnityInstance(canvas, config, (progress) =&gt; {
+                            spinner.style.display = &quot;none&quot;;
+                            progressBarEmpty.style.display = &quot;&quot;;
+                            progressBarFull.style.width = `${100 * progress}%`;
+                        }).then((unityInstance) =&gt; {
+                            myGameInstance = unityInstance;
+                            loadingCover.style.display = &quot;none&quot;;
+                            // Oyun yüklendiğinde tıklama olayını ekle
+                            canvas.addEventListener('pointerdown', showAdOnClick);
+                            canvas.addEventListener('touchstart', showAdOnClick);
+                            // Blob URL'leri temizle
+                            URL.revokeObjectURL(config.dataUrl);
+                            URL.revokeObjectURL(config.codeUrl);
+                        }).catch((message) =&gt; {
+                            console.error(&quot;Unity yükleme hatası:&quot;, message);
+                        });
+                    };
+                    StartUnityInstance();
+                } catch (error) {
+                    console.error(&quot;Part birleştirme sırasında hata:&quot;, error);
+                }
+            };
+            document.body.appendChild(script);
+        } catch (error) {
+            console.error(&quot;Başlatma sırasında hata:&quot;, error);
+        }
+
+        function InitGame() {
+            try {
+                console.log('Init Game Success');
+                initGame = true;
+                if (nowFullAdOpen === true &amp;&amp; myGameInstance != null) {
+                    myGameInstance.SendMessage('YandexGame', 'OpenFullAd');
+                }
+            } catch (error) {
+                console.error(&quot;InitGame sırasında hata:&quot;, error);
+            }
+        }
+
+        window.addEventListener(&quot;unhandledrejection&quot;, function(event) {
+            console.warn(&quot;Hata es geçildi:&quot;, event.reason);
+            event.preventDefault();
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>

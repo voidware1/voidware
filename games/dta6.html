@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTA 6 — Voidware</title>
+<meta name="game-title" content="DTA 6">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">DTA 6</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en-us&quot;&gt;
+
+&lt;head&gt;
+&lt;base href=&quot;https://cdn.jsdelivr.net/gh/greeniYT/dta6@main/&quot; /&gt;   
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot; /&gt;
+    &lt;title&gt;DTA6&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;TemplateData/style.css&quot; /&gt;
+    &lt;script src=&quot;TemplateData/gamepush-unity.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        const projectId = &quot;10947&quot;;
+        const publicToken = &quot;1jUALf4gEH9NVcmbDHHMyFvrKj9BkqrY&quot;;
+        const showPreloaderAd = &quot;true&quot;;
+        const overlayBackgroundColor = &quot;&quot;;
+        const progressBarFillColor = &quot;&quot;;
+        const progressBarBackgroundColor = &quot;&quot;;
+        const progressBarBorderColor = &quot;&quot;;
+
+        const autocallGameReady = &quot;&quot;;
+    &lt;/script&gt;
+    &lt;script&gt;
+        var _unityAwaiter = {};
+        _unityAwaiter.ready = new Promise((resolve, reject) =&gt; {
+            _unityAwaiter.done = resolve;
+            _unityAwaiter.abort = reject;
+        });
+
+        var _gpAwaiter = {};
+        _gpAwaiter.ready = new Promise((resolve) =&gt; {
+            _gpAwaiter.done = resolve;
+        });
+
+        window.unityInstance = null;
+        window.onGPError = () =&gt; _gpAwaiter.done();
+
+        window.onGPInit = async(gp) =&gt; {
+            if (showPreloaderAd == &quot;true&quot; || showPreloaderAd == &quot;1&quot;) {
+                gp.ads.showPreloader();
+            }
+
+            window.GamePush = new GamePushUnity(gp);
+            gp.player.ready.finally(_gpAwaiter.done);
+
+            await _unityAwaiter.ready;
+
+            if (autocallGameReady != null &amp;&amp; parseFloat(autocallGameReady) &gt; 0) {
+                setTimeout(() =&gt; gp.gameStart(), parseFloat(autocallGameReady));
+            }
+        };
+    &lt;/script&gt;
+    &lt;script&gt;
+        ((g, a, m, e) =&gt; {
+            let o = () =&gt; {
+                let p = document.createElement(&quot;script&quot;);
+                p.src = `${a[0]}?projectId=${m}&amp;publicToken=${e}`, p.onerror = () =&gt; {
+                    a.shift(), a.length &gt; 0 ? (o(), p.remove()) : &quot;onGPError&quot; in g &amp;&amp; g.onGPError()
+                }, document.head.appendChild(p)
+            };
+            o()
+        })(window, [&quot;./gamepush.js&quot;, &quot;./gamepush.js&quot;, &quot;./gamepush.js&quot;], projectId, publicToken);
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body class=&quot;light&quot;&gt;
+    &lt;div id=&quot;unity-container&quot; class=&quot;unity-desktop&quot;&gt;
+        &lt;canvas id=&quot;unity-canvas&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;loading-cover&quot; style=&quot;display:none;&quot;&gt;
+        &lt;div id=&quot;unity-loading-bar&quot;&gt;
+            &lt;div id=&quot;unity-logo&quot;&gt;&lt;img src=&quot;logo.png&quot; /&gt;&lt;/div&gt;
+            &lt;div id=&quot;unity-progress-bar-empty&quot; style=&quot;display: none;&quot;&gt;
+                &lt;div id=&quot;unity-progress-bar-full&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        (async () =&gt; {
+            const buildUrl = &quot;https://cdn.jsdelivr.net/gh/greeniYT/dta6@main/Build/&quot;;
+            
+            const parts = [
+                buildUrl + &quot;/cb329eb1ef692e19f43f5fddf5d5b128.data.unityweb.part1&quot;,
+                buildUrl + &quot;/cb329eb1ef692e19f43f5fddf5d5b128.data.unityweb.part2&quot;
+            ];
+
+            try {
+                console.log(&quot;Downloading and merging data parts...&quot;);
+                
+                const responses = await Promise.all(parts.map(url =&gt; fetch(url).then(r =&gt; {
+                    if (!r.ok) throw new Error(&quot;Failed to load part: &quot; + url);
+                    return r.arrayBuffer();
+                })));
+
+                const mergedBlob = new Blob(responses, { type: &quot;application/octet-stream&quot; });
+                const mergedUrl = URL.createObjectURL(mergedBlob);
+            
+                const loaderUrl = buildUrl + &quot;/Builds.loader.js&quot;;
+                const config = {
+                    dataUrl: mergedUrl,
+                    frameworkUrl: buildUrl + &quot;/3dffb3ed1e706df32d3b7b014ff04f0b.js.unityweb&quot;,
+                    codeUrl: buildUrl + &quot;/efd904c4e9e86d7a5592528dd74dfe59.wasm.unityweb&quot;,
+                    streamingAssetsUrl: &quot;StreamingAssets&quot;,
+                    companyName: &quot;vsegon&quot;,
+                    productName: &quot;DTA6&quot;,
+                    productVersion: &quot;1&quot;,
+                };
+
+                const container = document.querySelector(&quot;#unity-container&quot;);
+                const canvas = document.querySelector(&quot;#unity-canvas&quot;);
+                const loadingCover = document.querySelector(&quot;#loading-cover&quot;);
+                const progressBarEmpty = document.querySelector(&quot;#unity-progress-bar-empty&quot;);
+                const progressBarFull = document.querySelector(&quot;#unity-progress-bar-full&quot;);
+                const spinner = document.querySelector('.spinner');
+
+                if (overlayBackgroundColor !== &quot;-&quot; &amp;&amp; overlayBackgroundColor !== &quot; &quot; &amp;&amp; overlayBackgroundColor !== &quot;&quot;)
+                    canvas.style.background = overlayBackgroundColor;
+
+                if (progressBarFillColor !== &quot;-&quot; &amp;&amp; progressBarFillColor !== &quot; &quot; &amp;&amp; progressBarFillColor !== &quot;&quot;)
+                    progressBarFull.style.background = progressBarFillColor;
+
+                if (progressBarBackgroundColor !== &quot;-&quot; &amp;&amp; progressBarBackgroundColor !== &quot; &quot; &amp;&amp; progressBarBackgroundColor !== &quot;&quot;)
+                    progressBarEmpty.style.background = progressBarBackgroundColor;
+
+                if (progressBarBorderColor !== &quot;-&quot; &amp;&amp; progressBarBorderColor !== &quot; &quot; &amp;&amp; progressBarBorderColor !== &quot;&quot;)
+                    progressBarEmpty.style.border.color = progressBarBorderColor;
+
+
+                if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                    container.className = &quot;unity-mobile&quot;;
+                }
+
+                loadingCover.style.display = &quot;&quot;;
+
+                const unityLoader = document.createElement(&quot;script&quot;);
+                unityLoader.src = loaderUrl;
+                unityLoader.onload = async() =&gt; {
+                    await _gpAwaiter.ready;
+                    createUnityInstance(canvas, config, (progress) =&gt; {
+                        spinner.style.display = &quot;none&quot;;
+                        progressBarEmpty.style.display = &quot;&quot;;
+                        progressBarFull.style.width = `${100 * progress}%`;
+                    }).then((unityInstance) =&gt; {
+                        window.unityInstance = unityInstance;
+                        _unityAwaiter.done(unityInstance);
+                        loadingCover.style.display = &quot;none&quot;;
+                    }).catch((message) =&gt; {
+                        _unityAwaiter.abort(message);
+                        alert(message);
+                    });
+                };
+                document.body.appendChild(unityLoader);
+
+                document.addEventListener(&quot;pointerdown&quot;, () =&gt; {
+                    container.focus();
+                    window.focus();
+                    canvas.focus();
+                });
+            } catch (error) {
+                console.error(&quot;Error loading game data:&quot;, error);
+                alert(&quot;Failed to load game: &quot; + error.message);
+                _unityAwaiter.abort(error);
+            }
+        })();
+    &lt;/script&gt;
+&lt;script defer src=&quot;https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015&quot; integrity=&quot;sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==&quot; data-cf-beacon='{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;466cade843754106bbf20c4f18f202b6&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}' crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>
