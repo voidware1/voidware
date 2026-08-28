@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aquapark.io — Voidware</title>
+<meta name="game-title" content="Aquapark.io">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Aquapark.io</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!DOCTYPE html&gt;
+
+
+
+&lt;!-- Ultimate Game Stash file--&gt; 
+&lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
+
+
+&lt;html lang=&quot;en-us&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+   &lt;base href=&quot;https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/bad-parenting/&quot;&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+  &lt;title&gt;Unity WebGL Player | Bad Parenting 1&lt;/title&gt;
+  &lt;link rel=&quot;shortcut icon&quot; href=&quot;TemplateData/favicon.ico&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;TemplateData/style.css&quot;&gt;
+
+  &lt;style&gt;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    #unity-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+    #unity-canvas {
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+    #unity-loading-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #unity-progress-bar-full {
+      height: 100%;
+      width: 0%;
+      background: #09f;
+      transition: width 0.2s ease;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;unity-container&quot;&gt;
+    &lt;canvas id=&quot;unity-canvas&quot; tabindex=&quot;-1&quot;&gt;&lt;/canvas&gt;
+
+    &lt;div id=&quot;unity-loading-bar&quot;&gt;
+      &lt;div id=&quot;unity-progress-bar-full&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    const canvas = document.querySelector(&quot;#unity-canvas&quot;);
+    const loadingBar = document.querySelector(&quot;#unity-loading-bar&quot;);
+    const progressBarFull = document.querySelector(&quot;#unity-progress-bar-full&quot;);
+
+    function unityShowBanner(msg, type) {
+      // no need for errors
+    }
+
+    const buildUrl = &quot;Build&quot;;
+    const loaderUrl = buildUrl + &quot;/Build.loader.js&quot;;
+
+    async function loadSplitData(baseUrl, parts) {
+      const chunks = [];
+      for (let i = 1; i &lt;= parts; i++) {
+        const partUrl = `${baseUrl}.part${i}`;
+        const response = await fetch(partUrl);
+        if (!response.ok) throw new Error(`Failed to load ${partUrl}`);
+        const chunk = await response.arrayBuffer();
+        chunks.push(chunk);
+        progressBarFull.style.width = (i / parts) * 30 + &quot;%&quot;;
+      }
+      const mergedBlob = new Blob(chunks);
+      return URL.createObjectURL(mergedBlob);
+    }
+
+    const config = {
+      dataUrl: buildUrl + &quot;/Build.data&quot;,
+      frameworkUrl: buildUrl + &quot;/Build.framework.js&quot;,
+      codeUrl: buildUrl + &quot;/Build.wasm&quot;,
+      streamingAssetsUrl: &quot;StreamingAssets&quot;,
+      companyName: &quot;twoootwo&quot;,
+      productName: &quot;Bad Parenting 1&quot;,
+      productVersion: &quot;1.0&quot;,
+      showBanner: unityShowBanner,
+    };
+
+    // Make the canvas dynamically fit the screen
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener(&quot;resize&quot;, resizeCanvas);
+    resizeCanvas();
+
+    loadingBar.style.display = &quot;block&quot;;
+
+    Promise.all([
+      loadSplitData(&quot;Build/Build.wasm&quot;, 2),
+      loadSplitData(&quot;Build/Build.data&quot;, 3)
+    ])
+    .then(([wasmUrl, dataUrl]) =&gt; {
+      config.codeUrl = wasmUrl;
+      config.dataUrl = dataUrl;
+
+      const script = document.createElement(&quot;script&quot;);
+      script.src = loaderUrl;
+      script.onload = () =&gt; {
+        createUnityInstance(canvas, config, (progress) =&gt; {
+          progressBarFull.style.width = 30 + (70 * progress) + &quot;%&quot;;
+        }).then((unityInstance) =&gt; {
+          loadingBar.style.display = &quot;none&quot;;
+          window.addEventListener(&quot;click&quot;, () =&gt; {
+            unityInstance.SetFullscreen(1);
+          });
+          URL.revokeObjectURL(wasmUrl);
+          URL.revokeObjectURL(dataUrl);
+        }).catch((message) =&gt; {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    })
+    .catch((error) =&gt; {
+      alert(&quot;Failed to load game data: &quot; + error.message);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>

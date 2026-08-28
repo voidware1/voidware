@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aquapark.io — Voidware</title>
+<meta name="game-title" content="Aquapark.io">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Aquapark.io</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!-- Ultimate Game Stash file--&gt;
+&lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
+&lt;!-- Made by Genizy--&gt;
+
+&lt;!doctype html&gt;
+&lt;html lang=&quot;en-us&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;base href=&quot;https://cdn.jsdelivr.net/gh/bubblfan/braybray/aquapark-io/&quot; /&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+    &lt;title&gt;Aquapark IO Unblocked&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;TemplateData/css/style.css&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;igroutka.ru&quot; /&gt;
+    &lt;link rel=&quot;canonical&quot; href=&quot;https://igroutka.ru/&quot; /&gt;
+    &lt;script src=&quot;Build/UnityLoader.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;TemplateData/load.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;div class=&quot;keepRatio&quot;&gt;
+      &lt;div class=&quot;webgl-content&quot;&gt;
+        &lt;button
+          class=&quot;icon-resize-full&quot;
+          id=&quot;fullScreenButton&quot;
+          onclick=&quot;ToggleFullScreen()&quot;
+        &gt;&lt;/button&gt;
+        &lt;a
+          id=&quot;logoname&quot;
+          style=&quot;display: none&quot;
+          href=&quot;https://igroutka.ru/&quot;
+          target=&quot;_blank&quot;
+          &gt;igroutka.ru&lt;/a
+        &gt;
+        &lt;div id=&quot;gameContainer&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;loadingBlock&quot;&gt;
+        &lt;h1 class=&quot;subtitle&quot;&gt;Aquapark.io&lt;/h1&gt;
+        &lt;script type=&quot;text/javascript&quot; style=&quot;display: none&quot;&gt;
+          window.__mirage2 = {
+            petok: &quot;aCj.QNwGUOfLrCmu67eagpL0xPleX_OUL2kyVMsyHGk-31536000-0&quot;,
+          };
+        &lt;/script&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;patch/cdn/mirage2.min.js&quot;&gt;&lt;/script&gt;
+        &lt;img
+          class=&quot;logo-game&quot;
+          data-cfsrc=&quot;Aquaparkio512.jpg&quot;
+          style=&quot;display: none; visibility: hidden&quot;
+        /&gt;&lt;noscript&gt;&lt;img class=&quot;logo-game&quot; src=&quot;Aquaparkio512.jpg&quot; /&gt;&lt;/noscript&gt;
+        &lt;div id=&quot;progressBar&quot;&gt;
+          &lt;div style=&quot;margin-bottom: 5px&quot;&gt;Loading ...&lt;/div&gt;
+          &lt;div class=&quot;centered emptyBarbg&quot;&gt;
+            &lt;div id=&quot;emptyBar&quot;&gt;&lt;/div&gt;
+            &lt;div id=&quot;fullBar&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;warningBrowserBlock&quot; style=&quot;display: none&quot;&gt;
+          &lt;div class=&quot;warningBrowserText&quot;&gt;
+            Your browser may not be compatible with this website. For an optimal
+            experience, we suggest you to download one of this popular web
+            browsers.
+          &lt;/div&gt;
+          &lt;div class=&quot;browserIcons&quot;&gt;
+            &lt;span&gt;Firefox browser&lt;/span&gt;
+            &lt;span&gt;Chrome browser&lt;/span&gt;
+            &lt;span&gt;Safari browser&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;warningMobileBlock&quot; style=&quot;display: none&quot;&gt;&lt;/div&gt;
+        &lt;div
+          class=&quot;cover&quot;
+          style=&quot;background-image: url(Aquaparkio512.jpg)&quot;
+        &gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;errorBrowserBlock&quot; style=&quot;display: none&quot;&gt;
+        &lt;div id=&quot;errorContent&quot;&gt;
+          &lt;div id=&quot;errorBrowserText&quot;&gt;
+            Your browser does not support WebGL. &lt;br /&gt;
+            You can download one of this popular web browsers.
+          &lt;/div&gt;
+          &lt;div class=&quot;browserIcons&quot;&gt;
+            &lt;span&gt;Firefox browser&lt;/span&gt;
+            &lt;span&gt;Chrome browser&lt;/span&gt;
+            &lt;span&gt;Safari browser&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+      (function (a, b, c) {
+        var d = a.getElementsByTagName(b)[0];
+        a.getElementById(c) ||
+          ((a = a.createElement(b)),
+          (a.id = c),
+          (a.src = &quot;patch/js/gm-sdk-preload.js?v=&quot; + Date.now()),
+          d.parentNode.insertBefore(a, d));
+      })(document, &quot;script&quot;, &quot;gamemonetize-preload-api&quot;);
+    &lt;/script&gt;
+    &lt;script src=&quot;js/analytics_ubg_v1_4.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/ubg235_client_v1_1.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>

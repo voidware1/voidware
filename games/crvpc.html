@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitlife — Voidware</title>
+<meta name="game-title" content="Bitlife">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Bitlife</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!-- Ultimate Game Stash file--&gt; 
+&lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en-us&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;
+    &lt;title&gt;Unity WebGL Player&lt;/title&gt;
+    &lt;style&gt;
+        *, html, body { padding:0; margin:0; box-sizing:border-box; }
+        html, body { overflow: hidden; height: 100%; background: #000; -webkit-user-select: none; user-select: none; }
+        canvas:focus { outline: none; }
+        #unity-container { width:100%; height:100%; }
+        #unity-canvas   { width:100%; height:100%; display:block; }
+        #loading-cover { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #1a1a2e; z-index: 100; }
+        #loading-cover.hidden { display: none; }
+        #load-label { color: #ccc; font-family: sans-serif; font-size: 14px; margin-bottom: 16px; }
+        #bar-wrap { width: 260px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; }
+        #bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg,#4e9af1,#a78bfa); border-radius: 4px; transition: width .25s ease; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div id=&quot;unity-container&quot;&gt;
+    &lt;canvas id=&quot;unity-canvas&quot; tabindex=&quot;-1&quot;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;loading-cover&quot;&gt;
+    &lt;div id=&quot;load-label&quot;&gt;Connecting to server...&lt;/div&gt;
+    &lt;div id=&quot;bar-wrap&quot;&gt;&lt;div id=&quot;bar-fill&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var ysdk = {
+    environment: {
+        i18n: { lang: &quot;en&quot;, tld: &quot;com&quot; },
+        app: { id: &quot;489585&quot; },
+        deviceInfo: { type: &quot;desktop&quot; }
+    },
+    features: {
+        LoadingAPI: {
+            ready: function() { console.log(&quot;Game Ready&quot;); }
+        }
+    },
+    getEnvironment: function() { return this.environment; },
+    adv: {
+        showFullscreenAdv: function(c) { if(c &amp;&amp; c.callbacks &amp;&amp; c.callbacks.onClose) c.callbacks.onClose(true); },
+        showRewardedVideo: function(c) { if(c &amp;&amp; c.callbacks &amp;&amp; c.callbacks.onClose) c.callbacks.onClose(true); }
+    },
+    getPlayer: function() {
+        return Promise.resolve({
+            getName: function() { return &quot;Guest&quot;; },
+            getPhoto: function() { return &quot;&quot;; },
+            getUniqueID: function() { return &quot;0&quot;; }
+        });
+    }
+};
+
+var NO_DATA = &quot;no data&quot;;
+var playerData = NO_DATA;
+var paymentsData = NO_DATA;
+var cloudSaves = NO_DATA;
+var initGame = true;
+var player = null;
+var ygGameInstance = null;
+var initYSDK = true;
+
+function LogStyledMessage(msg, style) { console.log(msg); }
+function YG2Instance(method, arg) {
+    if (!ygGameInstance) return;
+    try {
+        if (arg !== undefined) ygGameInstance.SendMessage(&quot;YG2Instance&quot;, method, arg);
+        else ygGameInstance.SendMessage(&quot;YG2Instance&quot;, method);
+    } catch(e) {}
+}
+
+function SaveCloud()        {}
+function LoadCloud()        { YG2Instance(&quot;SetLoadSaves&quot;, NO_DATA); return Promise.resolve(NO_DATA); }
+function StickyAdActivity() {}
+function RewardedAdvShow(id){ YG2Instance(&quot;OpenRewardedAdv&quot;); YG2Instance(&quot;RewardAdv&quot;, id); YG2Instance(&quot;CloseRewardedAdv&quot;); }
+function InterAdvShow()     { YG2Instance(&quot;OpenInterAdv&quot;); YG2Instance(&quot;CloseInterAdv&quot;,&quot;true&quot;); }
+function InitPayments()     { YG2Instance(&quot;PaymentsEntries&quot;, NO_DATA); return Promise.resolve(NO_DATA); }
+function InitPlayer()       {
+    const j = JSON.stringify({ playerAuth:&quot;rejected&quot;, playerName:&quot;Guest&quot;, playerId:&quot;0&quot;, playerPhoto:&quot;no data&quot;, payingStatus:&quot;unknown&quot; });
+    YG2Instance(&quot;SetAuth&quot;, j);
+    return Promise.resolve(j);
+}
+function InitGame() { initGame = true; }
+
+const label   = document.getElementById(&quot;load-label&quot;);
+const barFill = document.getElementById(&quot;bar-fill&quot;);
+const cover   = document.getElementById(&quot;loading-cover&quot;);
+
+const BUILD_URL  = &quot;https://cdn.jsdelivr.net/gh/UGBONTOP/ugs-crunch-files@main/car-vs-ramp-police/Build&quot;;
+const DATA_PARTS = 6;
+const WASM_PARTS = 5;
+
+function setProgress(pct, text) {
+    barFill.style.width = pct + &quot;%&quot;;
+    label.textContent   = text;
+}
+
+async function fetchParts(baseName, count, startPct, endPct) {
+    const chunks = [];
+    const step   = (endPct - startPct) / count;
+    for (let i = 0; i &lt; count; i++) {
+        const url  = `${BUILD_URL}/${baseName}.part${i}`;
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`Fetch failed: ${url}`);
+        const buf  = await resp.arrayBuffer();
+        chunks.push(new Uint8Array(buf));
+        setProgress(Math.round(startPct + step * (i + 1)), `Fetching... ${i+1}/${count}`);
+    }
+    const total  = chunks.reduce((s, c) =&gt; s + c.length, 0);
+    const merged = new Uint8Array(total);
+    let offset = 0;
+    for (const c of chunks) { merged.set(c, offset); offset += c.length; }
+    return URL.createObjectURL(new Blob([merged]));
+}
+
+(async () =&gt; {
+    try {
+        const [dataUrl, wasmUrl] = await Promise.all([
+            fetchParts(&quot;Build.data.br&quot;,  DATA_PARTS, 5,  50),
+            fetchParts(&quot;Build.wasm.br&quot;,  WASM_PARTS, 50, 90),
+        ]);
+        const frameworkUrl = `${BUILD_URL}/Build.framework.js`;
+        const loaderScript = document.createElement(&quot;script&quot;);
+        loaderScript.src = `${BUILD_URL}/Build.loader.js`;
+        loaderScript.onload = () =&gt; {
+            const canvas = document.getElementById(&quot;unity-canvas&quot;);
+            const config = {
+                dataUrl: dataUrl,
+                frameworkUrl: frameworkUrl,
+                codeUrl: wasmUrl,
+                streamingAssetsUrl: &quot;StreamingAssets&quot;,
+                companyName: &quot;DefaultCompany&quot;,
+                productName: &quot;Rampa VS Police&quot;,
+                productVersion: &quot;0.1&quot;,
+            };
+            createUnityInstance(canvas, config, p =&gt; {
+                setProgress(Math.round(90 + p * 10), &quot;Launching...&quot;);
+            }).then(inst =&gt; {
+                ygGameInstance = inst;
+                cover.classList.add(&quot;hidden&quot;);
+                setTimeout(() =&gt; {
+                    InitGame();
+                    YG2Instance(&quot;InitSDKComplete&quot;);
+                    YG2Instance(&quot;SetAuth&quot;, JSON.stringify({ playerAuth:&quot;rejected&quot;, playerName:&quot;Guest&quot;, playerId:&quot;0&quot; }));
+                }, 500);
+                canvas.focus();
+            }).catch(e =&gt; { label.textContent = &quot;Error: &quot; + e; });
+        };
+        document.body.appendChild(loaderScript);
+    } catch (err) { label.textContent = &quot;Error: &quot; + err.message; }
+})();
+
+document.addEventListener(&quot;contextmenu&quot;, e =&gt; e.preventDefault());
+const oPRL = Element.prototype.requestPointerLock;
+Element.prototype.requestPointerLock = async function(...args) {
+    try { (args[0] ||= {}).unadjustedMovement = true; await oPRL.apply(this, args); } catch(e) {}
+};
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>

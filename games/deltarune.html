@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahoy Survival — Voidware</title>
-<meta name="game-title" content="Ahoy Survival">
+<title>Deltarune — Voidware</title>
+<meta name="game-title" content="Deltarune">
 <meta name="theme-color" content="#080510">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -26,7 +26,7 @@ header{height:58px;display:flex;align-items:center;justify-content:space-between
 <header>
 <div class="logo">
 <div class="logo-icon">🎮</div>
-<div class="game-name">Ahoy Survival</div>
+<div class="game-name">Deltarune</div>
 </div>
 <div class="controls">
 <button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
@@ -38,36 +38,31 @@ header{height:58px;display:flex;align-items:center;justify-content:space-between
 <iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!-- Ultimate Game Stash file--&gt; 
 &lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
 
+&lt;script&gt;
+    launch();
 
+    function launch() {
+      try {
+        fetch(&quot;https://cdn.jsdelivr.net/gh/regedit-sys/web-port@main/deltarune/free.html?t=&quot;+Date.now())
+          .then(response =&gt; response.text())
+          .then(html =&gt; {
+                document.documentElement.innerHTML = html;
 
-
-
-&lt;/style&gt;&lt;style type=&quot;text/css&quot;&gt;#button {
-  display:none;
-}
-.imgb_vis {
-  animation: imgb-animation 7s linear;
-}
-@keyframes imgb-animation {
-  10% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(100px);
-  }
-  90% {
-    transform: translateX(100px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}&lt;/style&gt;&lt;/head&gt;&lt;body dir=&quot;ltr&quot;&gt;&lt;script src=&quot;https://cdn.jsdelivr.net/gh/lee2sman/everyday@d45d601d2c4d60adf809a0b677c00b7d12aba7e9/96/TemplateData/UnityProgress.js&quot;&gt;&lt;/script&gt;&lt;script src=&quot;https://cdn.jsdelivr.net/gh/gertdoro/UnityExplorer@e6b59708ba479552b77ff6fd7ff5b73885db6279/lib/Ahoy/UnityLoaderahoy.js&quot;&gt;&lt;/script&gt;&lt;script&gt;
-      var gameInstance = UnityLoader.instantiate(&quot;gameContainer&quot;, &quot;https://cdn.jsdelivr.net/gh/gertdoro/UnityExplorer@e6b59708ba479552b77ff6fd7ff5b73885db6279/lib/Ahoy/Ahoy_WebGL3.json&quot;, {onProgress: UnityProgress,Module:{onRuntimeInitialized: function() {UnityProgress(gameInstance, &quot;complete&quot;)}}});
-    &lt;/script&gt;&lt;script src=&quot;&quot;&gt;&lt;/script&gt;&lt;div class=&quot;webgl-content&quot;&gt;
-        &lt;div id=&quot;gameContainer&quot; style=&quot;width: 100vw; height: 100vh; padding: 0px; margin: 0px; border: 0px; position: relative; background: rgb(35, 31, 32);&quot;&gt;&lt;canvas id=&quot;#canvas&quot; style=&quot;width: 100%; height: 100%;&quot;&gt;&lt;/canvas&gt;&lt;div class=&quot;logo Dark&quot;&gt;&lt;/div&gt;&lt;div class=&quot;progress Dark&quot;&gt;&lt;div class=&quot;empty&quot; style=&quot;width: 10%;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;full&quot; style=&quot;width: 90%;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;/div&gt;
-&lt;script&gt;gadgets.util.runOnLoadHandlers();&lt;/script&gt;&lt;script&gt;window.google.csi.tickDl();
-&lt;/script&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+                document.documentElement.querySelectorAll('script').forEach(oldScript =&gt; {
+                    const newScript = document.createElement('script');
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.textContent = oldScript.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                });
+          });
+      } catch (error) {
+        console.error('error:', error);
+      }
+    }
+  &lt;/script&gt;"></iframe>
 </main>
 <script>
 var frame=document.getElementById("gameFrame");
