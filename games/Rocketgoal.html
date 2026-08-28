@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voidware Game — Voidware</title>
+<meta name="game-title" content="Voidware Game">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Voidware Game</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en-us&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;
+&lt;title&gt;RocketGoal | Ripped&lt;/title&gt;
+&lt;base href=&quot;https://cdn.jsdelivr.net/gh/Slammpreal/slammpgames@main/rocketgoal.io/&quot;&gt;
+&lt;style&gt;
+body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;font-family:'Comic Sans MS',cursive,sans-serif}
+#loader-ui{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;background:#000;cursor:pointer}
+.rb-txt{font-weight:bold;font-size:52px;text-align:center;background:linear-gradient(270deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8f00ff);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:move 3s ease infinite;text-transform:uppercase}
+.slammp{font-size:32px;margin-top:-10px}
+@keyframes move{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#unity-canvas{width:100%;height:100%;background:#000;display:block}
+&lt;/style&gt;
+&lt;script&gt;
+window.PlaygamaAds = window.PlaygamaAds || {
+    Initialize: function() { return Promise.resolve(); },
+    ShowAd: function(t, c) {
+        if (c) {
+            if (typeof c.onClose === 'function') c.onClose();
+            if (typeof c.onCompleted === 'function') c.onCompleted();
+        }
+    }
+};
+&lt;/script&gt;
+&lt;script src=&quot;https://www.gstatic.com/firebasejs/10.2.0/firebase-app-compat.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://www.gstatic.com/firebasejs/10.2.0/firebase-analytics-compat.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://www.gstatic.com/firebasejs/10.2.0/firebase-auth-compat.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore-compat.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://www.gstatic.com/firebasejs/10.2.0/firebase-remote-config-compat.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onclick=&quot;res()&quot;&gt;
+&lt;div id=&quot;loader-ui&quot;&gt;
+&lt;div class=&quot;rb-txt&quot; id=&quot;ld-t&quot;&gt;Click to Play&lt;/div&gt;
+&lt;div class=&quot;rb-txt slammp&quot;&gt;Ripped by Slammp&lt;/div&gt;
+&lt;/div&gt;
+&lt;canvas id=&quot;unity-canvas&quot;&gt;&lt;/canvas&gt;
+&lt;script src=&quot;firebase/firebase.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;xsolla/xsolla.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;utils.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+const cvs = document.querySelector(&quot;#unity-canvas&quot;);
+const ldr = document.querySelector(&quot;#loader-ui&quot;);
+const txt = document.querySelector(&quot;#ld-t&quot;);
+const b = &quot;https://pockethaven.lon1.cdn.digitaloceanspaces.com/rocketgoal/33&quot;;
+const g = &quot;https://cdn.jsdelivr.net/gh/Slammpreal/slammpgames@main/rocketgoal.io/&quot;;
+function res(){if(window.uI&amp;&amp;window.uI.Module.audioContext){const a=window.uI.Module.audioContext;if(a.state==='suspended')a.resume();}}
+const cfg={dataUrl:b+&quot;/913e38fc4f019cbef3b96126ea9331a5.data.unityweb&quot;,frameworkUrl:b+&quot;/924abc59792b1df59857c715aa8b8c90.framework.js.unityweb&quot;,codeUrl:b+&quot;/cd7d7b4a616e3504e4f9fea4743c528d.wasm.unityweb&quot;,streamingAssetsUrl:g+&quot;StreamingAssets&quot;,companyName:&quot;PocketHaven&quot;,productName:&quot;RocketGoal&quot;,productVersion:&quot;0.309&quot;};
+const s=document.createElement(&quot;script&quot;);s.src=b+&quot;/b23dd96997961653e2825455633aac82.loader.js&quot;;
+s.onload=()=&gt;{createUnityInstance(cvs,cfg,(p)=&gt;{txt.innerText=&quot;Loading &quot;+Math.round(p*100)+&quot;%&quot;;}).then((i)=&gt;{ldr.style.display=&quot;none&quot;;window.uI=i;window.unityInstance=i;try{if(typeof firebase!=='undefined'&amp;&amp;firebase.apps.length&gt;0){const a=firebase.app();if(typeof firebase.remoteConfig==='function'){const r=firebase.remoteConfig(a);r.settings.minimumFetchIntervalMillis=3600000;}}if(typeof initializeFirebase==='function')initializeFirebase(i);}catch(e){}try{if(typeof initializeUtils==='function')initializeUtils(i);}catch(e){}}).catch((e)=&gt;{});};
+document.body.appendChild(s);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>
