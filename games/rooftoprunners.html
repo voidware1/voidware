@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocketgoal.io — Voidware</title>
+<meta name="game-title" content="Rocketgoal.io">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Rocketgoal.io</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!-- ugs file --&gt;
+&lt;!-- shxyder --&gt;
+&lt;!-- regular updating go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/edit?tab=t.oimtgyujc8f --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en-us&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;/&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;/&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/z799gs/99@main/TemplateData/style.css&quot;/&gt;
+&lt;style&gt;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #0a0a1a;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#unity-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+#unity-canvas {
+  width: 100%;
+  height: 100%;
+  background: #0a0a1a;
+}
+#custom-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a1628 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.8s ease;
+}
+#custom-loading.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.loading-icon {
+  font-size: 56px;
+  margin-bottom: 20px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+.loading-title {
+  font-size: 36px;
+  font-weight: 900;
+  color: #00d4ff;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 4px 8px rgba(0,0,0,0.5);
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+}
+.loading-subtitle {
+  font-size: 13px;
+  color: #6080a0;
+  margin-bottom: 35px;
+  letter-spacing: 1px;
+}
+.progress-container {
+  width: 380px;
+  margin-bottom: 12px;
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 20px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0066ff, #00d4ff, #0066ff);
+  background-size: 200% 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  animation: shimmer 1.5s linear infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.progress-text {
+  color: #00d4ff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 8px;
+}
+.loading-status {
+  color: #5a7a9a;
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+  min-height: 18px;
+}
+.fun-message {
+  color: #8090b0;
+  font-size: 13px;
+  margin-top: 25px;
+  font-style: italic;
+  opacity: 0.7;
+  text-align: center;
+  min-height: 20px;
+  transition: opacity 0.3s ease;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;dark&quot;&gt;
+&lt;div id=&quot;unity-container&quot; class=&quot;unity-desktop&quot;&gt;
+&lt;canvas id=&quot;unity-canvas&quot;&gt;&lt;/canvas&gt;
+&lt;div id=&quot;custom-loading&quot;&gt;
+  &lt;div class=&quot;loading-icon&quot;&gt;shayder&lt;/div&gt;
+  &lt;div class=&quot;loading-title&quot;&gt;aaaaaa&lt;/div&gt;
+  &lt;div class=&quot;loading-subtitle&quot;&gt;genuienly idk bro just wait i like the styling&lt;/div&gt;
+  &lt;div class=&quot;progress-container&quot;&gt;
+    &lt;div class=&quot;progress-bar-bg&quot;&gt;
+      &lt;div class=&quot;progress-bar-fill&quot; id=&quot;merge-progress-bar&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;progress-text&quot; id=&quot;merge-progress-text&quot;&gt;0%&lt;/div&gt;
+    &lt;div class=&quot;loading-status&quot; id=&quot;merge-status&quot;&gt;Initializing... Xd?&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;fun-message&quot; id=&quot;fun-message&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+const funMessages = [
+  &quot;Loading textures and shaders... 🎨&quot;,
+  &quot;Building the world around you... 🌍&quot;,
+  &quot;Placing all the objects... 📦&quot;,
+  &quot;Waking up the NPCs... 🧑&quot;,
+  &quot;Polishing the graphics... ✨&quot;,
+  &quot;Tuning the physics engine... ⚙️&quot;,
+  &quot;Syncing game logic... 🧠&quot;,
+  &quot;Almost there, hang tight... 🚀&quot;,
+  &quot;Final touches in progress... 🎯&quot;,
+  &quot;Get ready to play! 🏆&quot;
+];
+let funMsgIndex = 0;
+const funMsgEl = document.getElementById('fun-message');
+function rotateFunMessage() {
+  funMsgEl.style.opacity = '0';
+  setTimeout(() =&gt; {
+    funMsgEl.textContent = funMessages[funMsgIndex % funMessages.length];
+    funMsgEl.style.opacity = '0.7';
+    funMsgIndex++;
+  }, 300);
+}
+rotateFunMessage();
+const funMsgInterval = setInterval(rotateFunMessage, 3000);
+
+const mergeConfig = {
+  files: [
+    { name: 'game.data.br', parts: 4 },
+    { name: 'game.wasm.br', parts: 4 }
+  ],
+  basePath: 'https://cdn.jsdelivr.net/gh/z799gs/99@main/Build/'
+};
+const mergedFiles = {};
+const progressBar = document.getElementById('merge-progress-bar');
+const progressText = document.getElementById('merge-progress-text');
+const statusEl = document.getElementById('merge-status');
+
+async function mergeFileParts(baseName, partCount, progressCallback) {
+  const chunks = [];
+  for (let i = 0; i &lt; partCount; i++) {
+    const partUrl = mergeConfig.basePath + baseName + '.part' + i;
+    const response = await fetch(partUrl);
+    if (!response.ok) throw new Error(`Failed to load ${partUrl}: ${response.status}`);
+    const reader = response.body.getReader();
+    const partChunks = [];
+    let received = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      partChunks.push(value);
+      received += value.length;
+    }
+    const partData = new Uint8Array(received);
+    let offset = 0;
+    for (const chunk of partChunks) {
+      partData.set(chunk, offset);
+      offset += chunk.length;
+    }
+    chunks.push(partData);
+    progressCallback(i + 1, partCount);
+    console.log(`[MERGE] ${baseName} part${i} loaded (${(received / 1024 / 1024).toFixed(2)} MB)`);
+  }
+  const totalSize = chunks.reduce((acc, c) =&gt; acc + c.length, 0);
+  const merged = new Uint8Array(totalSize);
+  let off = 0;
+  for (const chunk of chunks) {
+    merged.set(chunk, off);
+    off += chunk.length;
+  }
+  console.log(`[MERGE] ${baseName} merged (${(totalSize / 1024 / 1024).toFixed(2)} MB)`);
+  return merged.buffer;
+}
+
+async function mergeAllFiles() {
+  const totalParts = mergeConfig.files.reduce((a, f) =&gt; a + f.parts, 0);
+  let completedParts = 0;
+  for (const file of mergeConfig.files) {
+    statusEl.textContent = `Downloading ${file.name}...`;
+    const buffer = await mergeFileParts(file.name, file.parts, (current, total) =&gt; {
+      completedParts++;
+      const pct = Math.round((completedParts / totalParts) * 100);
+      progressBar.style.width = pct + '%';
+      progressText.textContent = pct + '%';
+      statusEl.textContent = `${file.name} — part ${current}/${total}`;
+    });
+    mergedFiles[file.name] = buffer;
+  }
+  statusEl.textContent = 'Starting game engine...';
+  progressBar.style.width = '100%';
+  progressText.textContent = '100%';
+}
+
+const originalFetch = window.fetch;
+window.fetch = function(url, options) {
+  if (typeof url === 'string') {
+    for (const file of mergeConfig.files) {
+      if (url.endsWith(file.name) || url.includes('/' + file.name)) {
+        if (mergedFiles[file.name]) {
+          console.log(`[INTERCEPT] Serving merged: ${file.name}`);
+          return Promise.resolve(new Response(mergedFiles[file.name], {
+            status: 200,
+            headers: { 'Content-Type': 'application/octet-stream' }
+          }));
+        }
+      }
+    }
+  }
+  return originalFetch.apply(this, arguments);
+};
+
+const OrigXHR = XMLHttpRequest;
+window.XMLHttpRequest = function() {
+  const xhr = new OrigXHR();
+  const origOpen = xhr.open;
+  xhr.open = function(method, url) {
+    this._url = url;
+    return origOpen.apply(this, arguments);
+  };
+  const origSend = xhr.send;
+  xhr.send = function(body) {
+    if (this._url &amp;&amp; typeof this._url === 'string') {
+      for (const file of mergeConfig.files) {
+        if (this._url.endsWith(file.name) || this._url.includes('/' + file.name)) {
+          if (mergedFiles[file.name]) {
+            console.log(`[XHR-INTERCEPT] Serving merged: ${file.name}`);
+            const self = this;
+            setTimeout(() =&gt; {
+              Object.defineProperty(self, 'status', { get: () =&gt; 200 });
+              Object.defineProperty(self, 'readyState', { get: () =&gt; 4 });
+              Object.defineProperty(self, 'response', { get: () =&gt; mergedFiles[file.name] });
+              Object.defineProperty(self, 'responseType', { get: () =&gt; 'arraybuffer' });
+              if (self.onload) self.onload();
+              if (self.onreadystatechange) self.onreadystatechange();
+            }, 0);
+            return;
+          }
+        }
+      }
+    }
+    return origSend.apply(this, arguments);
+  };
+  return xhr;
+};
+window.XMLHttpRequest.prototype = OrigXHR.prototype;
+window.XMLHttpRequest.DONE = 4;
+window.XMLHttpRequest.HEADERS_RECEIVED = 2;
+window.XMLHttpRequest.LOADING = 3;
+window.XMLHttpRequest.OPENED = 1;
+window.XMLHttpRequest.UNSENT = 0;
+
+const container = document.querySelector('#unity-container');
+const canvas = document.querySelector('#unity-canvas');
+const buildUrl = 'https://cdn.jsdelivr.net/gh/z799gs/99@main/Build';
+const loaderUrl = buildUrl + '/loader.js';
+const config = {
+  dataUrl: buildUrl + '/game.data.br',
+  frameworkUrl: buildUrl + '/game.js',
+  codeUrl: buildUrl + '/game.wasm.br',
+  streamingAssetsUrl: '',
+  companyName: 'GAME',
+  productName: 'GAME',
+  productVersion: '1.0'
+};
+
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+  container.className = 'unity-mobile';
+  config.devicePixelRatio = 1;
+}
+
+mergeAllFiles().then(() =&gt; {
+  clearInterval(funMsgInterval);
+  const script = document.createElement('script');
+  script.src = loaderUrl;
+  script.onload = function() {
+    createUnityInstance(canvas, config, function(progress) {
+      const pct = Math.round(progress * 100);
+      progressBar.style.width = pct + '%';
+      progressText.textContent = pct + '%';
+      statusEl.textContent = 'Loading game engine... ' + pct + '%';
+    }).then(function(unityInstance) {
+      window.unityInstance = unityInstance;
+      document.getElementById('custom-loading').classList.add('fade-out');
+      setTimeout(() =&gt; {
+        document.getElementById('custom-loading').style.display = 'none';
+      }, 800);
+    }).catch(function(message) {
+      console.warn(message);
+    });
+  };
+  document.body.appendChild(script);
+}).catch((err) =&gt; {
+  statusEl.textContent = 'Error: ' + err.message;
+  progressBar.style.background = 'red';
+  console.error('[MERGE] Fatal error:', err);
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>
