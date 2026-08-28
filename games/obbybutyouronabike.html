@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obby but your on a bike — Voidware</title>
+<meta name="game-title" content="Obby but your on a bike">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Obby but your on a bike</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="&lt;!DOCTYPE html&gt;
+
+
+&lt;!-- Ultimate Game Stash file--&gt; 
+&lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
+
+
+&lt;html lang=&quot;en-us&quot;&gt;
+&lt;base href=&quot;https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/obby-bike/&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot; /&gt;
+  &lt;title&gt;Obby on a bike&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;TemplateData/style.css&quot; /&gt;
+  &lt;script src=&quot;TemplateData/gamepush-unity.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+    const projectId = &quot;7601&quot;;
+    const publicToken = &quot;zUd31AcyKWQdb78Kjp2jPZBNCHImJ14T&quot;;
+    const showPreloaderAd = &quot;true&quot;;
+    const overlayBackgroundColor = &quot;black&quot;;
+    const progressBarFillColor = &quot;orange&quot;;
+    const progressBarBackgroundColor = &quot;black&quot;;
+    const progressBarBorderColor = &quot;white&quot;;
+  &lt;/script&gt;
+  &lt;script&gt;
+    var _unityAwaiter = {};
+    _unityAwaiter.ready = new Promise((resolve, reject) =&gt; {
+      _unityAwaiter.done = resolve;
+      _unityAwaiter.abort = reject;
+    });
+
+    var _gpAwaiter = {};
+    _gpAwaiter.ready = new Promise((resolve) =&gt; {
+      _gpAwaiter.done = resolve;
+    });
+
+    window.unityInstance = null;
+    window.onGPError = () =&gt; _gpAwaiter.done();
+
+    window.onGPInit = async (gp) =&gt; {
+
+      gp.analytics.goal(&quot;GP_Init&quot;);
+      window.GamePush = new GamePushUnity(gp);
+      //gp.player.ready.finally(_gpAwaiter.done);
+
+      await gp.player.ready
+
+      if (gp.payments.has(&quot;no_ads&quot;) || gp.payments.has(&quot;pack_1&quot;) || gp.payments.has(&quot;magic_pack&quot;)) {
+        gp.ads.closeSticky();
+      } else {
+        gp.ads.showSticky();
+        gp.ads.showPreloader();
+      }
+
+      _gpAwaiter.done()
+
+      await _unityAwaiter.ready;
+    };
+
+    function GetMobileOperatingSystem() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/iPad|iPhone|iPod/.test(userAgent) &amp;&amp; !window.MSStream) {
+        return &quot;true&quot;;
+      }
+
+      return &quot;false&quot;;
+    }
+  &lt;/script&gt;
+  &lt;script&gt;
+    ((g, a, m, e) =&gt; {
+      let o = () =&gt; {
+        let p = document.createElement(&quot;script&quot;);
+        p.src = `${a[0]}?projectId=${m}&amp;publicToken=${e}`, p.onerror = () =&gt; {
+          a.shift(), a.length &gt; 0 ? (o(), p.remove()) : &quot;onGPError&quot; in g &amp;&amp; g.onGPError()
+        }, document.head.appendChild(p)
+      };
+      o()
+    })(window, [&quot;https://gs.eponesh.com/sdk/gamepush.js&quot;, &quot;https://s3.eponesh.com/files/gs/sdk/gamepush.js&quot;, &quot;gp-bundle/gamepush.js&quot;], projectId, publicToken);
+  &lt;/script&gt;
+&lt;/head&gt;
+   &lt;script&gt;
+      window.fileMergerConfig = {
+        files: [
+          { name: '87e078793133c4d3864be347264705c6.data.br', parts: 3 },
+          { name: 'e015e0ddf28b9cc20906ccec2345fcbf.wasm.br', parts: 3 },
+        ],
+        basePath: 'Build/',
+        debug: true
+      };
+    &lt;/script&gt;
+
+    &lt;script src=&quot;https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@ac5cdfc0042aca584e72619375b4aca948a9243c/merge.js&quot;&gt;&lt;/script&gt;
+&lt;body class=&quot;dark&quot;&gt;
+  &lt;div id=&quot;unity-container&quot; class=&quot;unity-desktop&quot;&gt;
+    &lt;canvas id=&quot;unity-canvas&quot;&gt;&lt;/canvas&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;loading-cover&quot; style=&quot;display:none;&quot;&gt;
+    &lt;div id=&quot;unity-loading-bar&quot;&gt;
+      &lt;div id=&quot;unity-logo&quot;&gt;&lt;img src=&quot;logo.png&quot; /&gt;&lt;/div&gt;
+      &lt;div id=&quot;unity-progress-bar-empty&quot; style=&quot;display: none;&quot;&gt;
+        &lt;div id=&quot;unity-progress-bar-full&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    const buildUrl = &quot;Build&quot;;
+    const loaderUrl = buildUrl + &quot;/76f034cff49013ce85bd6945ebf32347.loader.js&quot;;
+    const config = {
+      dataUrl: buildUrl + &quot;/87e078793133c4d3864be347264705c6.data.br&quot;,
+      frameworkUrl: buildUrl + &quot;/64f4e1ca2b061268ad5db0b0bbceeddc.framework.js&quot;,
+      codeUrl: buildUrl + &quot;/e015e0ddf28b9cc20906ccec2345fcbf.wasm.br&quot;,
+      streamingAssetsUrl: &quot;StreamingAssets&quot;,
+      companyName: &quot;GingerPlay&quot;,
+      productName: &quot;Obby on a bike&quot;,
+      productVersion: &quot;1.24.5&quot;,
+    };
+
+    const container = document.querySelector(&quot;#unity-container&quot;);
+    const canvas = document.querySelector(&quot;#unity-canvas&quot;);
+    const loadingCover = document.querySelector(&quot;#loading-cover&quot;);
+    const progressBarEmpty = document.querySelector(&quot;#unity-progress-bar-empty&quot;);
+    const progressBarFull = document.querySelector(&quot;#unity-progress-bar-full&quot;);
+    const spinner = document.querySelector('.spinner');
+
+    if (overlayBackgroundColor !== &quot;-&quot; &amp;&amp; overlayBackgroundColor !== &quot; &quot; &amp;&amp; overlayBackgroundColor !== &quot;&quot;)
+      canvas.style.background = overlayBackgroundColor;
+
+    if (progressBarFillColor !== &quot;-&quot; &amp;&amp; progressBarFillColor !== &quot; &quot; &amp;&amp; progressBarFillColor !== &quot;&quot;)
+      progressBarFull.style.background = progressBarFillColor;
+
+    if (progressBarBackgroundColor !== &quot;-&quot; &amp;&amp; progressBarBackgroundColor !== &quot; &quot; &amp;&amp; progressBarBackgroundColor !== &quot;&quot;)
+      progressBarEmpty.style.background = progressBarBackgroundColor;
+
+    if (progressBarBorderColor !== &quot;-&quot; &amp;&amp; progressBarBorderColor !== &quot; &quot; &amp;&amp; progressBarBorderColor !== &quot;&quot;)
+      progressBarEmpty.style.border.color = progressBarBorderColor;
+
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      container.className = &quot;unity-mobile&quot;;
+    }
+
+    loadingCover.style.display = &quot;&quot;;
+
+    const unityLoader = document.createElement(&quot;script&quot;);
+    unityLoader.src = loaderUrl;
+    unityLoader.onload = async () =&gt; {
+      await _gpAwaiter.ready;
+      createUnityInstance(canvas, config, (progress) =&gt; {
+        spinner.style.display = &quot;none&quot;;
+        progressBarEmpty.style.display = &quot;&quot;;
+        progressBarFull.style.width = `${100 * progress}%`;
+      }).then((unityInstance) =&gt; {
+        window.unityInstance = unityInstance;
+        _unityAwaiter.done(unityInstance);
+        loadingCover.style.display = &quot;none&quot;;
+      }).catch((message) =&gt; {
+        _unityAwaiter.abort(message);
+        alert(message);
+      });
+    };
+    document.body.appendChild(unityLoader);
+
+    document.addEventListener(&quot;pointerdown&quot;, () =&gt; {
+      container.focus();
+      window.focus();
+      canvas.focus();
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;"></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idle Football Manger — Voidware</title>
+<meta name="game-title" content="Idle Football Manger">
+<meta name="theme-color" content="#080510">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;}
+body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}
+.logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}
+.game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.controls{display:flex;gap:7px;}
+.control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}
+.control:hover{border-color:rgba(155,77,255,.7);color:white;}
+#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}
+#gameFrame{width:100%;height:100%;border:0;display:block;}
+@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<div class="logo-icon">🎮</div>
+<div class="game-name">Idle Football Manger</div>
+</div>
+<div class="controls">
+<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>
+<button class="control" id="blankButton" type="button">↗ About:blank</button>
+<button class="control" id="libraryButton" type="button">← Library</button>
+</div>
+</header>
+<main id="gameContainer">
+<iframe id="gameFrame" allowfullscreen="" allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share" srcdoc="
+&lt;!DOCTYPE html&gt;
+
+
+
+&lt;!-- Ultimate Game Stash file--&gt; 
+&lt;!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ --&gt;
+
+
+
+
+
+&lt;html lang=&quot;en&quot;&gt;
+&lt;base href=&quot;https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/idle-football-manager/&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=no&quot; /&gt;
+
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;css/themes/light.css&quot; /&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.css&quot; /&gt;
+  &lt;link rel=&quot;icon&quot; href=&quot;icon.ico&quot; /&gt;
+  &lt;title&gt;Idle Football Manager&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;game-header v-if=&quot;init&quot;&gt;&lt;/game-header&gt;
+    &lt;tutorial v-if=&quot;showTutorial&quot;&gt;&lt;/tutorial&gt;
+    &lt;main&gt;
+      &lt;component :is=&quot;tab&quot;&gt;&lt;/component&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Lib --&gt;
+  &lt;!--&lt;script src=&quot;js/lib/vue.js&quot;&gt;&lt;/script&gt;--&gt;
+  &lt;script src=&quot;js/lib/vue.prod.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/lib/break_infinity.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/lib/ad-notations.min.js&quot;&gt;&lt;/script&gt;
+
+  &lt;script src=&quot;js/enums.js&quot;&gt;&lt;/script&gt;
+
+  &lt;!-- Classes --&gt;
+  &lt;script src=&quot;js/classes/utils.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/random.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/keymap.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/upgrade.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/achievement.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/player.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/team.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/division.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/league.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/player-market.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/match.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/country-flag.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/country.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/stadium.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/team-logo.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/task/game-task.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/task/player-training-task.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/player-training.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/tv-channel.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/classes/generator-utils.js&quot;&gt;&lt;/script&gt;
+
+  &lt;!-- Data --&gt;
+  &lt;script src=&quot;js/data/game-data.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/data/game-methods.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/data/game-computed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/data/images.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/data/vocab.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/data/notations.js&quot;&gt;&lt;/script&gt;
+
+  &lt;script src=&quot;js/app.js&quot;&gt;&lt;/script&gt;
+
+  &lt;!-- Mixin --&gt;
+  &lt;script src=&quot;js/components/mixin/help.js&quot;&gt;&lt;/script&gt;
+
+  &lt;!-- Components --&gt;
+  &lt;script src=&quot;js/components/window.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/windows/window-team.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/windows/window-tutorial.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/windows/window-player.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/progress-bar.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/upgrade.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/achievement.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/division.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/player-market.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/player.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/team-management.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/match.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/match-view.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/country-flag.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/country.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/team-logo.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/team-settings.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/stadium.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/game-task.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tv-channel.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tutorial.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/notation-select.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/game-header.js&quot;&gt;&lt;/script&gt;
+
+  &lt;!-- Tabs --&gt;
+  &lt;script src=&quot;js/components/tabs/tab-team.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-player-market.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-league.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-match.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-upgrades.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-countries.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-achievements.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-stadium.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-player-training.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-tv-channels.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/components/tabs/tab-settings.js&quot;&gt;&lt;/script&gt;
+
+  &lt;script src=&quot;js/mount.js&quot;&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+Displaying clidlefootballmanager.html."></iframe>
+</main>
+<script>
+var frame=document.getElementById("gameFrame");
+document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});
+document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});
+document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});
+</script>
+</body>
+</html>
