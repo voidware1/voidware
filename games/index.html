@@ -1,0 +1,1376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voidware — Games</title>
+
+<meta name="theme-color" content="#080510">
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #07050c;
+  --panel: #100a17;
+  --panel2: #160d21;
+  --purple: #9b4dff;
+  --purple2: #6721c6;
+  --text: #f5f0ff;
+  --muted: #93889f;
+  --border: rgba(155,77,255,.22);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(125,45,220,.24),
+      transparent 42%
+    ),
+    var(--bg);
+
+  color: var(--text);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background:
+    rgba(7,5,12,.86);
+
+  backdrop-filter:
+    blur(18px);
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.06);
+
+}
+
+.nav {
+
+  width:
+    min(
+      1200px,
+      calc(100% - 32px)
+    );
+
+  min-height: 65px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+}
+
+.logo {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 3px;
+
+}
+
+.logo-icon {
+
+  width: 37px;
+  height: 37px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9b4dff,
+      #5f20b8
+    );
+
+  box-shadow:
+    0 0 28px
+    rgba(145,70,255,.4);
+
+}
+
+.nav-buttons {
+
+  display: flex;
+
+  gap: 7px;
+
+}
+
+.nav-button {
+
+  border:
+    1px solid
+    rgba(155,77,255,.2);
+
+  background:
+    rgba(255,255,255,.035);
+
+  color: #cfc4d8;
+
+  padding:
+    8px 12px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-weight: 700;
+
+}
+
+.nav-button:hover {
+
+  border-color:
+    rgba(155,77,255,.65);
+
+  color: white;
+
+  background:
+    rgba(155,77,255,.09);
+
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+.container {
+
+  width:
+    min(
+      1200px,
+      calc(100% - 32px)
+    );
+
+  margin: auto;
+
+  padding:
+    55px 0 80px;
+
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-bottom: 30px;
+
+}
+
+.hero h1 {
+
+  font-size:
+    clamp(
+      42px,
+      7vw,
+      70px
+    );
+
+  letter-spacing:
+    -3px;
+
+  line-height: .95;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #c7a7ff,
+      #8640db
+    );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  color: transparent;
+
+}
+
+.hero p {
+
+  margin-top: 10px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+}
+
+.update-status {
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    9px 12px;
+
+  border:
+    1px solid
+    rgba(155,77,255,.22);
+
+  border-radius: 10px;
+
+  background:
+    rgba(155,77,255,.06);
+
+  color: #bda4d4;
+
+  font-size: 12px;
+
+}
+
+.status-dot {
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #4ade80;
+
+  box-shadow:
+    0 0 10px
+    rgba(74,222,128,.7);
+
+}
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.toolbar {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 25px;
+
+}
+
+.search-box {
+
+  position: relative;
+
+  flex: 1;
+
+}
+
+.search-box input {
+
+  width: 100%;
+
+  height: 46px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 11px;
+
+  background:
+    rgba(5,3,8,.7);
+
+  color: white;
+
+  outline: none;
+
+  padding:
+    0 15px 0 42px;
+
+  font-size: 14px;
+
+}
+
+.search-box input:focus {
+
+  border-color:
+    rgba(155,77,255,.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(155,77,255,.08);
+
+}
+
+.search-icon {
+
+  position: absolute;
+
+  left: 14px;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  color: #81748d;
+
+}
+
+.refresh-button {
+
+  height: 46px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 11px;
+
+  padding:
+    0 15px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  color: #ddd3ea;
+
+  cursor: pointer;
+
+  font-weight: 800;
+
+}
+
+.refresh-button:hover {
+
+  border-color:
+    rgba(155,77,255,.7);
+
+  background:
+    rgba(155,77,255,.09);
+
+  color: white;
+
+}
+
+/* =========================================
+   GAMES GRID
+========================================= */
+
+.games-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(
+        230px,
+        1fr
+      )
+    );
+
+  gap: 16px;
+
+}
+
+/* =========================================
+   GAME CARD
+========================================= */
+
+.game-card {
+
+  position: relative;
+
+  min-height: 190px;
+
+  padding: 19px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24,14,37,.96),
+      rgba(11,7,17,.96)
+    );
+
+  text-decoration: none;
+
+  color: white;
+
+  transition:
+    transform .2s,
+    border-color .2s,
+    box-shadow .2s;
+
+}
+
+.game-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -60px;
+  top: -65px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(155,77,255,.12);
+
+  filter:
+    blur(10px);
+
+}
+
+.game-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(155,77,255,.65);
+
+  box-shadow:
+    0 18px 45px
+    rgba(0,0,0,.3);
+
+}
+
+.game-icon {
+
+  position: relative;
+
+  width: 52px;
+  height: 52px;
+
+  display: grid;
+
+  place-items: center;
+
+  margin-bottom: 16px;
+
+  border:
+    1px solid
+    rgba(155,77,255,.28);
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(155,77,255,.22),
+      rgba(103,33,198,.08)
+    );
+
+  font-size: 25px;
+
+}
+
+.game-title {
+
+  position: relative;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  margin-bottom: 6px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+}
+
+.game-file {
+
+  position: relative;
+
+  color: #766b80;
+
+  font-size: 11px;
+
+  margin-bottom: auto;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+}
+
+.play-label {
+
+  position: relative;
+
+  margin-top: 17px;
+
+  color: #b47cff;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+}
+
+/* =========================================
+   EMPTY / LOADING
+========================================= */
+
+.message {
+
+  grid-column:
+    1 / -1;
+
+  padding:
+    55px 20px;
+
+  text-align: center;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255,255,255,.02);
+
+  color: var(--muted);
+
+}
+
+.message-title {
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  margin-bottom: 7px;
+
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+  padding:
+    28px 16px;
+
+  text-align: center;
+
+  color: #655b6e;
+
+  font-size: 12px;
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px) {
+
+  .hero {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+  .update-status {
+
+    align-self: flex-start;
+
+  }
+
+}
+
+@media(max-width:550px) {
+
+  .nav-buttons {
+
+    display: none;
+
+  }
+
+  .container {
+
+    width:
+      calc(100% - 22px);
+
+    padding-top: 40px;
+
+  }
+
+  .toolbar {
+
+    flex-direction: column;
+
+  }
+
+  .refresh-button {
+
+    width: 100%;
+
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+  <nav class="nav">
+
+
+    <div class="logo">
+
+      <div class="logo-icon">
+        V
+      </div>
+
+      VOIDWARE
+
+    </div>
+
+
+    <div class="nav-buttons">
+
+      <button
+        class="nav-button"
+        onclick="goHome()"
+      >
+        Home
+      </button>
+
+      <button
+        class="nav-button"
+        onclick="goTo('proxys')"
+      >
+        Proxys
+      </button>
+
+      <button
+        class="nav-button"
+        onclick="goTo('apps')"
+      >
+        Apps
+      </button>
+
+    </div>
+
+
+  </nav>
+
+</header>
+
+
+<!-- =========================================
+     CONTENT
+========================================= -->
+
+<main class="container">
+
+
+  <section class="hero">
+
+
+    <div>
+
+      <h1>
+        Games
+      </h1>
+
+      <p>
+        Browse the Voidware game collection.
+        New HTML game pages are detected automatically.
+      </p>
+
+    </div>
+
+
+    <div class="update-status">
+
+      <span class="status-dot"></span>
+
+      <span id="statusText">
+        Checking library...
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <div class="toolbar">
+
+    <div class="search-box">
+
+      <span class="search-icon">
+        🔎
+      </span>
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search games..."
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <button
+      id="refreshButton"
+      class="refresh-button"
+    >
+      ↻ Refresh
+    </button>
+
+  </div>
+
+
+  <!-- GAME GRID -->
+
+  <section
+    id="gamesGrid"
+    class="games-grid"
+  >
+
+    <div class="message">
+
+      <div class="message-title">
+        Loading games...
+      </div>
+
+      Please wait while Voidware checks GitHub.
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<footer>
+
+  VOIDWARE • Games Library
+
+</footer>
+
+
+<script>
+
+/*
+==================================================
+VOIDWARE GAME LIBRARY
+==================================================
+
+Repository:
+https://github.com/voidware1/voidware
+
+GitHub Pages:
+https://voidware1.github.io/voidware/
+
+This library automatically scans:
+
+/games/
+
+for HTML files.
+
+==================================================
+*/
+
+
+/* =========================================
+   CONFIG
+========================================= */
+
+var GITHUB_USER =
+  "voidware1";
+
+var GITHUB_REPO =
+  "voidware";
+
+var GAMES_FOLDER =
+  "games";
+
+
+var GITHUB_API =
+  "https://api.github.com/repos/"
+  + GITHUB_USER
+  + "/"
+  + GITHUB_REPO
+  + "/contents/"
+  + GAMES_FOLDER;
+
+
+/*
+==================================================
+OPTIONAL GAME METADATA
+==================================================
+
+You can add custom names/icons here.
+
+The filename MUST match the HTML file.
+
+Example:
+
+"my-game.html": {
+  title: "My Awesome Game",
+  icon: "🔥"
+}
+
+You do NOT need to add games here.
+
+Games missing from this list automatically
+get their title from the filename.
+
+==================================================
+*/
+
+var GAME_METADATA = {
+
+  /*
+  "example.html": {
+    title: "Example Game",
+    icon: "🎮"
+  }
+  */
+
+};
+
+
+/*
+==================================================
+STATE
+==================================================
+*/
+
+var allGames = [];
+
+var searchInput =
+  document.getElementById(
+    "searchInput"
+  );
+
+var gamesGrid =
+  document.getElementById(
+    "gamesGrid"
+  );
+
+var statusText =
+  document.getElementById(
+    "statusText"
+  );
+
+var refreshButton =
+  document.getElementById(
+    "refreshButton"
+  );
+
+
+/*
+==================================================
+FORMAT TITLE
+==================================================
+*/
+
+function formatTitle(filename) {
+
+  var name =
+    filename
+      .replace(/\.html$/i, "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  if (!name) {
+    return "Voidware Game";
+  }
+
+  return name
+    .split(" ")
+    .map(function(word) {
+
+      return word.charAt(0).toUpperCase()
+        + word.slice(1);
+
+    })
+    .join(" ");
+
+}
+
+
+/*
+==================================================
+GET GAME INFO
+==================================================
+*/
+
+function getGameInfo(file) {
+
+  var metadata =
+    GAME_METADATA[file.name];
+
+
+  return {
+
+    name: file.name,
+
+    title:
+      metadata && metadata.title
+        ? metadata.title
+        : formatTitle(file.name),
+
+    icon:
+      metadata && metadata.icon
+        ? metadata.icon
+        : "🎮",
+
+    url:
+      "/voidware/games/"
+      + encodeURIComponent(file.name)
+
+  };
+
+}
+
+
+/*
+==================================================
+LOAD GAMES FROM GITHUB
+==================================================
+*/
+
+async function loadGames() {
+
+  statusText.textContent =
+    "Updating...";
+
+  gamesGrid.innerHTML = `
+
+    <div class="message">
+
+      <div class="message-title">
+        Updating library...
+      </div>
+
+      Checking GitHub for new games.
+
+    </div>
+
+  `;
+
+
+  try {
+
+    var response =
+      await fetch(
+        GITHUB_API
+        + "?_="
+        + Date.now()
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "GitHub API returned "
+        + response.status
+      );
+
+    }
+
+
+    var files =
+      await response.json();
+
+
+    /*
+    Only accept HTML files.
+
+    Ignore:
+    - index.html
+    - game-maker.html
+    */
+
+    var gameFiles =
+      files.filter(function(file) {
+
+        if (file.type !== "file") {
+          return false;
+        }
+
+        if (!/\.html$/i.test(file.name)) {
+          return false;
+        }
+
+        if (
+          file.name.toLowerCase()
+          === "index.html"
+        ) {
+          return false;
+        }
+
+        if (
+          file.name.toLowerCase()
+          === "game-maker.html"
+        ) {
+          return false;
+        }
+
+        return true;
+
+      });
+
+
+    allGames =
+      gameFiles
+        .map(getGameInfo)
+        .sort(function(a, b) {
+
+          return a.title
+            .localeCompare(
+              b.title
+            );
+
+        });
+
+
+    renderGames();
+
+
+    statusText.textContent =
+      allGames.length
+      + " game"
+      + (
+        allGames.length === 1
+          ? ""
+          : "s"
+      )
+      + " • Updated";
+
+
+  } catch(error) {
+
+    console.error(error);
+
+    statusText.textContent =
+      "Update failed";
+
+    gamesGrid.innerHTML = `
+
+      <div class="message">
+
+        <div class="message-title">
+          Couldn't load games
+        </div>
+
+        GitHub returned an error while
+        checking the games folder.
+
+        <br><br>
+
+        <button
+          class="refresh-button"
+          onclick="loadGames()"
+        >
+          Try Again
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/*
+==================================================
+RENDER
+==================================================
+*/
+
+function renderGames() {
+
+  var query =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+
+  var filtered =
+    allGames.filter(function(game) {
+
+      return (
+        game.title
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        game.name
+          .toLowerCase()
+          .includes(query)
+      );
+
+    });
+
+
+  if (!filtered.length) {
+
+    gamesGrid.innerHTML = `
+
+      <div class="message">
+
+        <div class="message-title">
+          No games found
+        </div>
+
+        ${
+          query
+            ? "Try a different search."
+            : "Add an HTML game to the games folder."
+        }
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  gamesGrid.innerHTML =
+    filtered
+      .map(function(game) {
+
+        return `
+
+          <a
+            class="game-card"
+            href="${game.url}"
+          >
+
+            <div class="game-icon">
+              ${escapeHTML(game.icon)}
+            </div>
+
+            <div class="game-title">
+              ${escapeHTML(game.title)}
+            </div>
+
+            <div class="game-file">
+              ${escapeHTML(game.name)}
+            </div>
+
+            <div class="play-label">
+              Play Game →
+            </div>
+
+          </a>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/*
+==================================================
+ESCAPE HTML
+==================================================
+*/
+
+function escapeHTML(value) {
+
+  return String(value)
+
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/*
+==================================================
+SEARCH
+==================================================
+*/
+
+searchInput.addEventListener(
+  "input",
+  renderGames
+);
+
+
+/*
+==================================================
+REFRESH
+==================================================
+*/
+
+refreshButton.addEventListener(
+  "click",
+  loadGames
+);
+
+
+/*
+==================================================
+NAVIGATION
+==================================================
+*/
+
+function goHome() {
+
+  window.location.href =
+    "/voidware/";
+
+}
+
+
+function goTo(section) {
+
+  var paths = {
+
+    proxys:
+      "/voidware/proxys/index.html",
+
+    apps:
+      "/voidware/apps/index.html"
+
+  };
+
+
+  if (paths[section]) {
+
+    window.location.href =
+      paths[section];
+
+  }
+
+}
+
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadGames();
+
+</script>
+
+</body>
+</html>
+

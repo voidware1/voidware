@@ -1,11 +1,13 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Voidware — Game Maker</title>
+<title>Voidware</title>
+
+<meta name="theme-color" content="#080510">
 
 <style>
 * {
@@ -16,36 +18,57 @@
 
 :root {
   --bg: #07050c;
-  --panel: #110a18;
+  --panel: #100a17;
+  --panel2: #160d21;
   --purple: #9b4dff;
   --purple2: #6721c6;
   --text: #f5f0ff;
   --muted: #93889f;
-  --border: rgba(155,77,255,.25);
+  --border: rgba(155,77,255,.22);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+
   background:
     radial-gradient(
       circle at 50% -10%,
-      rgba(125,45,220,.22),
+      rgba(125,45,220,.25),
       transparent 42%
     ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(92,35,160,.12),
+      transparent 35%
+    ),
     var(--bg);
+
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
-/* HEADER */
+/* =========================================
+   HEADER
+========================================= */
 
 header {
   position: sticky;
   top: 0;
   z-index: 100;
 
-  background: rgba(7,5,12,.9);
-  backdrop-filter: blur(15px);
+  background:
+    rgba(7,5,12,.82);
+
+  backdrop-filter:
+    blur(18px);
 
   border-bottom:
     1px solid
@@ -53,10 +76,15 @@ header {
 }
 
 .nav {
-  max-width: 1250px;
+  width:
+    min(
+      1200px,
+      calc(100% - 32px)
+    );
+
   margin: auto;
 
-  padding: 15px 20px;
+  min-height: 65px;
 
   display: flex;
   align-items: center;
@@ -68,18 +96,21 @@ header {
   align-items: center;
   gap: 10px;
 
+  font-size: 18px;
+
   font-weight: 900;
+
   letter-spacing: 3px;
 }
 
 .logo-icon {
-  width: 35px;
-  height: 35px;
+  width: 37px;
+  height: 37px;
 
   display: grid;
   place-items: center;
 
-  border-radius: 10px;
+  border-radius: 11px;
 
   background:
     linear-gradient(
@@ -89,73 +120,118 @@ header {
     );
 
   box-shadow:
-    0 0 25px
-    rgba(145,70,255,.35);
+    0 0 28px
+    rgba(145,70,255,.4);
 }
 
-.back-button {
-  border:
-    1px solid
-    var(--border);
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
 
-  background:
-    rgba(255,255,255,.04);
+.nav-link {
+  border: 0;
 
-  color: #ddd3ea;
+  background: transparent;
 
-  padding: 9px 14px;
+  color: #aaa0b5;
 
-  border-radius: 10px;
+  padding: 9px 12px;
+
+  border-radius: 9px;
 
   cursor: pointer;
 
   font-weight: 700;
 }
 
-.back-button:hover {
-  border-color:
-    rgba(155,77,255,.7);
-
+.nav-link:hover {
   color: white;
+
+  background:
+    rgba(155,77,255,.1);
 }
 
-/* MAIN */
+/* =========================================
+   HERO
+========================================= */
 
-.container {
+.hero {
   width:
     min(
-      1250px,
+      1200px,
       calc(100% - 32px)
     );
 
   margin: auto;
 
   padding:
-    45px 0 70px;
+    90px 0 70px;
+
+  text-align: center;
 }
 
-.heading {
-  margin-bottom: 30px;
+.hero-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 7px 12px;
+
+  margin-bottom: 22px;
+
+  border:
+    1px solid
+    rgba(155,77,255,.3);
+
+  border-radius: 999px;
+
+  background:
+    rgba(155,77,255,.08);
+
+  color: #c9a9f7;
+
+  font-size: 12px;
+
+  font-weight: 800;
 }
 
-.heading h1 {
+.hero-badge-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #9b4dff;
+
+  box-shadow:
+    0 0 10px
+    #9b4dff;
+}
+
+.hero h1 {
   font-size:
     clamp(
-      38px,
-      6vw,
-      60px
+      55px,
+      10vw,
+      105px
     );
 
-  letter-spacing: -3px;
+  line-height: .9;
 
-  margin-bottom: 10px;
+  letter-spacing:
+    -6px;
+
+  margin-bottom: 25px;
 
   background:
     linear-gradient(
       180deg,
-      #fff,
-      #c7a7ff,
-      #8640db
+      #ffffff 0%,
+      #d5baff 45%,
+      #8640db 100%
     );
 
   -webkit-background-clip: text;
@@ -164,435 +240,350 @@ header {
   color: transparent;
 }
 
-.heading p {
+.hero p {
+  max-width: 650px;
+
+  margin:
+    0 auto 32px;
+
   color: var(--muted);
+
+  font-size: 17px;
+
+  line-height: 1.7;
 }
 
-/* WORKSPACE */
+.hero-button {
+  display: inline-flex;
 
-.workspace {
+  align-items: center;
+
+  gap: 8px;
+
+  border: 0;
+
+  padding:
+    13px 19px;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple2)
+    );
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 10px 35px
+    rgba(103,33,198,.25);
+
+  transition:
+    transform .2s,
+    filter .2s;
+}
+
+.hero-button:hover {
+  transform:
+    translateY(-2px);
+
+  filter:
+    brightness(1.12);
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.content {
+  width:
+    min(
+      1200px,
+      calc(100% - 32px)
+    );
+
+  margin: auto;
+
+  padding-bottom: 80px;
+}
+
+.section-title {
+  margin-bottom: 16px;
+}
+
+.section-title h2 {
+  font-size: 25px;
+
+  letter-spacing: -.7px;
+}
+
+.section-title p {
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+/* =========================================
+   CATEGORY GRID
+========================================= */
+
+.category-grid {
   display: grid;
 
   grid-template-columns:
-    410px
-    minmax(0,1fr);
+    repeat(
+      3,
+      1fr
+    );
 
-  gap: 20px;
-
-  align-items: start;
+  gap: 18px;
 }
 
-@media(max-width:900px) {
-  .workspace {
-    grid-template-columns: 1fr;
-  }
-}
+.category-card {
+  position: relative;
 
-/* PANEL */
+  min-height: 260px;
 
-.panel {
+  padding: 26px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 18px;
+
   background:
     linear-gradient(
       145deg,
       rgba(24,14,37,.96),
-      rgba(12,7,18,.96)
+      rgba(11,7,17,.96)
     );
 
-  border:
-    1px solid
-    var(--border);
-
-  border-radius: 17px;
-
-  padding: 20px;
-}
-
-.panel-title {
-  font-size: 18px;
-  font-weight: 800;
-
-  margin-bottom: 18px;
-}
-
-/* MODE */
-
-.mode-switch {
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 4px;
-
-  padding: 4px;
-
-  margin-bottom: 20px;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius: 11px;
-
-  background: #09060e;
-}
-
-.mode-button {
-  border: 0;
-
-  padding: 11px;
-
-  border-radius: 8px;
-
-  background: transparent;
-
-  color: #82768d;
-
-  cursor: pointer;
-
-  font-weight: 800;
-}
-
-.mode-button.active {
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--purple2)
-    );
-
-  color: white;
-}
-
-/* INPUTS */
-
-.field {
-  margin-bottom: 17px;
-}
-
-label {
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: #b6a9c2;
-
-  font-size: 12px;
-
-  font-weight: 800;
-
-  letter-spacing: .7px;
-
-  text-transform: uppercase;
-}
-
-input,
-textarea {
-  width: 100%;
-
-  border:
-    1px solid
-    rgba(155,77,255,.2);
-
-  border-radius: 10px;
-
-  background:
-    rgba(5,3,8,.8);
+  text-decoration: none;
 
   color: white;
 
-  outline: none;
-
-  padding: 12px;
-
-  font-size: 14px;
+  transition:
+    transform .22s,
+    border-color .22s,
+    box-shadow .22s;
 }
 
-input:focus,
-textarea:focus {
+.category-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: -80px;
+  right: -60px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(155,77,255,.14);
+
+  filter:
+    blur(10px);
+}
+
+.category-card:hover {
+  transform:
+    translateY(-5px);
+
   border-color:
-    rgba(155,77,255,.75);
+    rgba(155,77,255,.65);
 
   box-shadow:
-    0 0 0 3px
-    rgba(155,77,255,.08);
+    0 20px 55px
+    rgba(0,0,0,.3);
 }
 
-textarea {
-  min-height: 220px;
+.category-icon {
+  position: relative;
 
-  resize: vertical;
-
-  font-family:
-    "Courier New",
-    monospace;
-
-  line-height: 1.5;
-}
-
-.icon-row {
-  display: flex;
-  gap: 10px;
-}
-
-.icon-row input {
-  flex: 1;
-}
-
-.icon-preview {
-  width: 45px;
-  height: 45px;
-
-  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
 
   display: grid;
   place-items: center;
 
-  border:
-    1px solid
-    var(--border);
+  margin-bottom: 25px;
 
-  border-radius: 10px;
-
-  background: #170d22;
-
-  font-size: 22px;
-}
-
-.help {
-  margin-top: 7px;
-
-  color: #71667b;
-
-  font-size: 11px;
-
-  line-height: 1.5;
-}
-
-/* BUTTONS */
-
-.button-row {
-  display: flex;
-  gap: 10px;
-
-  margin-top: 18px;
-}
-
-button {
-  font-family: inherit;
-}
-
-.primary {
-  flex: 1;
-
-  border: 0;
-
-  border-radius: 10px;
-
-  padding: 12px;
+  border-radius: 15px;
 
   background:
     linear-gradient(
       135deg,
-      var(--purple),
-      var(--purple2)
+      rgba(155,77,255,.25),
+      rgba(103,33,198,.12)
     );
 
-  color: white;
-
-  font-weight: 900;
-
-  cursor: pointer;
-}
-
-.primary:hover {
-  filter: brightness(1.15);
-}
-
-.secondary {
   border:
     1px solid
-    var(--border);
+    rgba(155,77,255,.3);
 
-  border-radius: 10px;
-
-  padding: 12px 15px;
-
-  background:
-    rgba(255,255,255,.04);
-
-  color: #ddd3ea;
-
-  cursor: pointer;
+  font-size: 28px;
 }
 
-.secondary:hover {
-  border-color:
-    rgba(155,77,255,.7);
-
-  color: white;
-}
-
-/* PREVIEW */
-
-.preview-header {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  margin-bottom: 12px;
-}
-
-.status {
-  color: #4ade80;
-
-  font-size: 12px;
-}
-
-.preview-frame {
-  width: 100%;
-  height: 520px;
-
-  display: block;
-
-  border:
-    1px solid
-    rgba(155,77,255,.2);
-
-  border-radius: 12px;
-
-  background: black;
-}
-
-/* CODE */
-
-.code-section {
-  margin-top: 20px;
-}
-
-.code-wrapper {
+.category-card h3 {
   position: relative;
+
+  font-size: 25px;
+
+  margin-bottom: 9px;
 }
 
-#generatedCode {
-  width: 100%;
+.category-card p {
+  position: relative;
 
-  min-height: 380px;
+  max-width: 290px;
 
-  resize: vertical;
+  color: var(--muted);
 
-  padding: 15px;
+  line-height: 1.6;
 
-  border:
-    1px solid
-    rgba(155,77,255,.2);
-
-  border-radius: 12px;
-
-  background: #050308;
-
-  color: #d9c8ec;
-
-  font-family:
-    "Courier New",
-    monospace;
-
-  font-size: 12px;
-
-  line-height: 1.5;
+  font-size: 13px;
 }
 
-.copy-button {
+.card-arrow {
   position: absolute;
 
-  top: 10px;
-  right: 10px;
+  right: 23px;
+  bottom: 21px;
 
-  border:
-    1px solid
-    var(--border);
+  color: #a970ed;
 
-  border-radius: 8px;
-
-  padding: 8px 11px;
-
-  background: #160d21;
-
-  color: white;
-
-  cursor: pointer;
-}
-
-.copy-button:hover {
-  border-color:
-    rgba(155,77,255,.7);
-}
-
-/* HIDDEN */
-
-.hidden {
-  display: none !important;
-}
-
-/* TOAST */
-
-.toast {
-  position: fixed;
-
-  left: 50%;
-  bottom: 22px;
-
-  transform:
-    translate(-50%,100px);
-
-  opacity: 0;
-
-  padding: 12px 17px;
-
-  border:
-    1px solid
-    rgba(155,77,255,.4);
-
-  border-radius: 10px;
-
-  background: #171020;
+  font-size: 20px;
 
   transition:
-    .25s;
-
-  z-index: 500;
+    transform .2s;
 }
 
-.toast.show {
+.category-card:hover .card-arrow {
   transform:
-    translate(-50%,0);
-
-  opacity: 1;
+    translateX(5px);
 }
 
-/* MOBILE */
+/* =========================================
+   INFO
+========================================= */
 
-@media(max-width:600px) {
+.info-section {
+  margin-top: 55px;
+}
 
-  .container {
+.info-card {
+  padding: 25px;
+
+  border:
+    1px solid
+    rgba(155,77,255,.18);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.info-card h3 {
+  margin-bottom: 8px;
+}
+
+.info-card p {
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+  border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+  padding:
+    28px 16px;
+
+  text-align: center;
+
+  color: #655b6e;
+
+  font-size: 12px;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:800px) {
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 65px;
+  }
+
+  .hero h1 {
+    letter-spacing: -4px;
+  }
+
+}
+
+@media(max-width:550px) {
+
+  .nav {
+    min-height: 58px;
+  }
+
+  .logo {
+    font-size: 15px;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding:
+      55px 0 55px;
+  }
+
+  .hero h1 {
+    font-size: 62px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .content {
     width:
-      calc(100% - 20px);
-
-    padding-top: 30px;
-  }
-
-  .panel {
-    padding: 15px;
-  }
-
-  .preview-frame {
-    height: 420px;
-  }
-
-  .button-row {
-    flex-direction: column;
+      calc(100% - 22px);
   }
 
 }
@@ -602,9 +593,13 @@ button {
 
 <body>
 
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
 
-  <div class="nav">
+  <nav class="nav">
 
     <div class="logo">
 
@@ -616,251 +611,204 @@ button {
 
     </div>
 
-    <button
-      id="backButton"
-      class="back-button"
-      type="button"
-    >
-      ← Library
-    </button>
 
-  </div>
+    <div class="nav-links">
+
+      <button
+        class="nav-link"
+        type="button"
+        onclick="goTo('games')"
+      >
+        Games
+      </button>
+
+      <button
+        class="nav-link"
+        type="button"
+        onclick="goTo('proxys')"
+      >
+        Proxys
+      </button>
+
+      <button
+        class="nav-link"
+        type="button"
+        onclick="goTo('apps')"
+      >
+        Apps
+      </button>
+
+    </div>
+
+  </nav>
 
 </header>
 
 
-<main class="container">
+<!-- =========================================
+     HERO
+========================================= -->
 
-  <div class="heading">
+<section class="hero">
 
-    <h1>
-      Game Page Maker
-    </h1>
+  <div class="hero-badge">
+
+    <span class="hero-badge-dot"></span>
+
+    VOIDWARE HUB
+
+  </div>
+
+
+  <h1>
+    VOIDWARE
+  </h1>
+
+
+  <p>
+    Your central hub for games, proxys,
+    apps, and everything else in the
+    Voidware collection.
+  </p>
+
+
+  <a
+    href="#categories"
+    class="hero-button"
+  >
+    Explore Voidware
+    ↓
+  </a>
+
+</section>
+
+
+<!-- =========================================
+     CATEGORIES
+========================================= -->
+
+<main
+  id="categories"
+  class="content"
+>
+
+  <div class="section-title">
+
+    <h2>
+      Explore
+    </h2>
 
     <p>
-      Create a Voidware game page from UGS HTML or a URL.
+      Choose a section to get started.
     </p>
 
   </div>
 
 
-  <div class="workspace">
+  <div class="category-grid">
 
 
-    <!-- SETTINGS -->
+    <!-- GAMES -->
 
-    <section class="panel">
+    <a
+      class="category-card"
+      href="/voidware/games/index.html"
+    >
 
-      <div class="panel-title">
-        Game Settings
+      <div class="category-icon">
+        🎮
       </div>
 
+      <h3>
+        Games
+      </h3>
 
-      <div class="mode-switch">
+      <p>
+        Browse the Voidware game collection.
+        New games can be automatically added
+        to the library.
+      </p>
 
-        <button
-          id="htmlMode"
-          class="mode-button active"
-          type="button"
-        >
-          HTML
-        </button>
-
-        <button
-          id="urlMode"
-          class="mode-button"
-          type="button"
-        >
-          URL
-        </button>
-
+      <div class="card-arrow">
+        →
       </div>
 
+    </a>
 
-      <div class="field">
 
-        <label>
-          Game Name
-        </label>
+    <!-- PROXYS -->
 
-        <input
-          id="gameTitle"
-          type="text"
-          placeholder="My Game"
-          autocomplete="off"
-        >
+    <a
+      class="category-card"
+      href="/voidware/proxys/index.html"
+    >
 
+      <div class="category-icon">
+        🌐
       </div>
 
+      <h3>
+        Proxys
+      </h3>
 
-      <div class="field">
+      <p>
+        Access your collection of proxy
+        projects from one organized library.
+      </p>
 
-        <label>
-          Game Icon
-        </label>
-
-        <div class="icon-row">
-
-          <input
-            id="gameIcon"
-            type="text"
-            value="🎮"
-            maxlength="8"
-          >
-
-          <div
-            id="iconPreview"
-            class="icon-preview"
-          >
-            🎮
-          </div>
-
-        </div>
-
+      <div class="card-arrow">
+        →
       </div>
 
+    </a>
 
-      <div
-        id="htmlArea"
-        class="field"
-      >
 
-        <label>
-          UGS Game HTML
-        </label>
+    <!-- APPS -->
 
-        <textarea
-          id="htmlInput"
-          spellcheck="false"
-          placeholder="Paste your UGS HTML here..."
-        ></textarea>
+    <a
+      class="category-card"
+      href="/voidware/apps/index.html"
+    >
 
-        <div class="help">
-          Paste the complete UGS game HTML.
-        </div>
-
+      <div class="category-icon">
+        📱
       </div>
 
+      <h3>
+        Apps
+      </h3>
 
-      <div
-        id="urlArea"
-        class="field hidden"
-      >
+      <p>
+        Browse useful apps and tools hosted
+        in the Voidware collection.
+      </p>
 
-        <label>
-          Game URL
-        </label>
-
-        <input
-          id="gameURL"
-          type="url"
-          placeholder="https://example.com/game"
-        >
-
+      <div class="card-arrow">
+        →
       </div>
 
+    </a>
 
-      <div class="button-row">
-
-        <button
-          id="generateButton"
-          class="primary"
-          type="button"
-        >
-          ⚡ Generate Page
-        </button>
-
-        <button
-          id="clearButton"
-          class="secondary"
-          type="button"
-        >
-          Clear
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- PREVIEW -->
-
-    <section class="panel">
-
-      <div class="preview-header">
-
-        <div class="panel-title">
-          Live Preview
-        </div>
-
-        <div
-          id="status"
-          class="status"
-        >
-          Ready
-        </div>
-
-      </div>
-
-
-      <iframe
-        id="previewFrame"
-        class="preview-frame"
-        title="Game Preview"
-        allow="
-          accelerometer;
-          autoplay;
-          clipboard-read;
-          clipboard-write;
-          encrypted-media;
-          fullscreen;
-          gamepad;
-          gyroscope;
-          microphone;
-          camera;
-          midi;
-          payment;
-          picture-in-picture;
-          screen-wake-lock;
-          web-share
-        "
-        allowfullscreen
-      ></iframe>
-
-    </section>
 
   </div>
 
 
-  <!-- GENERATED CODE -->
+  <!-- INFO -->
 
-  <section class="panel code-section">
+  <section class="info-section">
 
-    <div class="preview-header">
+    <div class="info-card">
 
-      <div class="panel-title">
-        Generated HTML
-      </div>
+      <h3>
+        Welcome to Voidware
+      </h3>
 
-      <button
-        id="copyButton"
-        class="copy-button"
-        type="button"
-      >
-        📋 Copy Code
-      </button>
-
-    </div>
-
-
-    <div class="code-wrapper">
-
-      <textarea
-        id="generatedCode"
-        readonly
-        spellcheck="false"
-        placeholder="Generated game page HTML will appear here..."
-      ></textarea>
+      <p>
+        Voidware is organized into separate
+        libraries so games, proxys, and apps
+        can each have their own search and
+        automatic update system.
+      </p>
 
     </div>
 
@@ -869,752 +817,49 @@ button {
 </main>
 
 
-<div
-  id="toast"
-  class="toast"
-></div>
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+  VOIDWARE
+
+  <br><br>
+
+  Built for the Void.
+
+</footer>
 
 
 <script>
-"use strict";
 
-/*
-==================================================
-VOIDWARE GAME MAKER
-==================================================
-*/
+function goTo(section) {
 
-var mode = "html";
-var previewBlobURL = null;
+  var paths = {
 
+    games:
+      "/voidware/games/index.html",
 
-/* ELEMENTS */
+    proxys:
+      "/voidware/proxys/index.html",
 
-var htmlMode =
-  document.getElementById("htmlMode");
+    apps:
+      "/voidware/apps/index.html"
 
-var urlMode =
-  document.getElementById("urlMode");
+  };
 
-var htmlArea =
-  document.getElementById("htmlArea");
 
-var urlArea =
-  document.getElementById("urlArea");
-
-var gameTitle =
-  document.getElementById("gameTitle");
-
-var gameIcon =
-  document.getElementById("gameIcon");
-
-var iconPreview =
-  document.getElementById("iconPreview");
-
-var htmlInput =
-  document.getElementById("htmlInput");
-
-var gameURL =
-  document.getElementById("gameURL");
-
-var generateButton =
-  document.getElementById("generateButton");
-
-var clearButton =
-  document.getElementById("clearButton");
-
-var copyButton =
-  document.getElementById("copyButton");
-
-var generatedCode =
-  document.getElementById("generatedCode");
-
-var previewFrame =
-  document.getElementById("previewFrame");
-
-var status =
-  document.getElementById("status");
-
-var backButton =
-  document.getElementById("backButton");
-
-var toast =
-  document.getElementById("toast");
-
-
-/* TOAST */
-
-var toastTimer;
-
-function showToast(message) {
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(
-    function() {
-
-      toast.classList.remove("show");
-
-    },
-    2500
-  );
-
-}
-
-
-/* MODE */
-
-function setMode(newMode) {
-
-  mode = newMode;
-
-  if (mode === "html") {
-
-    htmlMode.classList.add("active");
-    urlMode.classList.remove("active");
-
-    htmlArea.classList.remove("hidden");
-    urlArea.classList.add("hidden");
-
-  } else {
-
-    urlMode.classList.add("active");
-    htmlMode.classList.remove("active");
-
-    urlArea.classList.remove("hidden");
-    htmlArea.classList.add("hidden");
-
-  }
-
-}
-
-
-/* ICON */
-
-gameIcon.addEventListener(
-  "input",
-  function() {
-
-    iconPreview.textContent =
-      gameIcon.value || "🎮";
-
-  }
-);
-
-
-/*
-==================================================
-ESCAPE TEXT
-==================================================
-*/
-
-function escapeHTML(value) {
-
-  var div =
-    document.createElement("div");
-
-  div.textContent = value;
-
-  return div.innerHTML;
-
-}
-
-
-/*
-==================================================
-CREATE PLAYER
-==================================================
-*/
-
-function createPlayer(source, isHTML) {
-
-  var iframe =
-    document.createElement("iframe");
-
-  iframe.id = "gameFrame";
-
-  iframe.setAttribute(
-    "allowfullscreen",
-    ""
-  );
-
-  iframe.setAttribute(
-    "allow",
-    "accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; gamepad; gyroscope; microphone; camera; midi; payment; picture-in-picture; screen-wake-lock; web-share"
-  );
-
-
-  if (isHTML) {
-
-    iframe.srcdoc =
-      source;
-
-  } else {
-
-    iframe.src =
-      source;
-
-  }
-
-
-  /*
-  Get exactly what the browser would
-  serialize for the generated page.
-  */
-
-  var wrapper =
-    document.createElement("div");
-
-  wrapper.appendChild(
-    iframe
-  );
-
-  return wrapper.innerHTML;
-
-}
-
-
-/*
-==================================================
-GENERATE PAGE
-==================================================
-*/
-
-function generateGamePage() {
-
-  var title =
-    gameTitle.value.trim() ||
-    "Voidware Game";
-
-  var icon =
-    gameIcon.value.trim() ||
-    "🎮";
-
-
-  var player;
-
-
-  if (mode === "html") {
-
-    var source =
-      htmlInput.value;
-
-
-    if (!source.trim()) {
-
-      showToast(
-        "Paste the UGS HTML first."
-      );
-
-      return;
-
-    }
-
-
-    player =
-      createPlayer(
-        source,
-        true
-      );
-
-
-    /*
-    Preview the UGS HTML directly.
-    */
-
-    if (previewBlobURL) {
-
-      URL.revokeObjectURL(
-        previewBlobURL
-      );
-
-    }
-
-
-    var blob =
-      new Blob(
-        [source],
-        {
-          type:
-            "text/html"
-        }
-      );
-
-
-    previewBlobURL =
-      URL.createObjectURL(
-        blob
-      );
-
-
-    previewFrame.src =
-      previewBlobURL;
-
-  }
-
-
-  else {
-
-    var url =
-      gameURL.value.trim();
-
-
-    if (!url) {
-
-      showToast(
-        "Enter a game URL first."
-      );
-
-      return;
-
-    }
-
-
-    try {
-
-      new URL(url);
-
-    }
-
-    catch {
-
-      showToast(
-        "Enter a valid URL."
-      );
-
-      return;
-
-    }
-
-
-    player =
-      createPlayer(
-        url,
-        false
-      );
-
-
-    previewFrame.src =
-      url;
-
-  }
-
-
-  /*
-  BUILD THE GENERATED PAGE
-  */
-
-  var lines = [];
-
-
-  lines.push(
-    "<!DOCTYPE html>"
-  );
-
-  lines.push(
-    '<html lang="en">'
-  );
-
-  lines.push(
-    "<head>"
-  );
-
-  lines.push(
-    '<meta charset="UTF-8">'
-  );
-
-  lines.push(
-    '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
-  );
-
-  lines.push(
-    "<title>" +
-    escapeHTML(title) +
-    " — Voidware</title>"
-  );
-
-  lines.push(
-    '<meta name="game-title" content="' +
-    escapeHTML(title) +
-    '">'
-  );
-
-  lines.push(
-    '<meta name="theme-color" content="#080510">'
-  );
-
-
-  /* CSS */
-
-  lines.push("<style>");
-
-  lines.push(
-    "*{box-sizing:border-box;margin:0;padding:0;}"
-  );
-
-  lines.push(
-    "html,body{width:100%;height:100%;}"
-  );
-
-  lines.push(
-    "body{background:#07050c;color:#f5f0ff;font-family:Arial,Helvetica,sans-serif;overflow:hidden;}"
-  );
-
-  lines.push(
-    "header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:rgba(7,5,12,.94);border-bottom:1px solid rgba(155,77,255,.2);}"
-  );
-
-  lines.push(
-    ".logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:2px;}"
-  );
-
-  lines.push(
-    ".logo-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(135deg,#9b4dff,#5f20b8);}"
-  );
-
-  lines.push(
-    ".game-name{color:#cfc4db;font-size:13px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}"
-  );
-
-  lines.push(
-    ".controls{display:flex;gap:7px;}"
-  );
-
-  lines.push(
-    ".control{border:1px solid rgba(155,77,255,.25);background:rgba(255,255,255,.04);color:#ddd3ea;padding:7px 10px;border-radius:8px;cursor:pointer;}"
-  );
-
-  lines.push(
-    ".control:hover{border-color:rgba(155,77,255,.7);color:white;}"
-  );
-
-  lines.push(
-    "#gameContainer{position:absolute;top:58px;left:0;right:0;bottom:0;background:#000;}"
-  );
-
-  lines.push(
-    "#gameFrame{width:100%;height:100%;border:0;display:block;}"
-  );
-
-  lines.push(
-    "@media(max-width:650px){.game-name{display:none;}.control{padding:6px 7px;font-size:11px;}}"
-  );
-
-  lines.push(
-    "</style>"
-  );
-
-  lines.push(
-    "</head>"
-  );
-
-  lines.push(
-    "<body>"
-  );
-
-
-  /* HEADER */
-
-  lines.push(
-    '<header>'
-  );
-
-  lines.push(
-    '<div class="logo">'
-  );
-
-  lines.push(
-    '<div class="logo-icon">' +
-    escapeHTML(icon) +
-    "</div>"
-  );
-
-  lines.push(
-    '<div class="game-name">' +
-    escapeHTML(title) +
-    "</div>"
-  );
-
-  lines.push(
-    "</div>"
-  );
-
-
-  lines.push(
-    '<div class="controls">'
-  );
-
-  lines.push(
-    '<button class="control" id="fullscreenButton" type="button">⛶ Fullscreen</button>'
-  );
-
-  lines.push(
-    '<button class="control" id="blankButton" type="button">↗ About:blank</button>'
-  );
-
-  lines.push(
-    '<button class="control" id="libraryButton" type="button">← Library</button>'
-  );
-
-  lines.push(
-    "</div>"
-  );
-
-  lines.push(
-    "</header>"
-  );
-
-
-  /* GAME */
-
-  lines.push(
-    '<main id="gameContainer">'
-  );
-
-  lines.push(
-    player
-  );
-
-  lines.push(
-    "</main>"
-  );
-
-
-  /*
-  SCRIPT
-
-  We deliberately construct the script tag
-  using two strings so the Game Maker itself
-  cannot accidentally close its own script.
-  */
-
-  lines.push(
-    "<scr" + "ipt>"
-  );
-
-  lines.push(
-    'var frame=document.getElementById("gameFrame");'
-  );
-
-  lines.push(
-    'document.getElementById("fullscreenButton").addEventListener("click",function(){if(frame.requestFullscreen){frame.requestFullscreen();}});'
-  );
-
-  lines.push(
-    'document.getElementById("blankButton").addEventListener("click",function(){var w=window.open("about:blank","_blank");if(!w){alert("Please allow popups for Voidware.");return;}w.document.open();w.document.write(document.documentElement.outerHTML);w.document.close();});'
-  );
-
-  lines.push(
-    'document.getElementById("libraryButton").addEventListener("click",function(){window.location.href="index.html";});'
-  );
-
-  lines.push(
-    "</scr" + "ipt>"
-  );
-
-
-  lines.push(
-    "</body>"
-  );
-
-  lines.push(
-    "</html>"
-  );
-
-
-  var finalPage =
-    lines.join("\n");
-
-
-  generatedCode.value =
-    finalPage;
-
-
-  status.textContent =
-    "Generated ✓";
-
-  showToast(
-    "Game page generated!"
-  );
-
-}
-
-
-/*
-==================================================
-COPY
-==================================================
-*/
-
-async function copyCode() {
-
-  var code =
-    generatedCode.value;
-
-
-  if (!code) {
-
-    showToast(
-      "Generate a page first."
-    );
-
-    return;
-
-  }
-
-
-  try {
-
-    await navigator.clipboard.writeText(
-      code
-    );
-
-    showToast(
-      "HTML copied!"
-    );
-
-  }
-
-  catch {
-
-    generatedCode.focus();
-
-    generatedCode.select();
-
-    document.execCommand(
-      "copy"
-    );
-
-    showToast(
-      "HTML copied!"
-    );
-
-  }
-
-}
-
-
-/*
-==================================================
-CLEAR
-==================================================
-*/
-
-function clearAll() {
-
-  gameTitle.value =
-    "";
-
-  gameIcon.value =
-    "🎮";
-
-  htmlInput.value =
-    "";
-
-  gameURL.value =
-    "";
-
-  generatedCode.value =
-    "";
-
-  iconPreview.textContent =
-    "🎮";
-
-  previewFrame.src =
-    "about:blank";
-
-  status.textContent =
-    "Ready";
-
-
-  if (previewBlobURL) {
-
-    URL.revokeObjectURL(
-      previewBlobURL
-    );
-
-    previewBlobURL =
-      null;
-
-  }
-
-  showToast(
-    "Cleared!"
-  );
-
-}
-
-
-/*
-==================================================
-EVENTS
-==================================================
-*/
-
-htmlMode.addEventListener(
-  "click",
-  function() {
-
-    setMode("html");
-
-  }
-);
-
-urlMode.addEventListener(
-  "click",
-  function() {
-
-    setMode("url");
-
-  }
-);
-
-generateButton.addEventListener(
-  "click",
-  generateGamePage
-);
-
-copyButton.addEventListener(
-  "click",
-  copyCode
-);
-
-clearButton.addEventListener(
-  "click",
-  clearAll
-);
-
-backButton.addEventListener(
-  "click",
-  function() {
+  if (paths[section]) {
 
     window.location.href =
-      "index.html";
+      paths[section];
 
   }
-);
 
+}
 
-window.addEventListener(
-  "beforeunload",
-  function() {
-
-    if (previewBlobURL) {
-
-      URL.revokeObjectURL(
-        previewBlobURL
-      );
-
-    }
-
-  }
-);
 </script>
 
 </body>
 </html>
-```
