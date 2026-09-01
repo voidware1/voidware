@@ -2,340 +2,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Voidware — Interstellar</title>
+<title>Voidware — Proxys</title>
 
 <meta name="theme-color" content="#080510">
 
 <style>
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
-  background: #07050c;
-  color: #f5f0ff;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            rgba(125, 45, 220, 0.22),
+            transparent 45%
+        ),
+        #07050c;
+
+    color: #f5f0ff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow: hidden;
 }
 
-/* HEADER */
+/* =========================================
+   HEADER
+========================================= */
 
 header {
-  height: 58px;
+    position: fixed;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
 
-  padding: 0 14px;
+    height: 60px;
 
-  background: rgba(7,5,12,.94);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  border-bottom:
-    1px solid
-    rgba(155,77,255,.2);
+    padding: 0 15px;
 
-  backdrop-filter: blur(15px);
+    background: rgba(7,5,12,0.94);
 
-  position: relative;
-  z-index: 20;
+    border-bottom:
+        1px solid
+        rgba(155,77,255,0.25);
+
+    backdrop-filter: blur(16px);
+
+    z-index: 100;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+/* =========================================
+   LOGO
+========================================= */
 
-  min-width: 0;
+.logo {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
 }
 
 .logo-icon {
-  width: 32px;
-  height: 32px;
+    width: 34px;
+    height: 34px;
 
-  flex-shrink: 0;
+    display: grid;
+    place-items: center;
 
-  display: grid;
-  place-items: center;
+    flex-shrink: 0;
 
-  border-radius: 9px;
+    border-radius: 9px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #9b4dff,
-      #5f20b8
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #9b4dff,
+            #5f20b8
+        );
 
-  box-shadow:
-    0 0 22px
-    rgba(145,70,255,.35);
+    box-shadow:
+        0 0 25px
+        rgba(145,70,255,0.35);
 
-  font-weight: 900;
+    font-weight: 900;
 }
 
-.logo-name {
-  font-weight: 900;
-  letter-spacing: 2px;
+.logo-text {
+    font-weight: 900;
+
+    letter-spacing: 2px;
 }
 
-.proxy-name {
-  color: #a99bb4;
-  font-size: 12px;
-  margin-left: 4px;
+.page-name {
+    color: #93889f;
+
+    font-size: 12px;
+
+    margin-left: 3px;
 }
 
-/* CONTROLS */
+/* =========================================
+   CONTROLS
+========================================= */
 
 .controls {
-  display: flex;
-  align-items: center;
-  gap: 7px;
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
 }
 
 button,
 select {
-  font-family: inherit;
+    font-family: inherit;
 }
 
 .control {
-  height: 34px;
+    height: 35px;
 
-  border:
-    1px solid
-    rgba(155,77,255,.25);
+    padding:
+        0 11px;
 
-  background:
-    rgba(255,255,255,.04);
+    border:
+        1px solid
+        rgba(155,77,255,0.28);
 
-  color: #ddd3ea;
+    border-radius: 9px;
 
-  border-radius: 8px;
+    background:
+        rgba(255,255,255,0.04);
 
-  padding: 0 10px;
+    color: #ddd3ea;
 
-  cursor: pointer;
+    font-size: 12px;
 
-  font-size: 12px;
-  font-weight: 800;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        border-color .2s,
+        background .2s,
+        transform .15s;
 }
 
 .control:hover {
-  border-color:
-    rgba(155,77,255,.7);
+    border-color:
+        rgba(155,77,255,0.75);
 
-  background:
-    rgba(155,77,255,.1);
+    background:
+        rgba(155,77,255,0.11);
 
-  color: white;
+    color: white;
+}
+
+.control:active {
+    transform: scale(.97);
 }
 
 .control:disabled {
-  opacity: .45;
-  cursor: not-allowed;
+    opacity: .5;
+
+    cursor: not-allowed;
 }
 
-/* DROPDOWN */
-
 #linkSelector {
-  max-width: 170px;
-  outline: none;
-  cursor: pointer;
+    min-width: 115px;
+
+    max-width: 180px;
 }
 
 #linkSelector option {
-  background: #100a17;
-  color: white;
+    background: #100a17;
+
+    color: white;
 }
 
-/* GAME AREA */
+/* =========================================
+   GAME AREA
+========================================= */
 
-#gameContainer {
-  position: absolute;
+#gameArea {
+    position: fixed;
 
-  top: 58px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-  background: #000;
+    background: #000;
 }
 
 #proxyFrame {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  border: 0;
+    display: block;
 
-  display: block;
+    border: 0;
 
-  background: #000;
+    background: #000;
 }
 
-/* LOADING */
+/* =========================================
+   LOADING
+========================================= */
 
-#loadingScreen {
-  position: absolute;
+#loading {
+    position: absolute;
 
-  inset: 0;
+    inset: 0;
 
-  z-index: 10;
+    display: flex;
 
-  display: flex;
+    align-items: center;
+    justify-content: center;
 
-  align-items: center;
-  justify-content: center;
+    flex-direction: column;
 
-  flex-direction: column;
+    gap: 14px;
 
-  gap: 12px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(100,40,180,.12),
+            #050308 60%
+        );
 
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(112,48,190,.14),
-      #050308 55%
-    );
+    z-index: 20;
 }
 
 .spinner {
-  width: 35px;
-  height: 35px;
+    width: 38px;
+    height: 38px;
 
-  border:
-    3px solid
-    rgba(155,77,255,.18);
+    border:
+        3px solid
+        rgba(155,77,255,.18);
 
-  border-top-color:
-    #9b4dff;
+    border-top-color:
+        #9b4dff;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  animation:
-    spin .8s linear infinite;
+    animation:
+        spin .8s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+
+    to {
+        transform: rotate(360deg);
+    }
+
 }
 
 .loading-text {
-  color: #93889f;
-  font-size: 13px;
+    color: #93889f;
+
+    font-size: 13px;
 }
 
-/* ERROR */
+/* =========================================
+   ERROR
+========================================= */
 
-#errorScreen {
-  position: absolute;
+#error {
+    position: absolute;
 
-  inset: 0;
+    inset: 0;
 
-  z-index: 15;
+    display: none;
 
-  display: none;
+    align-items: center;
+    justify-content: center;
 
-  align-items: center;
-  justify-content: center;
+    text-align: center;
 
-  text-align: center;
+    padding: 25px;
 
-  padding: 20px;
+    background: #050308;
 
-  background: #050308;
+    z-index: 30;
 }
 
 .error-box {
-  max-width: 500px;
+    width: 100%;
+
+    max-width: 500px;
 }
 
 .error-icon {
-  font-size: 45px;
-  margin-bottom: 12px;
+    font-size: 45px;
+
+    margin-bottom: 12px;
 }
 
 .error-title {
-  font-size: 22px;
-  font-weight: 900;
-  margin-bottom: 8px;
+    font-size: 23px;
+
+    font-weight: 900;
+
+    margin-bottom: 9px;
 }
 
-.error-message {
-  color: #93889f;
+#errorMessage {
+    color: #93889f;
 
-  font-size: 13px;
+    font-size: 13px;
 
-  line-height: 1.6;
+    line-height: 1.6;
 
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
 
-.error-button {
-  border:
-    1px solid
-    rgba(155,77,255,.4);
+.retry {
+    border:
+        1px solid
+        rgba(155,77,255,.4);
 
-  background:
-    rgba(155,77,255,.1);
+    background:
+        rgba(155,77,255,.1);
 
-  color: white;
+    color: white;
 
-  padding:
-    10px 15px;
+    padding:
+        10px 16px;
 
-  border-radius: 9px;
+    border-radius: 9px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  font-weight: 800;
+    font-weight: 800;
 }
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+========================================= */
 
-@media(max-width:850px) {
+@media(max-width:700px) {
 
-  .proxy-name {
-    display: none;
-  }
+    header {
+        padding: 0 9px;
+    }
 
-  #linkSelector {
-    max-width: 125px;
-  }
+    .logo-text {
+        display: none;
+    }
 
-}
+    .page-name {
+        display: none;
+    }
 
-@media(max-width:600px) {
+    .controls {
+        gap: 4px;
+    }
 
-  .logo-name {
-    display: none;
-  }
+    .control {
+        padding: 0 8px;
+    }
 
-  .about-button {
-    display: none;
-  }
+    #linkSelector {
+        min-width: 85px;
 
-  #linkSelector {
-    max-width: 105px;
-  }
+        max-width: 105px;
+    }
 
-  .control {
-    padding: 0 8px;
-  }
+    .text-button {
+        display: none;
+    }
 
 }
 
@@ -346,140 +407,145 @@ select {
 
 <header>
 
-  <div class="logo">
+    <div class="logo">
 
-    <div class="logo-icon">
-      V
+        <div class="logo-icon">
+            V
+        </div>
+
+        <div class="logo-text">
+            VOIDWARE
+        </div>
+
+        <div class="page-name">
+            / Proxys
+        </div>
+
     </div>
 
-    <div class="logo-name">
-      VOIDWARE
+
+    <div class="controls">
+
+        <select
+            id="linkSelector"
+            class="control"
+            disabled
+        >
+            <option>
+                Loading...
+            </option>
+        </select>
+
+
+        <button
+            id="updateButton"
+            class="control"
+            disabled
+        >
+            ↻
+            <span class="text-button">
+                Update
+            </span>
+        </button>
+
+
+        <button
+            id="fullscreenButton"
+            class="control"
+            disabled
+            title="Fullscreen"
+        >
+            ⛶
+        </button>
+
+
+        <button
+            id="blankButton"
+            class="control"
+            disabled
+            title="Open in about:blank"
+        >
+            ↗
+        </button>
+
+
+        <button
+            id="homeButton"
+            class="control"
+            title="Voidware Home"
+        >
+            ←
+        </button>
+
     </div>
-
-    <div class="proxy-name">
-      / Interstellar
-    </div>
-
-  </div>
-
-
-  <div class="controls">
-
-    <select
-      id="linkSelector"
-      class="control"
-      disabled
-    >
-      <option>
-        Loading...
-      </option>
-    </select>
-
-
-    <button
-      id="updateButton"
-      class="control"
-    >
-      ↻ Update
-    </button>
-
-
-    <button
-      id="fullscreenButton"
-      class="control"
-      title="Fullscreen"
-    >
-      ⛶
-    </button>
-
-
-    <button
-      id="aboutBlankButton"
-      class="control about-button"
-      title="Open in about:blank"
-    >
-      ↗
-    </button>
-
-
-    <button
-      id="libraryButton"
-      class="control"
-      title="Proxy Library"
-    >
-      ←
-    </button>
-
-  </div>
 
 </header>
 
 
-<div id="gameContainer">
+<div id="gameArea">
 
-  <iframe
-    id="proxyFrame"
-    title="Voidware Proxy"
-    allow="
-      accelerometer;
-      autoplay;
-      clipboard-read;
-      clipboard-write;
-      encrypted-media;
-      fullscreen;
-      gamepad;
-      gyroscope;
-      microphone;
-      camera;
-      midi;
-      payment;
-      picture-in-picture;
-      screen-wake-lock;
-      web-share
-    "
-    allowfullscreen
-    referrerpolicy="no-referrer"
-  ></iframe>
-
-
-  <div id="loadingScreen">
-
-    <div class="spinner"></div>
-
-    <div class="loading-text">
-      Loading proxy links...
-    </div>
-
-  </div>
+    <iframe
+        id="proxyFrame"
+        title="Voidware Proxy"
+        allow="
+            accelerometer;
+            autoplay;
+            clipboard-read;
+            clipboard-write;
+            encrypted-media;
+            fullscreen;
+            gamepad;
+            gyroscope;
+            microphone;
+            camera;
+            midi;
+            payment;
+            picture-in-picture;
+            screen-wake-lock;
+            web-share
+        "
+        allowfullscreen
+        referrerpolicy="no-referrer"
+    ></iframe>
 
 
-  <div id="errorScreen">
+    <div id="loading">
 
-    <div class="error-box">
+        <div class="spinner"></div>
 
-      <div class="error-icon">
-        ⚠️
-      </div>
-
-      <div class="error-title">
-        Unable to load links
-      </div>
-
-      <div
-        id="errorMessage"
-        class="error-message"
-      ></div>
-
-      <button
-        class="error-button"
-        onclick="loadDatabase()"
-      >
-        Try Again
-      </button>
+        <div class="loading-text">
+            Loading proxy database...
+        </div>
 
     </div>
 
-  </div>
+
+    <div id="error">
+
+        <div class="error-box">
+
+            <div class="error-icon">
+                ⚠️
+            </div>
+
+            <div class="error-title">
+                Could not load proxies
+            </div>
+
+            <div
+                id="errorMessage"
+            ></div>
+
+            <button
+                class="retry"
+                id="retryButton"
+            >
+                Try Again
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -491,84 +557,100 @@ select {
 VOIDWARE PROXY DATABASE
 ==================================================
 
-ONLY ONE URL PER LINE.
+Repository:
 
-Example:
+voidware1/voidware
 
-https://example.com
-https://example.org
-https://example.net
+GitHub Pages:
 
-The page automatically creates:
+https://voidware1.github.io/voidware/
 
-Link 1
-Link 2
-Link 3
+This page:
 
-No numbering is needed in the TXT file.
+/Proxys/index.html
 
+Database:
+
+/Proxys/interstellar.txt
 ==================================================
 */
 
 
 /*
-CHANGE THIS FOR EACH PROXY
+==================================================
+DATABASE URL
+==================================================
 */
 
-var DATABASE_FILE =
-  "../interstellar.txt";
+const DATABASE_URL =
+    "/voidware/Proxys/interstellar.txt";
 
 
 /*
 ==================================================
-DOM
+HOME URL
 ==================================================
 */
 
-var frame =
-  document.getElementById(
-    "proxyFrame"
-  );
+const HOME_URL =
+    "/voidware/";
 
-var selector =
-  document.getElementById(
-    "linkSelector"
-  );
 
-var updateButton =
-  document.getElementById(
-    "updateButton"
-  );
+/*
+==================================================
+DOM ELEMENTS
+==================================================
+*/
 
-var fullscreenButton =
-  document.getElementById(
-    "fullscreenButton"
-  );
+const frame =
+    document.getElementById(
+        "proxyFrame"
+    );
 
-var aboutBlankButton =
-  document.getElementById(
-    "aboutBlankButton"
-  );
+const selector =
+    document.getElementById(
+        "linkSelector"
+    );
 
-var libraryButton =
-  document.getElementById(
-    "libraryButton"
-  );
+const updateButton =
+    document.getElementById(
+        "updateButton"
+    );
 
-var loadingScreen =
-  document.getElementById(
-    "loadingScreen"
-  );
+const fullscreenButton =
+    document.getElementById(
+        "fullscreenButton"
+    );
 
-var errorScreen =
-  document.getElementById(
-    "errorScreen"
-  );
+const blankButton =
+    document.getElementById(
+        "blankButton"
+    );
 
-var errorMessage =
-  document.getElementById(
-    "errorMessage"
-  );
+const homeButton =
+    document.getElementById(
+        "homeButton"
+    );
+
+const retryButton =
+    document.getElementById(
+        "retryButton"
+    );
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+const errorScreen =
+    document.getElementById(
+        "error"
+    );
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
 
 
 /*
@@ -577,9 +659,43 @@ STATE
 ==================================================
 */
 
-var links = [];
+let proxyLinks = [];
 
-var currentIndex = 0;
+let currentLink = -1;
+
+
+/*
+==================================================
+SHOW ERROR
+==================================================
+*/
+
+function showError(message) {
+
+    loading.style.display =
+        "none";
+
+    errorScreen.style.display =
+        "flex";
+
+    errorMessage.textContent =
+        message;
+
+}
+
+
+/*
+==================================================
+HIDE ERROR
+==================================================
+*/
+
+function hideError() {
+
+    errorScreen.style.display =
+        "none";
+
+}
 
 
 /*
@@ -590,188 +706,234 @@ LOAD DATABASE
 
 async function loadDatabase() {
 
-  loadingScreen.style.display =
-    "flex";
+    loading.style.display =
+        "flex";
 
-  errorScreen.style.display =
-    "none";
-
-  selector.disabled =
-    true;
-
-  updateButton.disabled =
-    true;
-
-
-  try {
-
-    var response =
-      await fetch(
-        DATABASE_FILE
-        + "?v="
-        + Date.now()
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Database returned HTTP "
-        + response.status
-      );
-
-    }
-
-
-    var text =
-      await response.text();
-
-
-    /*
-    Split the TXT file into individual
-    lines.
-    */
-
-    var lines =
-      text.split(/\r?\n/);
-
-
-    links = [];
-
-
-    /*
-    Read every line.
-    */
-
-    lines.forEach(
-      function(line) {
-
-        line =
-          line.trim();
-
-
-        /*
-        Ignore blank lines.
-        */
-
-        if (!line) {
-          return;
-        }
-
-
-        /*
-        Ignore comments beginning with #.
-        */
-
-        if (
-          line.charAt(0) === "#"
-        ) {
-          return;
-        }
-
-
-        /*
-        Make sure the line is a valid URL.
-        */
-
-        try {
-
-          var parsed =
-            new URL(line);
-
-
-          /*
-          Only allow normal web URLs.
-          */
-
-          if (
-            parsed.protocol !== "http:"
-            &&
-            parsed.protocol !== "https:"
-          ) {
-
-            return;
-
-          }
-
-
-          /*
-          Automatically number it.
-          */
-
-          links.push({
-
-            name:
-              "Link "
-              + (
-                links.length + 1
-              ),
-
-            url:
-              parsed.href
-
-          });
-
-
-        } catch {
-
-          /*
-          Ignore invalid lines.
-          */
-
-        }
-
-      }
-    );
-
-
-    if (!links.length) {
-
-      throw new Error(
-        "No valid links were found in "
-        + DATABASE_FILE
-      );
-
-    }
-
-
-    buildDropdown();
+    hideError();
 
 
     selector.disabled =
-      false;
+        true;
 
     updateButton.disabled =
-      false;
+        true;
+
+    fullscreenButton.disabled =
+        true;
+
+    blankButton.disabled =
+        true;
 
 
-    loadingScreen.style.display =
-      "none";
+    try {
+
+        /*
+        Cache busting makes sure that
+        pressing Update gets the newest
+        TXT file from GitHub Pages.
+        */
+
+        const response =
+            await fetch(
+                DATABASE_URL
+                +
+                "?v="
+                +
+                Date.now(),
+                {
+                    cache: "no-store"
+                }
+            );
 
 
-    currentIndex = 0;
+        if (!response.ok) {
 
-    loadCurrentLink();
+            throw new Error(
+                "GitHub Pages returned HTTP "
+                +
+                response.status
+                +
+                " when loading Proxys/interstellar.txt."
+            );
 
-
-  } catch(error) {
-
-    console.error(error);
-
-
-    loadingScreen.style.display =
-      "none";
-
-    errorScreen.style.display =
-      "flex";
+        }
 
 
-    errorMessage.textContent =
-      error.message
-      ||
-      "Could not load the database.";
+        const text =
+            await response.text();
 
-  }
+
+        /*
+        Split the TXT file into lines.
+        */
+
+        const lines =
+            text.split(/\r?\n/);
+
+
+        proxyLinks = [];
+
+
+        /*
+        Read every line.
+        */
+
+        for (
+            let i = 0;
+            i < lines.length;
+            i++
+        ) {
+
+            let line =
+                lines[i].trim();
+
+
+            /*
+            Ignore blank lines.
+            */
+
+            if (!line) {
+                continue;
+            }
+
+
+            /*
+            Ignore comments.
+
+            Example:
+
+            # This is a comment
+            */
+
+            if (
+                line.startsWith("#")
+            ) {
+                continue;
+            }
+
+
+            /*
+            Check whether the line
+            contains a valid URL.
+            */
+
+            try {
+
+                const url =
+                    new URL(line);
+
+
+                /*
+                Only allow HTTP/HTTPS.
+                */
+
+                if (
+                    url.protocol !== "http:"
+                    &&
+                    url.protocol !== "https:"
+                ) {
+
+                    continue;
+
+                }
+
+
+                proxyLinks.push(
+                    url.href
+                );
+
+
+            } catch {
+
+                /*
+                Invalid lines are simply
+                ignored.
+                */
+
+                continue;
+
+            }
+
+        }
+
+
+        /*
+        Make sure we found something.
+        */
+
+        if (
+            proxyLinks.length === 0
+        ) {
+
+            throw new Error(
+                "No valid proxy URLs were found in Proxys/interstellar.txt."
+            );
+
+        }
+
+
+        /*
+        Create the dropdown.
+        */
+
+        buildSelector();
+
+
+        /*
+        Enable controls.
+        */
+
+        selector.disabled =
+            false;
+
+        updateButton.disabled =
+            false;
+
+        fullscreenButton.disabled =
+            false;
+
+        blankButton.disabled =
+            false;
+
+
+        loading.style.display =
+            "none";
+
+
+        /*
+        Restore currently selected
+        link when possible.
+        */
+
+        if (
+            currentLink < 0
+            ||
+            currentLink >= proxyLinks.length
+        ) {
+
+            currentLink = 0;
+
+        }
+
+
+        selector.value =
+            String(currentLink);
+
+
+        loadSelectedProxy();
+
+
+    } catch(error) {
+
+        console.error(error);
+
+        showError(
+            error.message
+            ||
+            "Unknown database error."
+        );
+
+    }
 
 }
 
@@ -782,116 +944,114 @@ BUILD DROPDOWN
 ==================================================
 */
 
-function buildDropdown() {
+function buildSelector() {
 
-  selector.innerHTML = "";
+    selector.innerHTML = "";
 
 
-  links.forEach(
-    function(item, index) {
+    for (
+        let i = 0;
+        i < proxyLinks.length;
+        i++
+    ) {
 
-      var option =
-        document.createElement(
-          "option"
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            String(i);
+
+
+        /*
+        Automatically numbered.
+
+        0 becomes Link 1
+        1 becomes Link 2
+        2 becomes Link 3
+        */
+
+        option.textContent =
+            "Link "
+            +
+            String(i + 1);
+
+
+        selector.appendChild(
+            option
         );
 
-
-      option.value =
-        String(index);
-
-
-      option.textContent =
-        item.name;
-
-
-      selector.appendChild(
-        option
-      );
-
     }
-  );
-
-
-  selector.value =
-    String(currentIndex);
 
 }
 
 
 /*
 ==================================================
-LOAD CURRENT LINK
+LOAD SELECTED PROXY
 ==================================================
 */
 
-function loadCurrentLink() {
+function loadSelectedProxy() {
 
-  if (
-    !links.length
-    ||
-    !links[currentIndex]
-  ) {
-    return;
-  }
+    if (
+        currentLink < 0
+        ||
+        currentLink >= proxyLinks.length
+    ) {
+
+        return;
+
+    }
 
 
-  frame.src =
-    links[currentIndex].url;
+    const url =
+        proxyLinks[currentLink];
+
+
+    frame.src =
+        url;
 
 }
 
 
 /*
 ==================================================
-CHANGE LINK
+DROPDOWN CHANGE
 ==================================================
 */
 
 selector.addEventListener(
-  "change",
-  function() {
+    "change",
+    function() {
 
-    currentIndex =
-      Number(
-        selector.value
-      );
+        currentLink =
+            Number(
+                selector.value
+            );
 
 
-    loadCurrentLink();
+        loadSelectedProxy();
 
-  }
+    }
 );
 
 
 /*
 ==================================================
-UPDATE IFRAME
+UPDATE BUTTON
 ==================================================
 */
 
 updateButton.addEventListener(
-  "click",
-  function() {
+    "click",
+    function() {
 
-    if (!links.length) {
-      return;
+        loadDatabase();
+
     }
-
-
-    frame.src =
-      "about:blank";
-
-
-    setTimeout(
-      function() {
-
-        loadCurrentLink();
-
-      },
-      100
-    );
-
-  }
 );
 
 
@@ -902,29 +1062,26 @@ FULLSCREEN
 */
 
 fullscreenButton.addEventListener(
-  "click",
-  function() {
+    "click",
+    function() {
 
-    if (
-      frame.requestFullscreen
-    ) {
+        if (
+            frame.requestFullscreen
+        ) {
 
-      frame.requestFullscreen();
+            frame.requestFullscreen();
 
-      return;
+        }
+
+        else if (
+            frame.webkitRequestFullscreen
+        ) {
+
+            frame.webkitRequestFullscreen();
+
+        }
 
     }
-
-
-    if (
-      frame.webkitRequestFullscreen
-    ) {
-
-      frame.webkitRequestFullscreen();
-
-    }
-
-  }
 );
 
 
@@ -934,102 +1091,137 @@ ABOUT:BLANK
 ==================================================
 */
 
-aboutBlankButton.addEventListener(
-  "click",
-  function() {
+blankButton.addEventListener(
+    "click",
+    function() {
 
-    if (!links.length) {
-      return;
+        if (
+            currentLink < 0
+            ||
+            currentLink >= proxyLinks.length
+        ) {
+
+            return;
+
+        }
+
+
+        const url =
+            proxyLinks[currentLink];
+
+
+        /*
+        Open a blank tab.
+        */
+
+        const newWindow =
+            window.open(
+                "about:blank",
+                "_blank"
+            );
+
+
+        if (!newWindow) {
+
+            alert(
+                "Popup blocked. Please allow popups for Voidware."
+            );
+
+            return;
+
+        }
+
+
+        /*
+        Put a fullscreen iframe
+        inside the about:blank page.
+        */
+
+        newWindow.document.open();
+
+
+        newWindow.document.write(
+`
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>Voidware</title>
+
+<style>
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    background: #000;
+
+}
+
+iframe {
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+
+    display: block;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<iframe
+src="${escapeAttribute(url)}"
+allow="
+accelerometer;
+autoplay;
+clipboard-read;
+clipboard-write;
+encrypted-media;
+fullscreen;
+gamepad;
+gyroscope;
+microphone;
+camera;
+midi;
+payment;
+picture-in-picture;
+screen-wake-lock;
+web-share
+"
+allowfullscreen
+></iframe>
+
+</body>
+
+</html>
+`
+        );
+
+
+        newWindow.document.close();
+
     }
-
-
-    var selected =
-      links[currentIndex];
-
-
-    var win =
-      window.open(
-        "about:blank",
-        "_blank"
-      );
-
-
-    if (!win) {
-
-      alert(
-        "Please allow popups for Voidware."
-      );
-
-      return;
-
-    }
-
-
-    /*
-    Put the selected URL into the
-    about:blank window.
-    */
-
-    win.document.open();
-
-
-    win.document.write(
-
-      "<!DOCTYPE html>"
-      + "<html>"
-      + "<head>"
-      + "<title>Voidware</title>"
-      + "<style>"
-      + "html,body{"
-      + "margin:0;"
-      + "padding:0;"
-      + "width:100%;"
-      + "height:100%;"
-      + "overflow:hidden;"
-      + "background:#000;"
-      + "}"
-      + "iframe{"
-      + "width:100%;"
-      + "height:100%;"
-      + "border:0;"
-      + "display:block;"
-      + "}"
-      + "</style>"
-      + "</head>"
-      + "<body>"
-      + "<iframe "
-      + "src=\""
-      + escapeAttribute(
-          selected.url
-        )
-      + "\" "
-      + "allow=\""
-      + "accelerometer; "
-      + "autoplay; "
-      + "clipboard-read; "
-      + "clipboard-write; "
-      + "encrypted-media; "
-      + "fullscreen; "
-      + "gamepad; "
-      + "gyroscope; "
-      + "microphone; "
-      + "camera; "
-      + "midi; "
-      + "payment; "
-      + "picture-in-picture; "
-      + "screen-wake-lock; "
-      + "web-share\" "
-      + "allowfullscreen>"
-      + "</iframe>"
-      + "</body>"
-      + "</html>"
-
-    );
-
-
-    win.document.close();
-
-  }
 );
 
 
@@ -1041,45 +1233,46 @@ ESCAPE URL
 
 function escapeAttribute(value) {
 
-  return String(value)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    );
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 
 }
 
 
 /*
 ==================================================
-LIBRARY BUTTON
+HOME BUTTON
 ==================================================
 */
 
-libraryButton.addEventListener(
-  "click",
-  function() {
+homeButton.addEventListener(
+    "click",
+    function() {
 
-    window.location.href =
-      "index.html";
+        window.location.href =
+            HOME_URL;
 
-  }
+    }
+);
+
+
+/*
+==================================================
+RETRY BUTTON
+==================================================
+*/
+
+retryButton.addEventListener(
+    "click",
+    function() {
+
+        loadDatabase();
+
+    }
 );
 
 
