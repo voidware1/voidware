@@ -1,0 +1,1098 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voidware — Interstellar</title>
+
+<meta name="theme-color" content="#080510">
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #07050c;
+  color: #f5f0ff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+header {
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+
+  background: rgba(7,5,12,.94);
+
+  border-bottom:
+    1px solid
+    rgba(155,77,255,.2);
+
+  backdrop-filter: blur(15px);
+
+  position: relative;
+  z-index: 20;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9b4dff,
+      #5f20b8
+    );
+
+  box-shadow:
+    0 0 22px
+    rgba(145,70,255,.35);
+
+  font-weight: 900;
+}
+
+.logo-name {
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.proxy-name {
+  color: #a99bb4;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+/* CONTROLS */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+button,
+select {
+  font-family: inherit;
+}
+
+.control {
+  height: 34px;
+
+  border:
+    1px solid
+    rgba(155,77,255,.25);
+
+  background:
+    rgba(255,255,255,.04);
+
+  color: #ddd3ea;
+
+  border-radius: 8px;
+
+  padding: 0 10px;
+
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.control:hover {
+  border-color:
+    rgba(155,77,255,.7);
+
+  background:
+    rgba(155,77,255,.1);
+
+  color: white;
+}
+
+.control:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* DROPDOWN */
+
+#linkSelector {
+  max-width: 170px;
+  outline: none;
+  cursor: pointer;
+}
+
+#linkSelector option {
+  background: #100a17;
+  color: white;
+}
+
+/* GAME AREA */
+
+#gameContainer {
+  position: absolute;
+
+  top: 58px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: #000;
+}
+
+#proxyFrame {
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+
+  display: block;
+
+  background: #000;
+}
+
+/* LOADING */
+
+#loadingScreen {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(112,48,190,.14),
+      #050308 55%
+    );
+}
+
+.spinner {
+  width: 35px;
+  height: 35px;
+
+  border:
+    3px solid
+    rgba(155,77,255,.18);
+
+  border-top-color:
+    #9b4dff;
+
+  border-radius: 50%;
+
+  animation:
+    spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #93889f;
+  font-size: 13px;
+}
+
+/* ERROR */
+
+#errorScreen {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 15;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 20px;
+
+  background: #050308;
+}
+
+.error-box {
+  max-width: 500px;
+}
+
+.error-icon {
+  font-size: 45px;
+  margin-bottom: 12px;
+}
+
+.error-title {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.error-message {
+  color: #93889f;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  margin-bottom: 18px;
+}
+
+.error-button {
+  border:
+    1px solid
+    rgba(155,77,255,.4);
+
+  background:
+    rgba(155,77,255,.1);
+
+  color: white;
+
+  padding:
+    10px 15px;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-weight: 800;
+}
+
+/* MOBILE */
+
+@media(max-width:850px) {
+
+  .proxy-name {
+    display: none;
+  }
+
+  #linkSelector {
+    max-width: 125px;
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .logo-name {
+    display: none;
+  }
+
+  .about-button {
+    display: none;
+  }
+
+  #linkSelector {
+    max-width: 105px;
+  }
+
+  .control {
+    padding: 0 8px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+
+    <div class="logo-icon">
+      V
+    </div>
+
+    <div class="logo-name">
+      VOIDWARE
+    </div>
+
+    <div class="proxy-name">
+      / Interstellar
+    </div>
+
+  </div>
+
+
+  <div class="controls">
+
+    <select
+      id="linkSelector"
+      class="control"
+      disabled
+    >
+      <option>
+        Loading...
+      </option>
+    </select>
+
+
+    <button
+      id="updateButton"
+      class="control"
+    >
+      ↻ Update
+    </button>
+
+
+    <button
+      id="fullscreenButton"
+      class="control"
+      title="Fullscreen"
+    >
+      ⛶
+    </button>
+
+
+    <button
+      id="aboutBlankButton"
+      class="control about-button"
+      title="Open in about:blank"
+    >
+      ↗
+    </button>
+
+
+    <button
+      id="libraryButton"
+      class="control"
+      title="Proxy Library"
+    >
+      ←
+    </button>
+
+  </div>
+
+</header>
+
+
+<div id="gameContainer">
+
+  <iframe
+    id="proxyFrame"
+    title="Voidware Proxy"
+    allow="
+      accelerometer;
+      autoplay;
+      clipboard-read;
+      clipboard-write;
+      encrypted-media;
+      fullscreen;
+      gamepad;
+      gyroscope;
+      microphone;
+      camera;
+      midi;
+      payment;
+      picture-in-picture;
+      screen-wake-lock;
+      web-share
+    "
+    allowfullscreen
+    referrerpolicy="no-referrer"
+  ></iframe>
+
+
+  <div id="loadingScreen">
+
+    <div class="spinner"></div>
+
+    <div class="loading-text">
+      Loading proxy links...
+    </div>
+
+  </div>
+
+
+  <div id="errorScreen">
+
+    <div class="error-box">
+
+      <div class="error-icon">
+        ⚠️
+      </div>
+
+      <div class="error-title">
+        Unable to load links
+      </div>
+
+      <div
+        id="errorMessage"
+        class="error-message"
+      ></div>
+
+      <button
+        class="error-button"
+        onclick="loadDatabase()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/*
+==================================================
+VOIDWARE PROXY DATABASE
+==================================================
+
+ONLY ONE URL PER LINE.
+
+Example:
+
+https://example.com
+https://example.org
+https://example.net
+
+The page automatically creates:
+
+Link 1
+Link 2
+Link 3
+
+No numbering is needed in the TXT file.
+
+==================================================
+*/
+
+
+/*
+CHANGE THIS FOR EACH PROXY
+*/
+
+var DATABASE_FILE =
+  "../interstellar.txt";
+
+
+/*
+==================================================
+DOM
+==================================================
+*/
+
+var frame =
+  document.getElementById(
+    "proxyFrame"
+  );
+
+var selector =
+  document.getElementById(
+    "linkSelector"
+  );
+
+var updateButton =
+  document.getElementById(
+    "updateButton"
+  );
+
+var fullscreenButton =
+  document.getElementById(
+    "fullscreenButton"
+  );
+
+var aboutBlankButton =
+  document.getElementById(
+    "aboutBlankButton"
+  );
+
+var libraryButton =
+  document.getElementById(
+    "libraryButton"
+  );
+
+var loadingScreen =
+  document.getElementById(
+    "loadingScreen"
+  );
+
+var errorScreen =
+  document.getElementById(
+    "errorScreen"
+  );
+
+var errorMessage =
+  document.getElementById(
+    "errorMessage"
+  );
+
+
+/*
+==================================================
+STATE
+==================================================
+*/
+
+var links = [];
+
+var currentIndex = 0;
+
+
+/*
+==================================================
+LOAD DATABASE
+==================================================
+*/
+
+async function loadDatabase() {
+
+  loadingScreen.style.display =
+    "flex";
+
+  errorScreen.style.display =
+    "none";
+
+  selector.disabled =
+    true;
+
+  updateButton.disabled =
+    true;
+
+
+  try {
+
+    var response =
+      await fetch(
+        DATABASE_FILE
+        + "?v="
+        + Date.now()
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Database returned HTTP "
+        + response.status
+      );
+
+    }
+
+
+    var text =
+      await response.text();
+
+
+    /*
+    Split the TXT file into individual
+    lines.
+    */
+
+    var lines =
+      text.split(/\r?\n/);
+
+
+    links = [];
+
+
+    /*
+    Read every line.
+    */
+
+    lines.forEach(
+      function(line) {
+
+        line =
+          line.trim();
+
+
+        /*
+        Ignore blank lines.
+        */
+
+        if (!line) {
+          return;
+        }
+
+
+        /*
+        Ignore comments beginning with #.
+        */
+
+        if (
+          line.charAt(0) === "#"
+        ) {
+          return;
+        }
+
+
+        /*
+        Make sure the line is a valid URL.
+        */
+
+        try {
+
+          var parsed =
+            new URL(line);
+
+
+          /*
+          Only allow normal web URLs.
+          */
+
+          if (
+            parsed.protocol !== "http:"
+            &&
+            parsed.protocol !== "https:"
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+          Automatically number it.
+          */
+
+          links.push({
+
+            name:
+              "Link "
+              + (
+                links.length + 1
+              ),
+
+            url:
+              parsed.href
+
+          });
+
+
+        } catch {
+
+          /*
+          Ignore invalid lines.
+          */
+
+        }
+
+      }
+    );
+
+
+    if (!links.length) {
+
+      throw new Error(
+        "No valid links were found in "
+        + DATABASE_FILE
+      );
+
+    }
+
+
+    buildDropdown();
+
+
+    selector.disabled =
+      false;
+
+    updateButton.disabled =
+      false;
+
+
+    loadingScreen.style.display =
+      "none";
+
+
+    currentIndex = 0;
+
+    loadCurrentLink();
+
+
+  } catch(error) {
+
+    console.error(error);
+
+
+    loadingScreen.style.display =
+      "none";
+
+    errorScreen.style.display =
+      "flex";
+
+
+    errorMessage.textContent =
+      error.message
+      ||
+      "Could not load the database.";
+
+  }
+
+}
+
+
+/*
+==================================================
+BUILD DROPDOWN
+==================================================
+*/
+
+function buildDropdown() {
+
+  selector.innerHTML = "";
+
+
+  links.forEach(
+    function(item, index) {
+
+      var option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        String(index);
+
+
+      option.textContent =
+        item.name;
+
+
+      selector.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  selector.value =
+    String(currentIndex);
+
+}
+
+
+/*
+==================================================
+LOAD CURRENT LINK
+==================================================
+*/
+
+function loadCurrentLink() {
+
+  if (
+    !links.length
+    ||
+    !links[currentIndex]
+  ) {
+    return;
+  }
+
+
+  frame.src =
+    links[currentIndex].url;
+
+}
+
+
+/*
+==================================================
+CHANGE LINK
+==================================================
+*/
+
+selector.addEventListener(
+  "change",
+  function() {
+
+    currentIndex =
+      Number(
+        selector.value
+      );
+
+
+    loadCurrentLink();
+
+  }
+);
+
+
+/*
+==================================================
+UPDATE IFRAME
+==================================================
+*/
+
+updateButton.addEventListener(
+  "click",
+  function() {
+
+    if (!links.length) {
+      return;
+    }
+
+
+    frame.src =
+      "about:blank";
+
+
+    setTimeout(
+      function() {
+
+        loadCurrentLink();
+
+      },
+      100
+    );
+
+  }
+);
+
+
+/*
+==================================================
+FULLSCREEN
+==================================================
+*/
+
+fullscreenButton.addEventListener(
+  "click",
+  function() {
+
+    if (
+      frame.requestFullscreen
+    ) {
+
+      frame.requestFullscreen();
+
+      return;
+
+    }
+
+
+    if (
+      frame.webkitRequestFullscreen
+    ) {
+
+      frame.webkitRequestFullscreen();
+
+    }
+
+  }
+);
+
+
+/*
+==================================================
+ABOUT:BLANK
+==================================================
+*/
+
+aboutBlankButton.addEventListener(
+  "click",
+  function() {
+
+    if (!links.length) {
+      return;
+    }
+
+
+    var selected =
+      links[currentIndex];
+
+
+    var win =
+      window.open(
+        "about:blank",
+        "_blank"
+      );
+
+
+    if (!win) {
+
+      alert(
+        "Please allow popups for Voidware."
+      );
+
+      return;
+
+    }
+
+
+    /*
+    Put the selected URL into the
+    about:blank window.
+    */
+
+    win.document.open();
+
+
+    win.document.write(
+
+      "<!DOCTYPE html>"
+      + "<html>"
+      + "<head>"
+      + "<title>Voidware</title>"
+      + "<style>"
+      + "html,body{"
+      + "margin:0;"
+      + "padding:0;"
+      + "width:100%;"
+      + "height:100%;"
+      + "overflow:hidden;"
+      + "background:#000;"
+      + "}"
+      + "iframe{"
+      + "width:100%;"
+      + "height:100%;"
+      + "border:0;"
+      + "display:block;"
+      + "}"
+      + "</style>"
+      + "</head>"
+      + "<body>"
+      + "<iframe "
+      + "src=\""
+      + escapeAttribute(
+          selected.url
+        )
+      + "\" "
+      + "allow=\""
+      + "accelerometer; "
+      + "autoplay; "
+      + "clipboard-read; "
+      + "clipboard-write; "
+      + "encrypted-media; "
+      + "fullscreen; "
+      + "gamepad; "
+      + "gyroscope; "
+      + "microphone; "
+      + "camera; "
+      + "midi; "
+      + "payment; "
+      + "picture-in-picture; "
+      + "screen-wake-lock; "
+      + "web-share\" "
+      + "allowfullscreen>"
+      + "</iframe>"
+      + "</body>"
+      + "</html>"
+
+    );
+
+
+    win.document.close();
+
+  }
+);
+
+
+/*
+==================================================
+ESCAPE URL
+==================================================
+*/
+
+function escapeAttribute(value) {
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    );
+
+}
+
+
+/*
+==================================================
+LIBRARY BUTTON
+==================================================
+*/
+
+libraryButton.addEventListener(
+  "click",
+  function() {
+
+    window.location.href =
+      "index.html";
+
+  }
+);
+
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadDatabase();
+
+</script>
+
+</body>
+</html>
+```
