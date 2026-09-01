@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voidware - Proxy Page Maker</title>
+
+<style>
+:root {
+  --bg: #07050c;
+  --panel: #100a17;
+  --panel2: #160d21;
+  --purple: #9b4dff;
+  --purple2: #6721c6;
+  --text: #f5f0ff;
+  --muted: #93889f;
+  --border: rgba(155,77,255,.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(155,77,255,.16), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(103,33,198,.14), transparent 28%),
+    var(--bg);
+}
+
+/* HEADER */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(7,5,12,.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+  box-shadow: 0 0 25px rgba(155,77,255,.35);
+}
+
+.logo-text {
+  font-size: 18px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: .2s;
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(155,77,255,.1);
+}
+
+/* HERO */
+
+.hero {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 75px 0 45px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(155,77,255,.08);
+  color: #c99fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.hero h1 {
+  margin: 18px 0 12px;
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: .95;
+  font-weight: 1000;
+  letter-spacing: -3px;
+  background: linear-gradient(90deg, #fff, #cda5ff, #8d3cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* MAIN */
+
+.content {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding-bottom: 70px;
+}
+
+.panel {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent),
+    var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+  margin-bottom: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.22);
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.section-description {
+  margin: 0 0 22px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* INPUTS */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #cdbbe0;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--border);
+  outline: none;
+  background: #0b0710;
+  color: white;
+  padding: 14px 15px;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: .2s;
+}
+
+input:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(155,77,255,.12);
+}
+
+.path-box {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #0b0710;
+  border: 1px solid var(--border);
+  color: #bda8cf;
+  font-family: monospace;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+/* BUTTONS */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  color: white;
+  font-weight: 800;
+  border-radius: 11px;
+  padding: 12px 17px;
+  font-size: 14px;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+  box-shadow: 0 8px 25px rgba(155,77,255,.2);
+}
+
+.secondary {
+  background: #1b1026;
+  border: 1px solid var(--border);
+}
+
+.green {
+  background: #17351f;
+  border: 1px solid rgba(80,220,120,.2);
+}
+
+/* STATUS */
+
+.status {
+  margin-top: 15px;
+  min-height: 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.status.success {
+  color: #7dff9a;
+}
+
+.status.error {
+  color: #ff7777;
+}
+
+/* PREVIEW */
+
+.proxy-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.proxy-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  transition: .2s;
+}
+
+.proxy-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(155,77,255,.5);
+  box-shadow: 0 15px 35px rgba(0,0,0,.3);
+}
+
+.proxy-number {
+  color: #b87aff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.proxy-name {
+  margin-top: 7px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.proxy-url {
+  margin-top: 9px;
+  color: var(--muted);
+  font-family: monospace;
+  font-size: 12px;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.empty {
+  padding: 35px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 15px;
+}
+
+/* CODE */
+
+textarea {
+  width: 100%;
+  min-height: 420px;
+  resize: vertical;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  outline: none;
+  background: #08060b;
+  color: #d9c8e8;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proxy-preview {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  header {
+    padding: 0 16px;
+  }
+
+  .nav-link {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 550px) {
+  .hero {
+    padding-top: 50px;
+  }
+
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+
+  .proxy-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 19px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="/voidware/">
+    <div class="logo-icon">V</div>
+    <div class="logo-text">VOIDWARE</div>
+  </a>
+
+  <nav class="nav-links">
+    <a class="nav-link" href="/voidware/">Home</a>
+    <a class="nav-link" href="/voidware/games/index.html">Games</a>
+    <a class="nav-link" href="/voidware/proxys/index.html">Proxys</a>
+    <a class="nav-link" href="/voidware/apps/index.html">Apps</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="badge">PROXY PAGE MAKER</div>
+
+  <h1>BUILD YOUR<br>PROXY PAGE</h1>
+
+  <p>
+    Enter your TXT database filename, preview the proxy links,
+    and generate a complete Voidware proxy page.
+  </p>
+</section>
+
+<main class="content">
+
+  <!-- SETTINGS -->
+
+  <section class="panel">
+
+    <h2 class="section-title">Page Settings</h2>
+
+    <p class="section-description">
+      Choose the TXT database that contains your proxy URLs.
+      Put the TXT file inside the <b>proxys/database</b> folder.
+    </p>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label for="pageName">Page Name</label>
+
+        <input
+          id="pageName"
+          type="text"
+          value="Voidware Proxys"
+          placeholder="Example: Voidware Proxys"
+        >
+      </div>
+
+      <div class="field">
+        <label for="fileName">TXT Database Filename</label>
+
+        <input
+          id="fileName"
+          type="text"
+          value="interstellar.txt"
+          placeholder="example.txt"
+        >
+      </div>
+
+    </div>
+
+    <div class="path-box" id="pathBox">
+      /voidware/proxys/database/interstellar.txt
+    </div>
+
+    <div class="buttons">
+
+      <button class="primary" onclick="loadLinks()">
+        Load Links
+      </button>
+
+      <button class="secondary" onclick="generatePage()">
+        Generate Page
+      </button>
+
+    </div>
+
+    <div class="status" id="status"></div>
+
+  </section>
+
+
+  <!-- LINK PREVIEW -->
+
+  <section class="panel">
+
+    <h2 class="section-title">Link Preview</h2>
+
+    <p class="section-description">
+      These are the proxies that will appear on the generated page.
+    </p>
+
+    <div id="preview" class="proxy-preview">
+
+      <div class="empty">
+        Load your TXT database to preview the links.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GENERATED CODE -->
+
+  <section class="panel">
+
+    <h2 class="section-title">Generated Page</h2>
+
+    <p class="section-description">
+      Copy this code into the HTML file for your proxy page.
+    </p>
+
+    <textarea
+      id="generatedCode"
+      spellcheck="false"
+      placeholder="Your generated HTML will appear here..."
+    ></textarea>
+
+    <div class="buttons">
+
+      <button class="primary" onclick="copyCode()">
+        Copy Code
+      </button>
+
+    </div>
+
+    <div class="status" id="copyStatus"></div>
+
+  </section>
+
+</main>
+
+<footer>
+  VOIDWARE • PROXY PAGE MAKER
+</footer>
+
+
+<script>
+const BASE_PATH = "/voidware/proxys/database/";
+
+let loadedLinks = [];
+
+
+/* UPDATE DATABASE PATH */
+
+function updatePath() {
+  const fileInput = document.getElementById("fileName");
+
+  let file = fileInput.value.trim();
+
+  if (!file) {
+    file = "example.txt";
+  }
+
+  document.getElementById("pathBox").textContent =
+    BASE_PATH + file;
+}
+
+document
+  .getElementById("fileName")
+  .addEventListener("input", updatePath);
+
+
+/* LOAD TXT DATABASE */
+
+async function loadLinks() {
+
+  const fileInput = document.getElementById("fileName");
+  const status = document.getElementById("status");
+  const preview = document.getElementById("preview");
+
+  let file = fileInput.value.trim();
+
+  if (!file) {
+    status.textContent = "Enter a TXT filename first.";
+    status.className = "status error";
+    return;
+  }
+
+  if (!file.toLowerCase().endsWith(".txt")) {
+    file += ".txt";
+  }
+
+  fileInput.value = file;
+  updatePath();
+
+  const url = BASE_PATH + encodeURIComponent(file);
+
+  status.textContent = "Loading database...";
+  status.className = "status";
+
+  try {
+
+    const response = await fetch(url, {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        "Database returned HTTP " + response.status
+      );
+    }
+
+    const text = await response.text();
+
+    loadedLinks = text
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(line => {
+        return line &&
+          !line.startsWith("#") &&
+          /^https?:\/\//i.test(line);
+      });
+
+    renderPreview();
+
+    status.textContent =
+      "Loaded " + loadedLinks.length + " proxy link(s).";
+
+    status.className = "status success";
+
+  } catch (error) {
+
+    loadedLinks = [];
+
+    preview.innerHTML =
+      '<div class="empty">' +
+      'Could not load the database.<br><br>' +
+      'Make sure the file exists inside proxys/database/.' +
+      '</div>';
+
+    status.textContent =
+      "Error: " + error.message;
+
+    status.className = "status error";
+  }
+}
+
+
+/* PREVIEW */
+
+function renderPreview() {
+
+  const preview = document.getElementById("preview");
+
+  if (!loadedLinks.length) {
+
+    preview.innerHTML =
+      '<div class="empty">' +
+      'No valid proxy URLs were found.' +
+      '</div>';
+
+    return;
+  }
+
+  preview.innerHTML = "";
+
+  loadedLinks.forEach((url, index) => {
+
+    const card = document.createElement("div");
+
+    card.className = "proxy-card";
+
+    card.innerHTML =
+      '<div class="proxy-number">PROXY ' +
+      (index + 1) +
+      '</div>' +
+
+      '<div class="proxy-name">Proxy ' +
+      (index + 1) +
+      '</div>' +
+
+      '<div class="proxy-url">' +
+      escapeHtml(url) +
+      '</div>';
+
+    preview.appendChild(card);
+
+  });
+}
+
+
+/* GENERATE PAGE */
+
+function generatePage() {
+
+  const pageName =
+    document.getElementById("pageName").value.trim()
+    || "Voidware Proxys";
+
+  let file =
+    document.getElementById("fileName").value.trim()
+    || "interstellar.txt";
+
+  if (!file.toLowerCase().endsWith(".txt")) {
+    file += ".txt";
+  }
+
+  const databasePath =
+    "/voidware/proxys/database/" + file;
+
+  const html = buildGeneratedHTML(
+    pageName,
+    databasePath
+  );
+
+  document.getElementById("generatedCode").value = html;
+
+  const status = document.getElementById("status");
+
+  status.textContent =
+    "Page generated successfully.";
+
+  status.className =
+    "status success";
+}
+
+
+/* GENERATED HTML */
+
+function buildGeneratedHTML(pageName, databasePath) {
+
+  const safeTitle = escapeHtml(pageName);
+
+  const lines = [];
+
+  lines.push('<!DOCTYPE html>');
+  lines.push('<html lang="en">');
+  lines.push('<head>');
+  lines.push('<meta charset="UTF-8">');
+  lines.push('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+  lines.push('<title>' + safeTitle + '</title>');
+
+  lines.push('<style>');
+  lines.push(`
+:root {
+  --bg: #07050c;
+  --panel: #100a17;
+  --panel2: #160d21;
+  --purple: #9b4dff;
+  --purple2: #6721c6;
+  --text: #f5f0ff;
+  --muted: #93889f;
+  --border: rgba(155,77,255,.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(155,77,255,.16), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(103,33,198,.14), transparent 28%),
+    var(--bg);
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(7,5,12,.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.nav a:hover {
+  color: white;
+  background: rgba(155,77,255,.1);
+}
+
+.hero {
+  width: min(1200px, calc(100% - 32px));
+  margin: auto;
+  text-align: center;
+  padding: 70px 0 40px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: #c99fff;
+  background: rgba(155,77,255,.08);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin: 18px 0 10px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: .95;
+  letter-spacing: -3px;
+  background: linear-gradient(90deg, #fff, #cda5ff, #8d3cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  color: var(--muted);
+}
+
+.content {
+  width: min(1200px, calc(100% - 32px));
+  margin: auto;
+  padding-bottom: 70px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  padding: 22px;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(155,77,255,.5);
+}
+
+.card-number {
+  color: #b87aff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.card h2 {
+  margin: 8px 0;
+}
+
+.url {
+  color: var(--muted);
+  font-family: monospace;
+  font-size: 12px;
+  word-break: break-all;
+  line-height: 1.5;
+  min-height: 38px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+  padding: 10px 13px;
+  border-radius: 9px;
+  font-weight: 800;
+}
+
+button.secondary {
+  background: #1b1026;
+  border: 1px solid var(--border);
+}
+
+.home {
+  text-align: center;
+  margin-top: 35px;
+}
+
+.home a {
+  color: #c99fff;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+
+@media(max-width:800px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:550px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    padding: 0 15px;
+  }
+}
+`);
+  lines.push('</style>');
+  lines.push('</head>');
+
+  lines.push('<body>');
+
+  lines.push(`
+<header>
+  <a class="logo" href="/voidware/">
+    <div class="logo-icon">V</div>
+    <div>VOIDWARE</div>
+  </a>
+
+  <nav class="nav">
+    <a href="/voidware/">Home</a>
+    <a href="/voidware/games/index.html">Games</a>
+    <a href="/voidware/proxys/index.html">Proxys</a>
+    <a href="/voidware/apps/index.html">Apps</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="badge">VOIDWARE PROXYS</div>
+  <h1>${safeTitle}</h1>
+  <p>Choose a proxy and launch it.</p>
+</section>
+
+<main class="content">
+  <div class="grid" id="proxyGrid"></div>
+
+  <div class="home">
+    <a href="/voidware/proxys/index.html">← Back to Proxy Library</a>
+  </div>
+</main>
+
+<footer>
+  VOIDWARE
+</footer>
+`);
+
+  lines.push('<script>');
+
+  lines.push(`
+const DATABASE_URL = ${JSON.stringify(databasePath)};
+
+async function loadProxies() {
+
+  const grid = document.getElementById("proxyGrid");
+
+  try {
+
+    const response = await fetch(
+      DATABASE_URL,
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+      throw new Error("Database could not be loaded.");
+    }
+
+    const text = await response.text();
+
+    const links = text
+      .split(/\\\\r?\\\\n/)
+      .map(x => x.trim())
+      .filter(x =>
+        x &&
+        !x.startsWith("#") &&
+        /^https?:\\\\/\\\\//i.test(x)
+      );
+
+    grid.innerHTML = "";
+
+    links.forEach((url, index) => {
+
+      const card = document.createElement("div");
+
+      card.className = "card";
+
+      const number = index + 1;
+
+      card.innerHTML =
+        '<div class="card-number">PROXY ' +
+        number +
+        '</div>' +
+
+        '<h2>Proxy ' +
+        number +
+        '</h2>' +
+
+        '<div class="url">' +
+        escapeHtml(url) +
+        '</div>' +
+
+        '<div class="actions">' +
+
+        '<button onclick="openProxy(' +
+        index +
+        ')">' +
+        'Open' +
+        '</button>' +
+
+        '<button class="secondary" onclick="openBlank(' +
+        index +
+        ')">' +
+        'About:blank' +
+        '</button>' +
+
+        '<button class="secondary" onclick="fullscreenProxy(' +
+        index +
+        ')">' +
+        'Fullscreen' +
+        '</button>' +
+
+        '</div>';
+
+      grid.appendChild(card);
+
+    });
+
+    window.proxyLinks = links;
+
+  } catch (error) {
+
+    grid.innerHTML =
+      '<div class="card">' +
+      '<h2>Database Error</h2>' +
+      '<div class="url">' +
+      escapeHtml(error.message) +
+      '</div>' +
+      '</div>';
+
+  }
+}
+
+function openProxy(index) {
+
+  const url = window.proxyLinks[index];
+
+  if (!url) return;
+
+  window.open(url, "_blank");
+}
+
+function openBlank(index) {
+
+  const url = window.proxyLinks[index];
+
+  if (!url) return;
+
+  const win = window.open("about:blank", "_blank");
+
+  if (!win) {
+    alert("Your browser blocked the popup.");
+    return;
+  }
+
+  win.document.open();
+
+  win.document.write(
+    '<!DOCTYPE html>' +
+    '<html>' +
+    '<head>' +
+    '<title>Voidware Proxy</title>' +
+    '<style>' +
+    'html,body{margin:0;width:100%;height:100%;background:#000;overflow:hidden;}' +
+    'iframe{width:100%;height:100%;border:0;}' +
+    '</style>' +
+    '</head>' +
+    '<body>' +
+    '<iframe src="' +
+    escapeAttribute(url) +
+    '" allow="fullscreen; autoplay; clipboard-read; clipboard-write">' +
+    '</iframe>' +
+    '</body>' +
+    '</html>'
+  );
+
+  win.document.close();
+}
+
+function fullscreenProxy(index) {
+
+  const url = window.proxyLinks[index];
+
+  if (!url) return;
+
+  const frame = document.createElement("iframe");
+
+  frame.src = url;
+
+  frame.style.position = "fixed";
+  frame.style.inset = "0";
+  frame.style.width = "100%";
+  frame.style.height = "100%";
+  frame.style.border = "0";
+  frame.style.zIndex = "999999";
+  frame.style.background = "#000";
+
+  frame.allow =
+    "fullscreen; autoplay; clipboard-read; clipboard-write";
+
+  document.body.appendChild(frame);
+
+  frame.requestFullscreen().catch(function() {
+    frame.style.position = "fixed";
+  });
+
+  frame.addEventListener("dblclick", function() {
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+
+    frame.remove();
+
+  });
+}
+
+function escapeHtml(value) {
+
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function escapeAttribute(value) {
+
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+loadProxies();
+`);
+
+  lines.push('<\/script>');
+  lines.push('</body>');
+  lines.push('</html>');
+
+  return lines.join("\n");
+}
+
+
+/* COPY */
+
+async function copyCode() {
+
+  const code =
+    document.getElementById("generatedCode").value;
+
+  const status =
+    document.getElementById("copyStatus");
+
+  if (!code.trim()) {
+
+    status.textContent =
+      "Generate the page first.";
+
+    status.className =
+      "status error";
+
+    return;
+  }
+
+  try {
+
+    await navigator.clipboard.writeText(code);
+
+    status.textContent =
+      "Copied generated HTML!";
+
+    status.className =
+      "status success";
+
+  } catch (error) {
+
+    const box =
+      document.getElementById("generatedCode");
+
+    box.select();
+
+    document.execCommand("copy");
+
+    status.textContent =
+      "Copied generated HTML!";
+
+    status.className =
+      "status success";
+  }
+}
+
+
+/* HTML ESCAPING */
+
+function escapeHtml(value) {
+
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+updatePath();
+</script>
+
+</body>
+</html>
