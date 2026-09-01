@@ -1,405 +1,480 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Voidware — Proxys</title>
-
-<meta name="theme-color" content="#080510">
+<title>Voidware - Proxys</title>
 
 <style>
+:root {
+  --bg: #07050c;
+  --panel: #100a17;
+  --panel2: #160d21;
+  --purple: #9b4dff;
+  --purple2: #6721c6;
+  --text: #f5f0ff;
+  --muted: #93889f;
+  --border: rgba(155,77,255,.22);
+}
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    width: 100%;
-    height: 100%;
+  box-sizing: border-box;
 }
 
 body {
-    background:
-        radial-gradient(
-            circle at 50% -20%,
-            rgba(125, 45, 220, 0.22),
-            transparent 45%
-        ),
-        #07050c;
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
 
-    color: #f5f0ff;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(155,77,255,.16),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(103,33,198,.14),
+      transparent 28%
+    ),
+    var(--bg);
 }
 
-/* =========================================
-   HEADER
-========================================= */
+/* HEADER */
 
 header {
-    position: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-    top: 0;
-    left: 0;
-    right: 0;
+  height: 72px;
 
-    height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  padding: 0 28px;
 
-    padding: 0 15px;
+  background: rgba(7,5,12,.82);
+  backdrop-filter: blur(14px);
 
-    background: rgba(7,5,12,0.94);
-
-    border-bottom:
-        1px solid
-        rgba(155,77,255,0.25);
-
-    backdrop-filter: blur(16px);
-
-    z-index: 100;
+  border-bottom: 1px solid var(--border);
 }
 
-/* =========================================
-   LOGO
-========================================= */
-
 .logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    gap: 9px;
+  color: white;
+  text-decoration: none;
 
-    min-width: 0;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 .logo-icon {
-    width: 34px;
-    height: 34px;
+  width: 38px;
+  height: 38px;
 
-    display: grid;
-    place-items: center;
+  display: grid;
+  place-items: center;
 
-    flex-shrink: 0;
+  border-radius: 11px;
 
-    border-radius: 9px;
+  font-size: 20px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #9b4dff,
-            #5f20b8
-        );
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple2)
+    );
 
-    box-shadow:
-        0 0 25px
-        rgba(145,70,255,0.35);
-
-    font-weight: 900;
+  box-shadow:
+    0 0 25px rgba(155,77,255,.35);
 }
 
 .logo-text {
-    font-weight: 900;
-
-    letter-spacing: 2px;
+  font-size: 18px;
 }
 
-.page-name {
-    color: #93889f;
-
-    font-size: 12px;
-
-    margin-left: 3px;
+.nav-links {
+  display: flex;
+  gap: 8px;
 }
 
-/* =========================================
-   CONTROLS
-========================================= */
+.nav-link {
+  color: var(--muted);
 
-.controls {
-    display: flex;
+  text-decoration: none;
 
-    align-items: center;
+  padding: 10px 14px;
 
-    gap: 7px;
+  border-radius: 10px;
+
+  transition: .2s;
 }
 
-button,
-select {
-    font-family: inherit;
+.nav-link:hover {
+  color: white;
+
+  background:
+    rgba(155,77,255,.1);
 }
 
-.control {
-    height: 35px;
+.nav-link.active {
+  color: white;
 
-    padding:
-        0 11px;
-
-    border:
-        1px solid
-        rgba(155,77,255,0.28);
-
-    border-radius: 9px;
-
-    background:
-        rgba(255,255,255,0.04);
-
-    color: #ddd3ea;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
-    outline: none;
-
-    transition:
-        border-color .2s,
-        background .2s,
-        transform .15s;
+  background:
+    rgba(155,77,255,.12);
 }
 
-.control:hover {
-    border-color:
-        rgba(155,77,255,0.75);
+/* HERO */
 
-    background:
-        rgba(155,77,255,0.11);
+.hero {
+  width: min(1200px, calc(100% - 32px));
 
-    color: white;
+  margin: 0 auto;
+
+  padding: 75px 0 45px;
+
+  text-align: center;
 }
 
-.control:active {
-    transform: scale(.97);
+.badge {
+  display: inline-flex;
+
+  padding: 8px 14px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 999px;
+
+  background:
+    rgba(155,77,255,.08);
+
+  color: #c99fff;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
 }
 
-.control:disabled {
-    opacity: .5;
+.hero h1 {
+  margin: 18px 0 12px;
 
-    cursor: not-allowed;
+  font-size: clamp(42px, 7vw, 78px);
+
+  line-height: .95;
+
+  font-weight: 1000;
+
+  letter-spacing: -3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      #cda5ff,
+      #8d3cff
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
 }
 
-#linkSelector {
-    min-width: 115px;
+.hero p {
+  max-width: 680px;
 
-    max-width: 180px;
+  margin: 0 auto;
+
+  color: var(--muted);
+
+  font-size: 16px;
+
+  line-height: 1.7;
 }
 
-#linkSelector option {
-    background: #100a17;
+/* CONTENT */
 
-    color: white;
+.content {
+  width: min(1200px, calc(100% - 32px));
+
+  margin: 0 auto;
+
+  padding-bottom: 70px;
 }
 
-/* =========================================
-   GAME AREA
-========================================= */
+.section-header {
+  display: flex;
 
-#gameArea {
-    position: fixed;
+  align-items: center;
+  justify-content: space-between;
 
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background: #000;
+  margin-bottom: 22px;
 }
 
-#proxyFrame {
-    width: 100%;
-    height: 100%;
+.section-title {
+  margin: 0;
 
-    display: block;
-
-    border: 0;
-
-    background: #000;
+  font-size: 22px;
 }
 
-/* =========================================
-   LOADING
-========================================= */
+.proxy-count {
+  color: var(--muted);
 
-#loading {
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-direction: column;
-
-    gap: 14px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(100,40,180,.12),
-            #050308 60%
-        );
-
-    z-index: 20;
+  font-size: 13px;
 }
 
-.spinner {
-    width: 38px;
-    height: 38px;
+/* PROXY GRID */
 
-    border:
-        3px solid
-        rgba(155,77,255,.18);
+.proxy-grid {
+  display: grid;
 
-    border-top-color:
-        #9b4dff;
+  grid-template-columns:
+    repeat(3, 1fr);
 
-    border-radius: 50%;
-
-    animation:
-        spin .8s linear infinite;
+  gap: 18px;
 }
 
-@keyframes spin {
+.proxy-card {
+  position: relative;
 
-    to {
-        transform: rotate(360deg);
-    }
+  overflow: hidden;
 
+  padding: 24px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.025),
+      transparent
+    ),
+    var(--panel);
+
+  border: 1px solid var(--border);
+
+  transition:
+    transform .2s,
+    border-color .2s,
+    box-shadow .2s;
 }
 
-.loading-text {
-    color: #93889f;
+.proxy-card::before {
+  content: "";
 
+  position: absolute;
+
+  width: 160px;
+  height: 160px;
+
+  top: -90px;
+  right: -90px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(155,77,255,.16);
+
+  filter: blur(25px);
+
+  pointer-events: none;
+}
+
+.proxy-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(155,77,255,.5);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.3);
+}
+
+.proxy-number {
+  color: #b87aff;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.proxy-name {
+  margin-top: 8px;
+
+  font-size: 22px;
+
+  font-weight: 900;
+}
+
+.proxy-file {
+  margin-top: 8px;
+
+  color: var(--muted);
+
+  font-family: monospace;
+
+  font-size: 12px;
+
+  word-break: break-all;
+}
+
+.proxy-actions {
+  display: flex;
+
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+.proxy-button {
+  flex: 1;
+
+  padding: 11px 14px;
+
+  border-radius: 10px;
+
+  border: 0;
+
+  cursor: pointer;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple2)
+    );
+
+  transition: .2s;
+}
+
+.proxy-button:hover {
+  transform: translateY(-2px);
+}
+
+.proxy-button.secondary {
+  background: #1b1026;
+
+  border: 1px solid var(--border);
+}
+
+/* EMPTY / ERROR */
+
+.message {
+  grid-column: 1 / -1;
+
+  padding: 45px 25px;
+
+  text-align: center;
+
+  color: var(--muted);
+
+  border: 1px dashed var(--border);
+
+  border-radius: 18px;
+
+  background: rgba(16,10,23,.55);
+}
+
+.message-title {
+  margin-bottom: 8px;
+
+  color: white;
+
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+.message-code {
+  margin-top: 12px;
+
+  color: #b87aff;
+
+  font-family: monospace;
+
+  font-size: 12px;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 30px 20px;
+
+  text-align: center;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  border-top: 1px solid var(--border);
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .proxy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  header {
+    padding: 0 16px;
+  }
+
+  .nav-link {
+    padding: 8px;
     font-size: 13px;
+  }
 }
 
-/* =========================================
-   ERROR
-========================================= */
+@media (max-width: 550px) {
 
-#error {
-    position: absolute;
+  .hero {
+    padding-top: 50px;
+  }
 
-    inset: 0;
+  .hero h1 {
+    letter-spacing: -2px;
+  }
 
+  .proxy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .logo-text {
     display: none;
+  }
 
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 25px;
-
-    background: #050308;
-
-    z-index: 30;
+  .section-header {
+    align-items: flex-start;
+    gap: 10px;
+    flex-direction: column;
+  }
 }
-
-.error-box {
-    width: 100%;
-
-    max-width: 500px;
-}
-
-.error-icon {
-    font-size: 45px;
-
-    margin-bottom: 12px;
-}
-
-.error-title {
-    font-size: 23px;
-
-    font-weight: 900;
-
-    margin-bottom: 9px;
-}
-
-#errorMessage {
-    color: #93889f;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-
-    margin-bottom: 18px;
-}
-
-.retry {
-    border:
-        1px solid
-        rgba(155,77,255,.4);
-
-    background:
-        rgba(155,77,255,.1);
-
-    color: white;
-
-    padding:
-        10px 16px;
-
-    border-radius: 9px;
-
-    cursor: pointer;
-
-    font-weight: 800;
-}
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media(max-width:700px) {
-
-    header {
-        padding: 0 9px;
-    }
-
-    .logo-text {
-        display: none;
-    }
-
-    .page-name {
-        display: none;
-    }
-
-    .controls {
-        gap: 4px;
-    }
-
-    .control {
-        padding: 0 8px;
-    }
-
-    #linkSelector {
-        min-width: 85px;
-
-        max-width: 105px;
-    }
-
-    .text-button {
-        display: none;
-    }
-
-}
-
 </style>
 </head>
 
@@ -407,885 +482,353 @@ select {
 
 <header>
 
-    <div class="logo">
+  <a class="logo" href="/voidware/">
 
-        <div class="logo-icon">
-            V
-        </div>
-
-        <div class="logo-text">
-            VOIDWARE
-        </div>
-
-        <div class="page-name">
-            / Proxys
-        </div>
-
+    <div class="logo-icon">
+      V
     </div>
 
-
-    <div class="controls">
-
-        <select
-            id="linkSelector"
-            class="control"
-            disabled
-        >
-            <option>
-                Loading...
-            </option>
-        </select>
-
-
-        <button
-            id="updateButton"
-            class="control"
-            disabled
-        >
-            ↻
-            <span class="text-button">
-                Update
-            </span>
-        </button>
-
-
-        <button
-            id="fullscreenButton"
-            class="control"
-            disabled
-            title="Fullscreen"
-        >
-            ⛶
-        </button>
-
-
-        <button
-            id="blankButton"
-            class="control"
-            disabled
-            title="Open in about:blank"
-        >
-            ↗
-        </button>
-
-
-        <button
-            id="homeButton"
-            class="control"
-            title="Voidware Home"
-        >
-            ←
-        </button>
-
+    <div class="logo-text">
+      VOIDWARE
     </div>
+
+  </a>
+
+  <nav class="nav-links">
+
+    <a
+      class="nav-link"
+      href="/voidware/"
+    >
+      Home
+    </a>
+
+    <a
+      class="nav-link"
+      href="/voidware/games/index.html"
+    >
+      Games
+    </a>
+
+    <a
+      class="nav-link active"
+      href="/voidware/proxys/index.html"
+    >
+      Proxys
+    </a>
+
+    <a
+      class="nav-link"
+      href="/voidware/apps/index.html"
+    >
+      Apps
+    </a>
+
+  </nav>
 
 </header>
 
 
-<div id="gameArea">
+<section class="hero">
 
-    <iframe
-        id="proxyFrame"
-        title="Voidware Proxy"
-        allow="
-            accelerometer;
-            autoplay;
-            clipboard-read;
-            clipboard-write;
-            encrypted-media;
-            fullscreen;
-            gamepad;
-            gyroscope;
-            microphone;
-            camera;
-            midi;
-            payment;
-            picture-in-picture;
-            screen-wake-lock;
-            web-share
-        "
-        allowfullscreen
-        referrerpolicy="no-referrer"
-    ></iframe>
+  <div class="badge">
+    VOIDWARE PROXYS
+  </div>
+
+  <h1>
+    PROXYS
+  </h1>
+
+  <p>
+    Browse the available Voidware proxy pages
+    and launch the one you want.
+  </p>
+
+</section>
 
 
-    <div id="loading">
+<main class="content">
 
-        <div class="spinner"></div>
+  <div class="section-header">
 
-        <div class="loading-text">
-            Loading proxy database...
-        </div>
+    <h2 class="section-title">
+      Available Proxys
+    </h2>
+
+    <div
+      class="proxy-count"
+      id="proxyCount"
+    >
+      Loading...
+    </div>
+
+  </div>
+
+
+  <div
+    class="proxy-grid"
+    id="proxyGrid"
+  >
+
+    <div class="message">
+
+      <div class="message-title">
+        Loading Proxys...
+      </div>
+
+      Please wait.
 
     </div>
 
+  </div>
 
-    <div id="error">
+</main>
 
-        <div class="error-box">
 
-            <div class="error-icon">
-                ⚠️
-            </div>
-
-            <div class="error-title">
-                Could not load proxies
-            </div>
-
-            <div
-                id="errorMessage"
-            ></div>
-
-            <button
-                class="retry"
-                id="retryButton"
-            >
-                Try Again
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
+<footer>
+  VOIDWARE • PROXYS
+</footer>
 
 
 <script>
 
 /*
-==================================================
-VOIDWARE PROXY DATABASE
-==================================================
+  PROXY PAGE MANIFEST
 
-Repository:
+  This file contains the filenames of the
+  proxy HTML pages located directly inside
+  /voidware/proxys/
 
-voidware1/voidware
+  Example:
 
-GitHub Pages:
-
-https://voidware1.github.io/voidware/
-
-This page:
-
-/Proxys/index.html
-
-Database:
-
-/Proxys/interstellar.txt
-==================================================
-*/
-
-
-/*
-==================================================
-DATABASE URL
-==================================================
+  interstellar.html
+  example.html
+  anotherproxy.html
 */
 
 const DATABASE_URL =
-    "/voidware/Proxys/interstellar.txt";
+  "/voidware/proxys/database/proxy-pages.txt";
 
 
-/*
-==================================================
-HOME URL
-==================================================
-*/
-
-const HOME_URL =
-    "/voidware/";
+const PROXY_FOLDER =
+  "/voidware/proxys/";
 
 
-/*
-==================================================
-DOM ELEMENTS
-==================================================
-*/
+async function loadProxyPages() {
 
-const frame =
-    document.getElementById(
-        "proxyFrame"
+  const grid =
+    document.getElementById("proxyGrid");
+
+  const count =
+    document.getElementById("proxyCount");
+
+  try {
+
+    const response =
+      await fetch(
+        DATABASE_URL,
+        {
+          cache: "no-store"
+        }
+      );
+
+    if (!response.ok) {
+
+      throw new Error(
+        "HTTP " + response.status
+      );
+
+    }
+
+    const text =
+      await response.text();
+
+
+    /*
+      Read filenames from TXT.
+    */
+
+    const files =
+      text
+        .split(/\r?\n/)
+        .map(function(line) {
+          return line.trim();
+        })
+        .filter(function(line) {
+
+          return (
+            line &&
+            !line.startsWith("#") &&
+            line.toLowerCase().endsWith(".html")
+          );
+
+        });
+
+
+    if (!files.length) {
+
+      count.textContent =
+        "0 proxys";
+
+      grid.innerHTML =
+        `
+        <div class="message">
+
+          <div class="message-title">
+            No Proxys Found
+          </div>
+
+          Add HTML filenames to:
+
+          <div class="message-code">
+            proxys/database/proxy-pages.txt
+          </div>
+
+        </div>
+        `;
+
+      return;
+    }
+
+
+    count.textContent =
+      files.length +
+      (files.length === 1 ? " proxy" : " proxys");
+
+
+    grid.innerHTML = "";
+
+
+    files.forEach(function(file, index) {
+
+      /*
+        Make sure the page stays inside
+        the proxys folder.
+      */
+
+      const safeFile =
+        file
+          .replace(/^\/+/, "")
+          .replace(/^proxys\//i, "")
+          .replace(/^voidware\//i, "");
+
+
+      const pageURL =
+        PROXY_FOLDER +
+        encodeURIComponent(safeFile);
+
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "proxy-card";
+
+
+      card.innerHTML =
+        `
+        <div class="proxy-number">
+          PROXY ${index + 1}
+        </div>
+
+        <div class="proxy-name">
+          Proxy ${index + 1}
+        </div>
+
+        <div class="proxy-file">
+          ${escapeHTML(safeFile)}
+        </div>
+
+        <div class="proxy-actions">
+
+          <a
+            class="proxy-button"
+            href="${escapeAttribute(pageURL)}"
+          >
+            Open
+          </a>
+
+          <a
+            class="proxy-button secondary"
+            href="${escapeAttribute(pageURL)}"
+            target="_blank"
+            rel="noopener"
+          >
+            New Tab
+          </a>
+
+        </div>
+        `;
+
+
+      grid.appendChild(card);
+
+    });
+
+
+  } catch (error) {
+
+    count.textContent =
+      "Error";
+
+
+    grid.innerHTML =
+      `
+      <div class="message">
+
+        <div class="message-title">
+          Could Not Load Proxys
+        </div>
+
+        Make sure this file exists:
+
+        <div class="message-code">
+          /voidware/proxys/database/proxy-pages.txt
+        </div>
+
+      </div>
+      `;
+
+    console.error(
+      "Proxy database error:",
+      error
     );
 
-const selector =
-    document.getElementById(
-        "linkSelector"
-    );
-
-const updateButton =
-    document.getElementById(
-        "updateButton"
-    );
-
-const fullscreenButton =
-    document.getElementById(
-        "fullscreenButton"
-    );
-
-const blankButton =
-    document.getElementById(
-        "blankButton"
-    );
-
-const homeButton =
-    document.getElementById(
-        "homeButton"
-    );
-
-const retryButton =
-    document.getElementById(
-        "retryButton"
-    );
-
-const loading =
-    document.getElementById(
-        "loading"
-    );
-
-const errorScreen =
-    document.getElementById(
-        "error"
-    );
-
-const errorMessage =
-    document.getElementById(
-        "errorMessage"
-    );
-
-
-/*
-==================================================
-STATE
-==================================================
-*/
-
-let proxyLinks = [];
-
-let currentLink = -1;
-
-
-/*
-==================================================
-SHOW ERROR
-==================================================
-*/
-
-function showError(message) {
-
-    loading.style.display =
-        "none";
-
-    errorScreen.style.display =
-        "flex";
-
-    errorMessage.textContent =
-        message;
+  }
 
 }
 
 
-/*
-==================================================
-HIDE ERROR
-==================================================
-*/
+/* HTML SECURITY HELPERS */
 
-function hideError() {
+function escapeHTML(value) {
 
-    errorScreen.style.display =
-        "none";
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
 }
 
-
-/*
-==================================================
-LOAD DATABASE
-==================================================
-*/
-
-async function loadDatabase() {
-
-    loading.style.display =
-        "flex";
-
-    hideError();
-
-
-    selector.disabled =
-        true;
-
-    updateButton.disabled =
-        true;
-
-    fullscreenButton.disabled =
-        true;
-
-    blankButton.disabled =
-        true;
-
-
-    try {
-
-        /*
-        Cache busting makes sure that
-        pressing Update gets the newest
-        TXT file from GitHub Pages.
-        */
-
-        const response =
-            await fetch(
-                DATABASE_URL
-                +
-                "?v="
-                +
-                Date.now(),
-                {
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "GitHub Pages returned HTTP "
-                +
-                response.status
-                +
-                " when loading Proxys/interstellar.txt."
-            );
-
-        }
-
-
-        const text =
-            await response.text();
-
-
-        /*
-        Split the TXT file into lines.
-        */
-
-        const lines =
-            text.split(/\r?\n/);
-
-
-        proxyLinks = [];
-
-
-        /*
-        Read every line.
-        */
-
-        for (
-            let i = 0;
-            i < lines.length;
-            i++
-        ) {
-
-            let line =
-                lines[i].trim();
-
-
-            /*
-            Ignore blank lines.
-            */
-
-            if (!line) {
-                continue;
-            }
-
-
-            /*
-            Ignore comments.
-
-            Example:
-
-            # This is a comment
-            */
-
-            if (
-                line.startsWith("#")
-            ) {
-                continue;
-            }
-
-
-            /*
-            Check whether the line
-            contains a valid URL.
-            */
-
-            try {
-
-                const url =
-                    new URL(line);
-
-
-                /*
-                Only allow HTTP/HTTPS.
-                */
-
-                if (
-                    url.protocol !== "http:"
-                    &&
-                    url.protocol !== "https:"
-                ) {
-
-                    continue;
-
-                }
-
-
-                proxyLinks.push(
-                    url.href
-                );
-
-
-            } catch {
-
-                /*
-                Invalid lines are simply
-                ignored.
-                */
-
-                continue;
-
-            }
-
-        }
-
-
-        /*
-        Make sure we found something.
-        */
-
-        if (
-            proxyLinks.length === 0
-        ) {
-
-            throw new Error(
-                "No valid proxy URLs were found in Proxys/interstellar.txt."
-            );
-
-        }
-
-
-        /*
-        Create the dropdown.
-        */
-
-        buildSelector();
-
-
-        /*
-        Enable controls.
-        */
-
-        selector.disabled =
-            false;
-
-        updateButton.disabled =
-            false;
-
-        fullscreenButton.disabled =
-            false;
-
-        blankButton.disabled =
-            false;
-
-
-        loading.style.display =
-            "none";
-
-
-        /*
-        Restore currently selected
-        link when possible.
-        */
-
-        if (
-            currentLink < 0
-            ||
-            currentLink >= proxyLinks.length
-        ) {
-
-            currentLink = 0;
-
-        }
-
-
-        selector.value =
-            String(currentLink);
-
-
-        loadSelectedProxy();
-
-
-    } catch(error) {
-
-        console.error(error);
-
-        showError(
-            error.message
-            ||
-            "Unknown database error."
-        );
-
-    }
-
-}
-
-
-/*
-==================================================
-BUILD DROPDOWN
-==================================================
-*/
-
-function buildSelector() {
-
-    selector.innerHTML = "";
-
-
-    for (
-        let i = 0;
-        i < proxyLinks.length;
-        i++
-    ) {
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-
-        option.value =
-            String(i);
-
-
-        /*
-        Automatically numbered.
-
-        0 becomes Link 1
-        1 becomes Link 2
-        2 becomes Link 3
-        */
-
-        option.textContent =
-            "Link "
-            +
-            String(i + 1);
-
-
-        selector.appendChild(
-            option
-        );
-
-    }
-
-}
-
-
-/*
-==================================================
-LOAD SELECTED PROXY
-==================================================
-*/
-
-function loadSelectedProxy() {
-
-    if (
-        currentLink < 0
-        ||
-        currentLink >= proxyLinks.length
-    ) {
-
-        return;
-
-    }
-
-
-    const url =
-        proxyLinks[currentLink];
-
-
-    frame.src =
-        url;
-
-}
-
-
-/*
-==================================================
-DROPDOWN CHANGE
-==================================================
-*/
-
-selector.addEventListener(
-    "change",
-    function() {
-
-        currentLink =
-            Number(
-                selector.value
-            );
-
-
-        loadSelectedProxy();
-
-    }
-);
-
-
-/*
-==================================================
-UPDATE BUTTON
-==================================================
-*/
-
-updateButton.addEventListener(
-    "click",
-    function() {
-
-        loadDatabase();
-
-    }
-);
-
-
-/*
-==================================================
-FULLSCREEN
-==================================================
-*/
-
-fullscreenButton.addEventListener(
-    "click",
-    function() {
-
-        if (
-            frame.requestFullscreen
-        ) {
-
-            frame.requestFullscreen();
-
-        }
-
-        else if (
-            frame.webkitRequestFullscreen
-        ) {
-
-            frame.webkitRequestFullscreen();
-
-        }
-
-    }
-);
-
-
-/*
-==================================================
-ABOUT:BLANK
-==================================================
-*/
-
-blankButton.addEventListener(
-    "click",
-    function() {
-
-        if (
-            currentLink < 0
-            ||
-            currentLink >= proxyLinks.length
-        ) {
-
-            return;
-
-        }
-
-
-        const url =
-            proxyLinks[currentLink];
-
-
-        /*
-        Open a blank tab.
-        */
-
-        const newWindow =
-            window.open(
-                "about:blank",
-                "_blank"
-            );
-
-
-        if (!newWindow) {
-
-            alert(
-                "Popup blocked. Please allow popups for Voidware."
-            );
-
-            return;
-
-        }
-
-
-        /*
-        Put a fullscreen iframe
-        inside the about:blank page.
-        */
-
-        newWindow.document.open();
-
-
-        newWindow.document.write(
-`
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
-
-<title>Voidware</title>
-
-<style>
-
-html,
-body {
-
-    width: 100%;
-    height: 100%;
-
-    margin: 0;
-
-    overflow: hidden;
-
-    background: #000;
-
-}
-
-iframe {
-
-    width: 100%;
-    height: 100%;
-
-    border: 0;
-
-    display: block;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<iframe
-src="${escapeAttribute(url)}"
-allow="
-accelerometer;
-autoplay;
-clipboard-read;
-clipboard-write;
-encrypted-media;
-fullscreen;
-gamepad;
-gyroscope;
-microphone;
-camera;
-midi;
-payment;
-picture-in-picture;
-screen-wake-lock;
-web-share
-"
-allowfullscreen
-></iframe>
-
-</body>
-
-</html>
-`
-        );
-
-
-        newWindow.document.close();
-
-    }
-);
-
-
-/*
-==================================================
-ESCAPE URL
-==================================================
-*/
 
 function escapeAttribute(value) {
 
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 
 }
 
 
-/*
-==================================================
-HOME BUTTON
-==================================================
-*/
+/* START */
 
-homeButton.addEventListener(
-    "click",
-    function() {
-
-        window.location.href =
-            HOME_URL;
-
-    }
-);
-
-
-/*
-==================================================
-RETRY BUTTON
-==================================================
-*/
-
-retryButton.addEventListener(
-    "click",
-    function() {
-
-        loadDatabase();
-
-    }
-);
-
-
-/*
-==================================================
-START
-==================================================
-*/
-
-loadDatabase();
+loadProxyPages();
 
 </script>
 
 </body>
 </html>
-```
