@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strawberri</title>
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at top,#24103d 0%,#10091c 45%,#07050d 100%);
+    color:white;
+}
+
+header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    background:rgba(10,5,18,.9);
+    border-bottom:1px solid #392052;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#b86cff;
+    text-decoration:none;
+}
+
+nav{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:#d8c7e8;
+    text-decoration:none;
+    padding:9px 13px;
+    border-radius:8px;
+}
+
+nav a:hover{
+    background:#26133b;
+    color:white;
+}
+
+.container{
+    width:min(1100px,calc(100% - 30px));
+    margin:35px auto;
+}
+
+h1{
+    text-align:center;
+    color:#d8b4fe;
+    margin-bottom:25px;
+}
+
+.panel{
+    background:rgba(18,10,30,.9);
+    border:1px solid #3b2253;
+    border-radius:15px;
+    padding:20px;
+}
+
+select{
+    width:100%;
+    padding:13px;
+    border-radius:9px;
+    border:1px solid #493060;
+    background:#0d0815;
+    color:white;
+    font-size:15px;
+    outline:none;
+    margin-bottom:12px;
+}
+
+select:focus{
+    border-color:#a855f7;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+button{
+    border:0;
+    border-radius:9px;
+    padding:11px 16px;
+    background:#7c3aed;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#9333ea;
+}
+
+iframe{
+    width:100%;
+    height:600px;
+    border:1px solid #493060;
+    border-radius:10px;
+    background:#000;
+}
+
+.status{
+    color:#9686a4;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+@media(max-width:700px){
+
+    header{
+        height:auto;
+        padding:15px;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    iframe{
+        height:500px;
+    }
+}
+
+</style>
+</head>
+<body>
+<header>
+<a class="logo" href="/voidware/">Voidware</a>
+<nav>
+<a href="/voidware/">Home</a>
+<a href="/voidware/games/index.html">Games</a>
+<a href="/voidware/proxys/index.html">Proxys</a>
+<a href="/voidware/apps/index.html">Apps</a>
+</nav>
+</header>
+<div class="container">
+<h1>Strawberri</h1>
+<div class="panel">
+<div class="status" id="status">Loading links...</div>
+<select id="linkSelect"></select>
+<div class="buttons">
+<button id="openBlank">Open in About:Blank</button>
+<button id="fullscreen">Fullscreen</button>
+</div>
+<iframe id="proxyFrame" allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"></iframe>
+</div>
+</div>
+<script>
+const DATABASE_URL="https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/strawberri.txt";
+
+let proxyLinks = [];
+let currentLink = "";
+
+const select =
+    document.getElementById("linkSelect");
+
+const frame =
+    document.getElementById("proxyFrame");
+
+const status =
+    document.getElementById("status");
+
+
+async function loadDatabase(){
+
+    try{
+
+        const response =
+            await fetch(
+                DATABASE_URL,
+                {
+                    cache:"no-store"
+                }
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " + response.status
+            );
+        }
+
+        const text =
+            await response.text();
+
+
+        proxyLinks =
+            text
+            .split(/\r?\n/)
+            .map(function(line){
+                return line.trim();
+            })
+            .filter(function(line){
+
+                return (
+                    line &&
+                    !line.startsWith("#") &&
+                    /^https?:\/\//i.test(line)
+                );
+
+            });
+
+
+        if(proxyLinks.length === 0){
+
+            status.textContent =
+                "No links found.";
+
+            return;
+        }
+
+
+        /*
+        Create generic dropdown names.
+        The actual URLs are NEVER displayed.
+        */
+
+        select.innerHTML = "";
+
+
+        proxyLinks.forEach(
+            function(link,index){
+
+                const option =
+                    document.createElement("option");
+
+                option.value = index;
+
+                option.textContent =
+                    "Link " + (index + 1);
+
+                select.appendChild(option);
+
+            }
+        );
+
+
+        status.textContent =
+            proxyLinks.length +
+            " links available";
+
+
+        selectLink();
+
+
+    }catch(error){
+
+        status.textContent =
+            "Unable to load proxy database.";
+
+        console.error(error);
+
+    }
+
+}
+
+
+function selectLink(){
+
+    const index =
+        Number(select.value);
+
+
+    if(
+        Number.isNaN(index) ||
+        !proxyLinks[index]
+    ){
+        return;
+    }
+
+
+    currentLink =
+        proxyLinks[index];
+
+
+    frame.src =
+        currentLink;
+}
+
+
+select.addEventListener(
+    "change",
+    selectLink
+);
+
+
+/*
+Open selected link inside About:Blank.
+*/
+
+document
+    .getElementById("openBlank")
+    .addEventListener(
+        "click",
+        function(){
+
+            if(!currentLink){
+                return;
+            }
+
+
+            const win =
+                window.open(
+                    "about:blank",
+                    "_blank"
+                );
+
+
+            if(!win){
+
+                alert(
+                    "Please allow popups for Voidware."
+                );
+
+                return;
+            }
+
+
+            win.document.open();
+
+
+            /*
+            Do not display the URL as text.
+            */
+
+            const iframe =
+                win.document.createElement(
+                    "iframe"
+                );
+
+
+            iframe.src =
+                currentLink;
+
+            iframe.style.position =
+                "fixed";
+
+            iframe.style.inset =
+                "0";
+
+            iframe.style.width =
+                "100%";
+
+            iframe.style.height =
+                "100%";
+
+            iframe.style.border =
+                "0";
+
+            iframe.setAttribute(
+                "allow",
+                "accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+            );
+
+
+            win.document.body.style.margin =
+                "0";
+
+            win.document.body.style.background =
+                "#000";
+
+
+            win.document.body.appendChild(
+                iframe
+            );
+
+
+            win.document.close();
+
+        }
+    );
+
+
+/*
+Fullscreen button.
+*/
+
+document
+    .getElementById("fullscreen")
+    .addEventListener(
+        "click",
+        function(){
+
+            const container =
+                frame;
+
+            if(
+                container.requestFullscreen
+            ){
+
+                container
+                    .requestFullscreen()
+                    .catch(
+                        function(){}
+                    );
+
+            }
+
+        }
+    );
+
+
+loadDatabase();
+
+</script>
+</body>
+</html>
