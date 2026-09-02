@@ -1,0 +1,363 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy Tester</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #09060f;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px;
+      background: #120b1c;
+      border-bottom: 1px solid #302040;
+    }
+
+    h1 {
+      margin: 0 0 15px;
+      color: #b66cff;
+    }
+
+    .top-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    input,
+    textarea {
+      border: 1px solid #3b2850;
+      border-radius: 8px;
+      background: #0c0812;
+      color: white;
+      outline: none;
+    }
+
+    #key {
+      flex: 1;
+      padding: 12px;
+    }
+
+    #urls {
+      width: 100%;
+      min-height: 180px;
+      padding: 14px;
+      resize: vertical;
+      font-family: monospace;
+      line-height: 1.5;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #9b55d9;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      background: #8d48d5;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a75bea;
+    }
+
+    .secondary {
+      background: #2a2033;
+    }
+
+    .secondary:hover {
+      background: #3a2b47;
+    }
+
+    #message {
+      margin-top: 10px;
+      color: #aaa;
+    }
+
+    #frames {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+    }
+
+    .frame-card {
+      overflow: hidden;
+      border: 1px solid #302040;
+      border-radius: 12px;
+      background: #120b1c;
+    }
+
+    .frame-header {
+      padding: 12px;
+      background: #1a1027;
+    }
+
+    .frame-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .frame-title {
+      color: #b66cff;
+      font-weight: bold;
+    }
+
+    .frame-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .frame-buttons button {
+      padding: 6px 9px;
+      font-size: 12px;
+    }
+
+    .frame-url {
+      overflow: hidden;
+      color: #888;
+      font-family: monospace;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: white;
+    }
+
+    .fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: black;
+    }
+
+    .fullscreen iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 600px) {
+      #frames {
+        grid-template-columns: 1fr;
+      }
+
+      .top-row {
+        flex-direction: column;
+      }
+
+      #frames {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Proxy Tester</h1>
+
+  <div class="top-row">
+    <input
+      id="key"
+      type="text"
+      placeholder="Enter testing key..."
+    >
+
+    <button onclick="createFrames()">
+      Test Proxies
+    </button>
+
+    <button class="secondary" onclick="clearAll()">
+      Clear
+    </button>
+  </div>
+
+  <textarea
+    id="urls"
+    placeholder="Paste proxy URLs here, one per line...
+
+10–25 URLs maximum"
+  ></textarea>
+
+  <div id="message">
+    Paste 10–25 URLs to begin testing.
+  </div>
+</header>
+
+<div id="frames"></div>
+
+<script>
+  function createFrames() {
+    const key = document.getElementById("key").value.trim();
+    const input = document.getElementById("urls").value.trim();
+    const frames = document.getElementById("frames");
+    const message = document.getElementById("message");
+
+    if (!key) {
+      message.textContent = "Please enter your testing key.";
+      return;
+    }
+
+    if (!input) {
+      message.textContent = "Please paste some proxy URLs.";
+      return;
+    }
+
+    let urls = input
+      .split(/\r?\n/)
+      .map(url => url.trim())
+      .filter(url => url !== "");
+
+    if (urls.length < 1) {
+      message.textContent =
+        `You entered ${urls.length} URL(s). Minimum is 10.`;
+      return;
+    }
+
+    if (urls.length > 67) {
+      message.textContent =
+        `You entered ${urls.length} URL(s). Maximum is 25.`;
+      return;
+    }
+
+    frames.innerHTML = "";
+
+    urls.forEach((url, index) => {
+      if (
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+      ) {
+        url = "https://" + url;
+      }
+
+      const card = document.createElement("div");
+      card.className = "frame-card";
+
+      const header = document.createElement("div");
+      header.className = "frame-header";
+
+      const top = document.createElement("div");
+      top.className = "frame-top";
+
+      const title = document.createElement("div");
+      title.className = "frame-title";
+      title.textContent = `Proxy ${index + 1}`;
+
+      const buttons = document.createElement("div");
+      buttons.className = "frame-buttons";
+
+      const copyButton = document.createElement("button");
+      copyButton.textContent = "Copy Link";
+
+      copyButton.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+
+          copyButton.textContent = "Copied!";
+
+          setTimeout(() => {
+            copyButton.textContent = "Copy Link";
+          }, 1200);
+
+        } catch {
+          alert("Could not copy the link.");
+        }
+      };
+
+      const fullscreenButton = document.createElement("button");
+      fullscreenButton.textContent = "Fullscreen";
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "iframe-wrapper";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+
+      iframe.setAttribute(
+        "allow",
+        "accelerometer; autoplay; camera; clipboard-read; clipboard-write; encrypted-media; fullscreen; geolocation; gyroscope; microphone; payment; picture-in-picture"
+      );
+
+      iframe.setAttribute("allowfullscreen", "");
+
+      fullscreenButton.onclick = () => {
+        wrapper.classList.toggle("fullscreen");
+
+        fullscreenButton.textContent =
+          wrapper.classList.contains("fullscreen")
+            ? "Exit Fullscreen"
+            : "Fullscreen";
+      };
+
+      buttons.appendChild(copyButton);
+      buttons.appendChild(fullscreenButton);
+
+      top.appendChild(title);
+      top.appendChild(buttons);
+
+      const urlDisplay = document.createElement("div");
+      urlDisplay.className = "frame-url";
+      urlDisplay.textContent = url;
+
+      header.appendChild(top);
+      header.appendChild(urlDisplay);
+
+      wrapper.appendChild(iframe);
+
+      card.appendChild(header);
+      card.appendChild(wrapper);
+
+      frames.appendChild(card);
+    });
+
+    message.textContent =
+      `Testing ${urls.length} proxy URLs.`;
+  }
+
+  function clearAll() {
+    document.getElementById("key").value = "";
+    document.getElementById("urls").value = "";
+    document.getElementById("frames").innerHTML = "";
+
+    document.getElementById("message").textContent =
+      "Paste 10–25 URLs to begin testing.";
+  }
+</script>
+
+</body>
+</html>
+```
