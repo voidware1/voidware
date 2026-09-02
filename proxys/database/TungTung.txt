@@ -1,0 +1,12 @@
+https://s3.amazonaws.com/vcsa-yt/index.html
+https://vcsa-yt.s3.amazonaws.com/index.html
+https://vcsa-yt.s3.us-east-1.amazonaws.com/index.html
+https://vcsa-yt.s3-external-1.amazonaws.com/index.html
+https://s3.us-east-1.amazonaws.com/vcsa-yt/index.html
+https://s3-external-1.amazonaws.com/vcsa-yt/index.html
+https://s3.amazonaws.com/ttbest/index.html
+https://s3.us-east-1.amazonaws.com/ttbest/index.html
+https://s3.dualstack.us-east-1.amazonaws.com/ttbest/index.html
+https://ttbest.s3.amazonaws.com/index.html
+https://ttbest.s3.us-east-1.amazonaws.com/index.html
+https://ttbest.s3.dualstack.us-east-1.amazonaws.com/index.html
