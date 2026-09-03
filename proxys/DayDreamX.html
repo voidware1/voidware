@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DayDreamX</title>
+<title>DayDream X</title>
 <style>
 
 *{
@@ -135,6 +135,7 @@ iframe{
     iframe{
         height:500px;
     }
+
 }
 
 </style>
@@ -150,7 +151,7 @@ iframe{
 </nav>
 </header>
 <div class="container">
-<h1>DayDreamX</h1>
+<h1>DayDream X</h1>
 <div class="panel">
 <div class="status" id="status">Loading links...</div>
 <select id="linkSelect"></select>
@@ -158,13 +159,21 @@ iframe{
 <button id="openBlank">Open in About:Blank</button>
 <button id="fullscreen">Fullscreen</button>
 </div>
-<iframe id="proxyFrame" allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"></iframe>
+
+<iframe
+    id="proxyFrame"
+    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+    allowfullscreen>
+</iframe>
+
 </div>
 </div>
 <script>
 const DATABASE_URL="https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/DayDreamX.txt";
 
+
 let proxyLinks = [];
+
 let currentLink = "";
 
 const select =
@@ -176,6 +185,12 @@ const frame =
 const status =
     document.getElementById("status");
 
+
+/*
+==========================================================
+LOAD DATABASE
+==========================================================
+*/
 
 async function loadDatabase(){
 
@@ -192,26 +207,29 @@ async function loadDatabase(){
         if(!response.ok){
 
             throw new Error(
-                "HTTP " + response.status
+                "HTTP " +
+                response.status
             );
+
         }
 
         const text =
             await response.text();
 
-
         proxyLinks =
             text
-            .split(/\r?\n/)
+            .split(/\\r?\\n/)
             .map(function(line){
+
                 return line.trim();
+
             })
             .filter(function(line){
 
                 return (
                     line &&
                     !line.startsWith("#") &&
-                    /^https?:\/\//i.test(line)
+                    /^https?:\\/\\//i.test(line)
                 );
 
             });
@@ -223,29 +241,35 @@ async function loadDatabase(){
                 "No links found.";
 
             return;
+
         }
 
 
         /*
-        Create generic dropdown names.
-        The actual URLs are NEVER displayed.
+        Generic dropdown names.
+        URLs are not displayed.
         */
 
         select.innerHTML = "";
-
 
         proxyLinks.forEach(
             function(link,index){
 
                 const option =
-                    document.createElement("option");
+                    document.createElement(
+                        "option"
+                    );
 
-                option.value = index;
+                option.value =
+                    index;
 
                 option.textContent =
-                    "Link " + (index + 1);
+                    "Link " +
+                    (index + 1);
 
-                select.appendChild(option);
+                select.appendChild(
+                    option
+                );
 
             }
         );
@@ -258,8 +282,8 @@ async function loadDatabase(){
 
         selectLink();
 
-
-    }catch(error){
+    }
+    catch(error){
 
         status.textContent =
             "Unable to load proxy database.";
@@ -271,26 +295,32 @@ async function loadDatabase(){
 }
 
 
+/*
+==========================================================
+SELECT LINK
+==========================================================
+*/
+
 function selectLink(){
 
     const index =
         Number(select.value);
 
-
     if(
         Number.isNaN(index) ||
         !proxyLinks[index]
     ){
-        return;
-    }
 
+        return;
+
+    }
 
     currentLink =
         proxyLinks[index];
 
-
     frame.src =
         currentLink;
+
 }
 
 
@@ -301,7 +331,9 @@ select.addEventListener(
 
 
 /*
-Open selected link inside About:Blank.
+==========================================================
+ABOUT:BLANK OPENER
+==========================================================
 */
 
 document
@@ -311,9 +343,20 @@ document
         function(){
 
             if(!currentLink){
+
+                alert(
+                    "Select a proxy first."
+                );
+
                 return;
+
             }
 
+
+            /*
+            Open a new blank tab immediately
+            from the user's click.
+            */
 
             const win =
                 window.open(
@@ -329,57 +372,106 @@ document
                 );
 
                 return;
+
             }
 
 
-            win.document.open();
-
-
             /*
-            Do not display the URL as text.
+            Escape the selected URL safely
+            before inserting it into the new page.
             */
 
-            const iframe =
-                win.document.createElement(
-                    "iframe"
+            const safeURL =
+                JSON.stringify(
+                    currentLink
                 );
 
 
-            iframe.src =
-                currentLink;
+            /*
+            Build the About:Blank page.
+            */
 
-            iframe.style.position =
-                "fixed";
+            win.document.open();
 
-            iframe.style.inset =
-                "0";
+            win.document.write(
+                `
+<!DOCTYPE html>
 
-            iframe.style.width =
-                "100%";
+<html lang="en">
 
-            iframe.style.height =
-                "100%";
+<head>
 
-            iframe.style.border =
-                "0";
+<meta charset="UTF-8">
 
-            iframe.setAttribute(
-                "allow",
-                "accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Voidware Proxy</title>
+
+<style>
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+#proxyEmbed{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    border:0;
+
+    background:#000;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<iframe
+    id="proxyEmbed"
+    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+    allowfullscreen>
+</iframe>
+
+<script>
+
+const iframe =
+    document.getElementById(
+        "proxyEmbed"
+    );
+
+iframe.src =
+    ${safeURL};
+
+<\\/script>
+
+</body>
+
+</html>
+                `
             );
-
-
-            win.document.body.style.margin =
-                "0";
-
-            win.document.body.style.background =
-                "#000";
-
-
-            win.document.body.appendChild(
-                iframe
-            );
-
 
             win.document.close();
 
@@ -388,7 +480,9 @@ document
 
 
 /*
-Fullscreen button.
+==========================================================
+FULLSCREEN
+==========================================================
 */
 
 document
@@ -397,14 +491,11 @@ document
         "click",
         function(){
 
-            const container =
-                frame;
-
             if(
-                container.requestFullscreen
+                frame.requestFullscreen
             ){
 
-                container
+                frame
                     .requestFullscreen()
                     .catch(
                         function(){}
@@ -416,7 +507,14 @@ document
     );
 
 
+/*
+==========================================================
+START
+==========================================================
+*/
+
 loadDatabase();
+
 
 </script>
 </body>
