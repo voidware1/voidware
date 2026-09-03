@@ -229,7 +229,7 @@ async function loadDatabase(){
                 return (
                     line &&
                     !line.startsWith("#") &&
-                    /^https?:\\/\\//i.test(line)
+                    /^https?:\/\//i.test(line)
                 );
 
             });
