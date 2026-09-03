@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -271,6 +272,7 @@ textarea {
 
         <div class="field">
             <label for="pageName">Page Name</label>
+
             <input
                 id="pageName"
                 type="text"
@@ -280,7 +282,10 @@ textarea {
         </div>
 
         <div class="field">
-            <label for="fileName">TXT Database File</label>
+
+            <label for="fileName">
+                TXT Database File
+            </label>
 
             <input
                 id="fileName"
@@ -289,33 +294,57 @@ textarea {
                 value="example.txt"
             >
 
-            <div class="path-box" id="pathBox">
+            <div
+                class="path-box"
+                id="pathBox"
+            >
                 /voidware/proxys/database/example.txt
             </div>
+
         </div>
 
         <div class="buttons">
-            <button id="loadButton">Load Database</button>
-            <button id="generateButton">Generate Page</button>
+
+            <button id="loadButton">
+                Load Database
+            </button>
+
+            <button id="generateButton">
+                Generate Page
+            </button>
+
         </div>
 
-        <div class="status" id="status"></div>
+        <div
+            class="status"
+            id="status"
+        ></div>
 
-        <div class="warning" id="warning"></div>
+        <div
+            class="warning"
+            id="warning"
+        ></div>
 
     </div>
+
 
     <div class="panel">
 
         <h2>Database Preview</h2>
 
-        <div id="preview" class="preview">
+        <div
+            id="preview"
+            class="preview"
+        >
+
             <div class="empty">
                 Load a TXT database to preview its links.
             </div>
+
         </div>
 
     </div>
+
 
     <div class="panel">
 
@@ -327,13 +356,21 @@ textarea {
             placeholder="Your generated HTML will appear here..."
         ></textarea>
 
-        <div class="buttons" style="margin-top:15px;">
-            <button id="copyButton">Copy Code</button>
+        <div
+            class="buttons"
+            style="margin-top:15px;"
+        >
+
+            <button id="copyButton">
+                Copy Code
+            </button>
+
         </div>
 
     </div>
 
 </div>
+
 
 <script>
 
@@ -348,7 +385,6 @@ const GITHUB_API_BASE =
 
 const RAW_BASE =
     "https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/";
-
 
 let loadedLinks = [];
 
@@ -397,8 +433,8 @@ async function loadLinks() {
     const preview =
         document.getElementById("preview");
 
-
-    let file = input.value.trim();
+    let file =
+        input.value.trim();
 
     if (!file) {
         file = "example.txt";
@@ -412,29 +448,28 @@ async function loadLinks() {
 
     updatePath();
 
-    status.textContent = "Loading database...";
-    warning.style.display = "none";
+    status.textContent =
+        "Loading database...";
+
+    warning.style.display =
+        "none";
 
     preview.innerHTML =
         '<div class="empty">Loading...</div>';
 
-
     try {
-
-        /*
-        GitHub API is used to verify that the file exists.
-        */
 
         const apiURL =
             GITHUB_API_BASE +
             encodeURIComponent(file);
 
-
         const response =
-            await fetch(apiURL, {
-                cache: "no-store"
-            });
-
+            await fetch(
+                apiURL,
+                {
+                    cache: "no-store"
+                }
+            );
 
         if (!response.ok) {
 
@@ -442,48 +477,42 @@ async function loadLinks() {
                 "GitHub returned HTTP " +
                 response.status
             );
-        }
 
+        }
 
         const fileData =
             await response.json();
 
-
-        /*
-        GitHub API returns the file as base64.
-        */
-
         if (!fileData.content) {
+
             throw new Error(
                 "The TXT file did not contain readable content."
             );
-        }
 
+        }
 
         const cleanBase64 =
             fileData.content.replace(/\s/g, "");
 
-
         const binary =
             atob(cleanBase64);
-
 
         const bytes =
             new Uint8Array(binary.length);
 
+        for (
+            let i = 0;
+            i < binary.length;
+            i++
+        ) {
 
-        for (let i = 0; i < binary.length; i++) {
-            bytes[i] = binary.charCodeAt(i);
+            bytes[i] =
+                binary.charCodeAt(i);
+
         }
-
 
         const text =
             new TextDecoder("utf-8").decode(bytes);
-
-
-        /*
-        Read every line.
-        */
 
         loadedLinks =
             text
@@ -501,9 +530,7 @@ async function loadLinks() {
 
             });
 
-
         renderPreview();
-
 
         status.textContent =
             "Loaded " +
@@ -511,15 +538,15 @@ async function loadLinks() {
             " proxy link(s) from " +
             file;
 
-
         if (loadedLinks.length === 0) {
 
-            warning.style.display = "block";
+            warning.style.display =
+                "block";
 
             warning.textContent =
                 "The TXT file exists, but no valid http:// or https:// links were found.";
-        }
 
+        }
 
     } catch (error) {
 
@@ -529,12 +556,15 @@ async function loadLinks() {
             '<div class="empty">Unable to load the database.</div>';
 
         status.textContent =
-            "Error: " + error.message;
+            "Error: " +
+            error.message;
 
-        warning.style.display = "block";
+        warning.style.display =
+            "block";
 
         warning.textContent =
             "Make sure the TXT file exists in proxys/database/ and that the filename is correct.";
+
     }
 
 }
@@ -551,48 +581,46 @@ function renderPreview() {
     const preview =
         document.getElementById("preview");
 
-
     if (loadedLinks.length === 0) {
 
         preview.innerHTML =
             '<div class="empty">No links found.</div>';
 
         return;
-    }
 
+    }
 
     preview.innerHTML = "";
 
+    loadedLinks.forEach(
+        function(link, index) {
 
-    loadedLinks.forEach(function(link, index) {
+            const card =
+                document.createElement("div");
 
-        const card =
-            document.createElement("div");
+            card.className =
+                "proxy-card";
 
-        card.className =
-            "proxy-card";
+            const title =
+                document.createElement("h3");
 
+            title.textContent =
+                "Proxy " +
+                (index + 1);
 
-        const title =
-            document.createElement("h3");
+            const url =
+                document.createElement("p");
 
-        title.textContent =
-            "Proxy " + (index + 1);
+            url.textContent =
+                link;
 
+            card.appendChild(title);
+            card.appendChild(url);
 
-        const url =
-            document.createElement("p");
+            preview.appendChild(card);
 
-        url.textContent =
-            link;
-
-
-        card.appendChild(title);
-        card.appendChild(url);
-
-        preview.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
@@ -603,27 +631,48 @@ GENERATE HTML
 ==========================================================
 */
 
-function buildGeneratedHTML(pageName, databasePath) {
+function buildGeneratedHTML(
+    pageName,
+    databasePath
+) {
 
     const lines = [];
 
-    const fileName = getFileNameFromPath(databasePath);
+    const fileName =
+        getFileNameFromPath(databasePath);
 
     const rawDatabaseURL =
         "https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/" +
         encodeURIComponent(fileName);
 
+
+    /*
+    HEAD
+    */
+
     lines.push("<!DOCTYPE html>");
     lines.push('<html lang="en">');
 
     lines.push("<head>");
-    lines.push('<meta charset="UTF-8">');
+
+    lines.push(
+        '<meta charset="UTF-8">'
+    );
+
     lines.push(
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
     );
+
     lines.push(
-        "<title>" + escapeHTML(pageName) + "</title>"
+        "<title>" +
+        escapeHTML(pageName) +
+        "</title>"
     );
+
+
+    /*
+    GENERATED PAGE CSS
+    */
 
     lines.push("<style>");
 
@@ -757,17 +806,19 @@ iframe{
     iframe{
         height:500px;
     }
+
 }
 `);
 
     lines.push("</style>");
     lines.push("</head>");
 
-    lines.push("<body>");
 
     /*
-    NAVIGATION
+    BODY
     */
+
+    lines.push("<body>");
 
     lines.push("<header>");
 
@@ -796,17 +847,24 @@ iframe{
     lines.push("</nav>");
     lines.push("</header>");
 
+
     /*
     MAIN
     */
 
-    lines.push('<div class="container">');
-
     lines.push(
-        "<h1>" + escapeHTML(pageName) + "</h1>"
+        '<div class="container">'
     );
 
-    lines.push('<div class="panel">');
+    lines.push(
+        "<h1>" +
+        escapeHTML(pageName) +
+        "</h1>"
+    );
+
+    lines.push(
+        '<div class="panel">'
+    );
 
     lines.push(
         '<div class="status" id="status">Loading links...</div>'
@@ -816,7 +874,9 @@ iframe{
         '<select id="linkSelect"></select>'
     );
 
-    lines.push('<div class="buttons">');
+    lines.push(
+        '<div class="buttons">'
+    );
 
     lines.push(
         '<button id="openBlank">Open in About:Blank</button>'
@@ -828,15 +888,20 @@ iframe{
 
     lines.push("</div>");
 
-    lines.push(
-        '<iframe id="proxyFrame" allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"></iframe>'
-    );
+    lines.push(`
+<iframe
+    id="proxyFrame"
+    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+    allowfullscreen>
+</iframe>
+`);
 
     lines.push("</div>");
     lines.push("</div>");
+
 
     /*
-    SCRIPT
+    GENERATED PAGE SCRIPT
     */
 
     lines.push("<script>");
@@ -848,7 +913,9 @@ iframe{
     );
 
     lines.push(`
+
 let proxyLinks = [];
+
 let currentLink = "";
 
 const select =
@@ -860,6 +927,12 @@ const frame =
 const status =
     document.getElementById("status");
 
+
+/*
+==========================================================
+LOAD DATABASE
+==========================================================
+*/
 
 async function loadDatabase(){
 
@@ -876,26 +949,29 @@ async function loadDatabase(){
         if(!response.ok){
 
             throw new Error(
-                "HTTP " + response.status
+                "HTTP " +
+                response.status
             );
+
         }
 
         const text =
             await response.text();
 
-
         proxyLinks =
             text
-            .split(/\\r?\\n/)
+            .split(/\\\\r?\\\\n/)
             .map(function(line){
+
                 return line.trim();
+
             })
             .filter(function(line){
 
                 return (
                     line &&
                     !line.startsWith("#") &&
-                    /^https?:\\/\\//i.test(line)
+                    /^https?:\\\\/\\\\//i.test(line)
                 );
 
             });
@@ -907,29 +983,35 @@ async function loadDatabase(){
                 "No links found.";
 
             return;
+
         }
 
 
         /*
-        Create generic dropdown names.
-        The actual URLs are NEVER displayed.
+        Generic dropdown names.
+        URLs are not displayed.
         */
 
         select.innerHTML = "";
-
 
         proxyLinks.forEach(
             function(link,index){
 
                 const option =
-                    document.createElement("option");
+                    document.createElement(
+                        "option"
+                    );
 
-                option.value = index;
+                option.value =
+                    index;
 
                 option.textContent =
-                    "Link " + (index + 1);
+                    "Link " +
+                    (index + 1);
 
-                select.appendChild(option);
+                select.appendChild(
+                    option
+                );
 
             }
         );
@@ -942,8 +1024,8 @@ async function loadDatabase(){
 
         selectLink();
 
-
-    }catch(error){
+    }
+    catch(error){
 
         status.textContent =
             "Unable to load proxy database.";
@@ -955,26 +1037,32 @@ async function loadDatabase(){
 }
 
 
+/*
+==========================================================
+SELECT LINK
+==========================================================
+*/
+
 function selectLink(){
 
     const index =
         Number(select.value);
 
-
     if(
         Number.isNaN(index) ||
         !proxyLinks[index]
     ){
-        return;
-    }
 
+        return;
+
+    }
 
     currentLink =
         proxyLinks[index];
 
-
     frame.src =
         currentLink;
+
 }
 
 
@@ -985,7 +1073,9 @@ select.addEventListener(
 
 
 /*
-Open selected link inside About:Blank.
+==========================================================
+ABOUT:BLANK OPENER
+==========================================================
 */
 
 document
@@ -995,9 +1085,20 @@ document
         function(){
 
             if(!currentLink){
+
+                alert(
+                    "Select a proxy first."
+                );
+
                 return;
+
             }
 
+
+            /*
+            Open a new blank tab immediately
+            from the user's click.
+            */
 
             const win =
                 window.open(
@@ -1013,57 +1114,106 @@ document
                 );
 
                 return;
+
             }
 
 
-            win.document.open();
-
-
             /*
-            Do not display the URL as text.
+            Escape the selected URL safely
+            before inserting it into the new page.
             */
 
-            const iframe =
-                win.document.createElement(
-                    "iframe"
+            const safeURL =
+                JSON.stringify(
+                    currentLink
                 );
 
 
-            iframe.src =
-                currentLink;
+            /*
+            Build the About:Blank page.
+            */
 
-            iframe.style.position =
-                "fixed";
+            win.document.open();
 
-            iframe.style.inset =
-                "0";
+            win.document.write(
+                \`
+<!DOCTYPE html>
 
-            iframe.style.width =
-                "100%";
+<html lang="en">
 
-            iframe.style.height =
-                "100%";
+<head>
 
-            iframe.style.border =
-                "0";
+<meta charset="UTF-8">
 
-            iframe.setAttribute(
-                "allow",
-                "accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Voidware Proxy</title>
+
+<style>
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#000;
+
+}
+
+#proxyEmbed{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    border:0;
+
+    background:#000;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<iframe
+    id="proxyEmbed"
+    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+    allowfullscreen>
+</iframe>
+
+<script>
+
+const iframe =
+    document.getElementById(
+        "proxyEmbed"
+    );
+
+iframe.src =
+    \${safeURL};
+
+<\\\\/script>
+
+</body>
+
+</html>
+                \`
             );
-
-
-            win.document.body.style.margin =
-                "0";
-
-            win.document.body.style.background =
-                "#000";
-
-
-            win.document.body.appendChild(
-                iframe
-            );
-
 
             win.document.close();
 
@@ -1072,7 +1222,9 @@ document
 
 
 /*
-Fullscreen button.
+==========================================================
+FULLSCREEN
+==========================================================
 */
 
 document
@@ -1081,14 +1233,11 @@ document
         "click",
         function(){
 
-            const container =
-                frame;
-
             if(
-                container.requestFullscreen
+                frame.requestFullscreen
             ){
 
-                container
+                frame
                     .requestFullscreen()
                     .catch(
                         function(){}
@@ -1100,15 +1249,31 @@ document
     );
 
 
+/*
+==========================================================
+START
+==========================================================
+*/
+
 loadDatabase();
+
 `);
 
-    lines.push("<" + "/script>");
+    /*
+    IMPORTANT:
+    Prevent the generated script from being
+    prematurely closed.
+    */
+
+    lines.push(
+        "<" + "/script>"
+    );
 
     lines.push("</body>");
     lines.push("</html>");
 
     return lines.join("\n");
+
 }
 
 
@@ -1120,7 +1285,10 @@ HELPER FUNCTIONS
 
 function getFileNameFromPath(path) {
 
-    return path.split("/").pop();
+    return path
+        .split("/")
+        .pop();
+
 }
 
 
@@ -1132,6 +1300,7 @@ function escapeHTML(text) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
 }
 
 
@@ -1144,10 +1313,14 @@ GENERATE BUTTON
 function generatePage() {
 
     const pageNameInput =
-        document.getElementById("pageName");
+        document.getElementById(
+            "pageName"
+        );
 
     const fileInput =
-        document.getElementById("fileName");
+        document.getElementById(
+            "fileName"
+        );
 
 
     const pageName =
@@ -1160,26 +1333,32 @@ function generatePage() {
         "example.txt";
 
 
-    if (!file.toLowerCase().endsWith(".txt")) {
+    if(
+        !file
+            .toLowerCase()
+            .endsWith(".txt")
+    ){
+
         file += ".txt";
+
     }
 
 
-    fileInput.value = file;
+    fileInput.value =
+        file;
 
     updatePath();
 
 
     /*
-    THIS IS THE IMPORTANT PATH.
-
-    Every TXT file is inside:
+    Every TXT file is located at:
 
     /voidware/proxys/database/
     */
 
     const databasePath =
-        "/voidware/proxys/database/" + file;
+        "/voidware/proxys/database/" +
+        file;
 
 
     const generated =
@@ -1189,15 +1368,22 @@ function generatePage() {
         );
 
 
-    document.getElementById(
-        "generatedCode"
-    ).value = generated;
+    document
+        .getElementById(
+            "generatedCode"
+        )
+        .value =
+        generated;
 
 
-    document.getElementById(
-        "status"
-    ).textContent =
-        "HTML page generated for " + file;
+    document
+        .getElementById(
+            "status"
+        )
+        .textContent =
+        "HTML page generated for " +
+        file;
+
 }
 
 
@@ -1210,45 +1396,56 @@ COPY
 async function copyCode() {
 
     const textarea =
-        document.getElementById("generatedCode");
-
-
-    if (!textarea.value) {
-
         document.getElementById(
-            "status"
-        ).textContent =
+            "generatedCode"
+        );
+
+
+    if(!textarea.value){
+
+        document
+            .getElementById(
+                "status"
+            )
+            .textContent =
             "Generate the page first.";
 
         return;
+
     }
 
 
-    try {
+    try{
 
         await navigator.clipboard.writeText(
             textarea.value
         );
 
-
-        document.getElementById(
-            "status"
-        ).textContent =
-            "Code copied!";
-
-
-    } catch (error) {
-
-        textarea.select();
-
-        document.execCommand("copy");
-
-        document.getElementById(
-            "status"
-        ).textContent =
+        document
+            .getElementById(
+                "status"
+            )
+            .textContent =
             "Code copied!";
 
     }
+    catch(error){
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        document
+            .getElementById(
+                "status"
+            )
+            .textContent =
+            "Code copied!";
+
+    }
+
 }
 
 
@@ -1259,7 +1456,9 @@ EVENTS
 */
 
 document
-    .getElementById("fileName")
+    .getElementById(
+        "fileName"
+    )
     .addEventListener(
         "input",
         updatePath
@@ -1267,7 +1466,9 @@ document
 
 
 document
-    .getElementById("loadButton")
+    .getElementById(
+        "loadButton"
+    )
     .addEventListener(
         "click",
         loadLinks
@@ -1275,7 +1476,9 @@ document
 
 
 document
-    .getElementById("generateButton")
+    .getElementById(
+        "generateButton"
+    )
     .addEventListener(
         "click",
         generatePage
@@ -1283,7 +1486,9 @@ document
 
 
 document
-    .getElementById("copyButton")
+    .getElementById(
+        "copyButton"
+    )
     .addEventListener(
         "click",
         copyCode
@@ -1296,3 +1501,4 @@ updatePath();
 
 </body>
 </html>
+
