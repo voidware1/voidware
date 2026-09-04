@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Strawberri</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Strawberi</title>
+
+
 <style>
 
 *{
@@ -13,74 +22,122 @@
 body{
     margin:0;
     min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background:
-        radial-gradient(circle at top,#24103d 0%,#10091c 45%,#07050d 100%);
+        radial-gradient(
+            circle at top,
+            #24103d 0%,
+            #10091c 45%,
+            #07050d 100%
+        );
+
     color:white;
 }
 
 header{
     height:70px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 28px;
-    background:rgba(10,5,18,.9);
-    border-bottom:1px solid #392052;
+
+    background:
+        rgba(10,5,18,.9);
+
+    border-bottom:
+        1px solid #392052;
 }
 
 .logo{
     font-size:25px;
+
     font-weight:bold;
+
     color:#b86cff;
+
     text-decoration:none;
 }
 
 nav{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
 }
 
 nav a{
     color:#d8c7e8;
+
     text-decoration:none;
+
     padding:9px 13px;
+
     border-radius:8px;
 }
 
 nav a:hover{
     background:#26133b;
+
     color:white;
 }
 
 .container{
-    width:min(1100px,calc(100% - 30px));
+    width:min(
+        1100px,
+        calc(100% - 30px)
+    );
+
     margin:35px auto;
 }
 
 h1{
     text-align:center;
+
     color:#d8b4fe;
+
     margin-bottom:25px;
 }
 
 .panel{
-    background:rgba(18,10,30,.9);
-    border:1px solid #3b2253;
+    background:
+        rgba(18,10,30,.9);
+
+    border:
+        1px solid #3b2253;
+
     border-radius:15px;
+
     padding:20px;
 }
 
 select{
     width:100%;
+
     padding:13px;
+
     border-radius:9px;
-    border:1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     background:#0d0815;
+
     color:white;
+
     font-size:15px;
+
     outline:none;
+
     margin-bottom:12px;
 }
 
@@ -90,18 +147,27 @@ select:focus{
 
 .buttons{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
+
     margin-bottom:15px;
 }
 
 button{
     border:0;
+
     border-radius:9px;
+
     padding:11px 16px;
+
     background:#7c3aed;
+
     color:white;
+
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -111,15 +177,22 @@ button:hover{
 
 iframe{
     width:100%;
+
     height:600px;
-    border:1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     border-radius:10px;
+
     background:#000;
 }
 
 .status{
     color:#9686a4;
+
     margin-bottom:12px;
+
     font-size:14px;
 }
 
@@ -127,55 +200,141 @@ iframe{
 
     header{
         height:auto;
+
         padding:15px;
+
         flex-direction:column;
+
         gap:12px;
     }
 
     iframe{
         height:500px;
     }
+
 }
 
 </style>
+
 </head>
+
+
 <body>
+
+
 <header>
-<a class="logo" href="/voidware/">Voidware</a>
+
+<a
+    class="logo"
+    href="/voidware/"
+>
+    Voidware
+</a>
+
+
 <nav>
-<a href="/voidware/">Home</a>
-<a href="/voidware/games/index.html">Games</a>
-<a href="/voidware/proxys/index.html">Proxys</a>
-<a href="/voidware/apps/index.html">Apps</a>
+
+<a href="/voidware/">
+    Home
+</a>
+
+<a href="/voidware/games/index.html">
+    Games
+</a>
+
+<a href="/voidware/proxys/index.html">
+    Proxys
+</a>
+
+<a href="/voidware/apps/index.html">
+    Apps
+</a>
+
 </nav>
+
 </header>
+
+
 <div class="container">
-<h1>Strawberri</h1>
+
+<h1>
+    Strawberi
+</h1>
+
+
 <div class="panel">
-<div class="status" id="status">Loading links...</div>
-<select id="linkSelect"></select>
+
+
+<div
+    class="status"
+    id="status"
+>
+    Loading links...
+</div>
+
+
+<select
+    id="linkSelect"
+></select>
+
+
 <div class="buttons">
-<button id="openBlank">Open in About:Blank</button>
-<button id="fullscreen">Fullscreen</button>
+
+<button id="openBlank">
+    Open in About:Blank
+</button>
+
+<button id="fullscreen">
+    Fullscreen
+</button>
+
 </div>
-<iframe id="proxyFrame" allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"></iframe>
+
+
+<iframe
+    id="proxyFrame"
+    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
+    allowfullscreen>
+</iframe>
+
+
 </div>
+
 </div>
+
+
 <script>
-const DATABASE_URL="https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/strawberri.txt";
+
+const DATABASE_URL =
+    "https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/strawberri.txt";
+
 
 let proxyLinks = [];
+
 let currentLink = "";
 
+
 const select =
-    document.getElementById("linkSelect");
+    document.getElementById(
+        "linkSelect"
+    );
+
 
 const frame =
-    document.getElementById("proxyFrame");
+    document.getElementById(
+        "proxyFrame"
+    );
+
 
 const status =
-    document.getElementById("status");
+    document.getElementById(
+        "status"
+    );
 
+
+/* ==========================================================
+   LOAD DATABASE
+========================================================== */
 
 async function loadDatabase(){
 
@@ -189,12 +348,16 @@ async function loadDatabase(){
                 }
             );
 
+
         if(!response.ok){
 
             throw new Error(
-                "HTTP " + response.status
+                "HTTP " +
+                response.status
             );
+
         }
+
 
         const text =
             await response.text();
@@ -202,50 +365,60 @@ async function loadDatabase(){
 
         proxyLinks =
             text
-            .split(/\r?\n/)
-            .map(function(line){
-                return line.trim();
-            })
-            .filter(function(line){
+                .split(/\r?\n/)
+                .map(function(line){
 
-                return (
-                    line &&
-                    !line.startsWith("#") &&
-                    /^https?:\/\//i.test(line)
-                );
+                    return line.trim();
 
-            });
+                })
+                .filter(function(line){
+
+                    return (
+                        line &&
+                        !line.startsWith("#") &&
+                        /^https?:\/\//i.test(line)
+                    );
+
+                });
 
 
-        if(proxyLinks.length === 0){
+        if(
+            proxyLinks.length === 0
+        ){
 
             status.textContent =
                 "No links found.";
 
             return;
+
         }
 
 
-        /*
-        Create generic dropdown names.
-        The actual URLs are NEVER displayed.
-        */
-
-        select.innerHTML = "";
+        select.innerHTML =
+            "";
 
 
         proxyLinks.forEach(
             function(link,index){
 
                 const option =
-                    document.createElement("option");
+                    document.createElement(
+                        "option"
+                    );
 
-                option.value = index;
+
+                option.value =
+                    index;
+
 
                 option.textContent =
-                    "Link " + (index + 1);
+                    "Link " +
+                    (index + 1);
 
-                select.appendChild(option);
+
+                select.appendChild(
+                    option
+                );
 
             }
         );
@@ -258,30 +431,40 @@ async function loadDatabase(){
 
         selectLink();
 
-
-    }catch(error){
+    }
+    catch(error){
 
         status.textContent =
             "Unable to load proxy database.";
 
-        console.error(error);
+        console.error(
+            error
+        );
 
     }
 
 }
 
 
+/* ==========================================================
+   SELECT LINK
+========================================================== */
+
 function selectLink(){
 
     const index =
-        Number(select.value);
+        Number(
+            select.value
+        );
 
 
     if(
         Number.isNaN(index) ||
         !proxyLinks[index]
     ){
+
         return;
+
     }
 
 
@@ -291,6 +474,7 @@ function selectLink(){
 
     frame.src =
         currentLink;
+
 }
 
 
@@ -300,18 +484,26 @@ select.addEventListener(
 );
 
 
-/*
-Open selected link inside About:Blank.
-*/
+/* ==========================================================
+   ABOUT:BLANK
+========================================================== */
 
 document
-    .getElementById("openBlank")
+    .getElementById(
+        "openBlank"
+    )
     .addEventListener(
         "click",
         function(){
 
             if(!currentLink){
+
+                alert(
+                    "Select a proxy first."
+                );
+
                 return;
+
             }
 
 
@@ -329,55 +521,74 @@ document
                 );
 
                 return;
+
             }
 
+
+            /*
+            Create a blank page and put the
+            selected proxy inside an iframe.
+            */
 
             win.document.open();
 
 
-            /*
-            Do not display the URL as text.
-            */
+            win.document.write(
+                '<!DOCTYPE html>' +
 
-            const iframe =
-                win.document.createElement(
-                    "iframe"
-                );
+                '<html lang="en">' +
 
+                '<head>' +
 
-            iframe.src =
-                currentLink;
+                '<meta charset="UTF-8">' +
 
-            iframe.style.position =
-                "fixed";
+                '<meta name="viewport" content="width=device-width,initial-scale=1.0">' +
 
-            iframe.style.inset =
-                "0";
+                '<title>Voidware Proxy</title>' +
 
-            iframe.style.width =
-                "100%";
+                '<style>' +
 
-            iframe.style.height =
-                "100%";
+                'html,body{' +
+                    'margin:0;' +
+                    'padding:0;' +
+                    'width:100%;' +
+                    'height:100%;' +
+                    'overflow:hidden;' +
+                    'background:#000;' +
+                '}' +
 
-            iframe.style.border =
-                "0";
+                '#proxyEmbed{' +
+                    'position:fixed;' +
+                    'inset:0;' +
+                    'width:100%;' +
+                    'height:100%;' +
+                    'border:0;' +
+                    'background:#000;' +
+                '}' +
 
-            iframe.setAttribute(
-                "allow",
-                "accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
-            );
+                '</style>' +
 
+                '</head>' +
 
-            win.document.body.style.margin =
-                "0";
+                '<body>' +
 
-            win.document.body.style.background =
-                "#000";
+                '<iframe ' +
+                    'id="proxyEmbed" ' +
+                    'allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *" ' +
+                    'allowfullscreen>' +
+                '</iframe>' +
 
+                '<script>' +
 
-            win.document.body.appendChild(
-                iframe
+                'document.getElementById("proxyEmbed").src=' +
+                JSON.stringify(currentLink) +
+                ';' +
+
+                '<\/script>' +
+
+                '</body>' +
+
+                '</html>'
             );
 
 
@@ -387,24 +598,23 @@ document
     );
 
 
-/*
-Fullscreen button.
-*/
+/* ==========================================================
+   FULLSCREEN
+========================================================== */
 
 document
-    .getElementById("fullscreen")
+    .getElementById(
+        "fullscreen"
+    )
     .addEventListener(
         "click",
         function(){
 
-            const container =
-                frame;
-
             if(
-                container.requestFullscreen
+                frame.requestFullscreen
             ){
 
-                container
+                frame
                     .requestFullscreen()
                     .catch(
                         function(){}
@@ -416,8 +626,14 @@ document
     );
 
 
+/* ==========================================================
+   START
+========================================================== */
+
 loadDatabase();
 
 </script>
+
 </body>
+
 </html>

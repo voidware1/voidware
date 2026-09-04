@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>Lunar</title>
+
+
 <style>
 
 *{
@@ -13,74 +22,122 @@
 body{
     margin:0;
     min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background:
-        radial-gradient(circle at top,#24103d 0%,#10091c 45%,#07050d 100%);
+        radial-gradient(
+            circle at top,
+            #24103d 0%,
+            #10091c 45%,
+            #07050d 100%
+        );
+
     color:white;
 }
 
 header{
     height:70px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 28px;
-    background:rgba(10,5,18,.9);
-    border-bottom:1px solid #392052;
+
+    background:
+        rgba(10,5,18,.9);
+
+    border-bottom:
+        1px solid #392052;
 }
 
 .logo{
     font-size:25px;
+
     font-weight:bold;
+
     color:#b86cff;
+
     text-decoration:none;
 }
 
 nav{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
 }
 
 nav a{
     color:#d8c7e8;
+
     text-decoration:none;
+
     padding:9px 13px;
+
     border-radius:8px;
 }
 
 nav a:hover{
     background:#26133b;
+
     color:white;
 }
 
 .container{
-    width:min(1100px,calc(100% - 30px));
+    width:min(
+        1100px,
+        calc(100% - 30px)
+    );
+
     margin:35px auto;
 }
 
 h1{
     text-align:center;
+
     color:#d8b4fe;
+
     margin-bottom:25px;
 }
 
 .panel{
-    background:rgba(18,10,30,.9);
-    border:1px solid #3b2253;
+    background:
+        rgba(18,10,30,.9);
+
+    border:
+        1px solid #3b2253;
+
     border-radius:15px;
+
     padding:20px;
 }
 
 select{
     width:100%;
+
     padding:13px;
+
     border-radius:9px;
-    border:1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     background:#0d0815;
+
     color:white;
+
     font-size:15px;
+
     outline:none;
+
     margin-bottom:12px;
 }
 
@@ -90,18 +147,27 @@ select:focus{
 
 .buttons{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
+
     margin-bottom:15px;
 }
 
 button{
     border:0;
+
     border-radius:9px;
+
     padding:11px 16px;
+
     background:#7c3aed;
+
     color:white;
+
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -111,15 +177,22 @@ button:hover{
 
 iframe{
     width:100%;
+
     height:600px;
-    border:1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     border-radius:10px;
+
     background:#000;
 }
 
 .status{
     color:#9686a4;
+
     margin-bottom:12px;
+
     font-size:14px;
 }
 
@@ -127,8 +200,11 @@ iframe{
 
     header{
         height:auto;
+
         padding:15px;
+
         flex-direction:column;
+
         gap:12px;
     }
 
@@ -139,26 +215,81 @@ iframe{
 }
 
 </style>
+
 </head>
+
+
 <body>
+
+
 <header>
-<a class="logo" href="/voidware/">Voidware</a>
+
+<a
+    class="logo"
+    href="/voidware/"
+>
+    Voidware
+</a>
+
+
 <nav>
-<a href="/voidware/">Home</a>
-<a href="/voidware/games/index.html">Games</a>
-<a href="/voidware/proxys/index.html">Proxys</a>
-<a href="/voidware/apps/index.html">Apps</a>
+
+<a href="/voidware/">
+    Home
+</a>
+
+<a href="/voidware/games/index.html">
+    Games
+</a>
+
+<a href="/voidware/proxys/index.html">
+    Proxys
+</a>
+
+<a href="/voidware/apps/index.html">
+    Apps
+</a>
+
 </nav>
+
 </header>
+
+
 <div class="container">
-<h1>Lunar</h1>
+
+<h1>
+    Lunar
+</h1>
+
+
 <div class="panel">
-<div class="status" id="status">Loading links...</div>
-<select id="linkSelect"></select>
-<div class="buttons">
-<button id="openBlank">Open in About:Blank</button>
-<button id="fullscreen">Fullscreen</button>
+
+
+<div
+    class="status"
+    id="status"
+>
+    Loading links...
 </div>
+
+
+<select
+    id="linkSelect"
+></select>
+
+
+<div class="buttons">
+
+<button id="openBlank">
+    Open in About:Blank
+</button>
+
+<button id="fullscreen">
+    Fullscreen
+</button>
+
+</div>
+
 
 <iframe
     id="proxyFrame"
@@ -166,31 +297,44 @@ iframe{
     allowfullscreen>
 </iframe>
 
+
 </div>
+
 </div>
+
+
 <script>
-const DATABASE_URL="https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/lunar.txt";
+
+const DATABASE_URL =
+    "https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/lunar.txt";
 
 
 let proxyLinks = [];
 
 let currentLink = "";
 
+
 const select =
-    document.getElementById("linkSelect");
+    document.getElementById(
+        "linkSelect"
+    );
+
 
 const frame =
-    document.getElementById("proxyFrame");
+    document.getElementById(
+        "proxyFrame"
+    );
+
 
 const status =
-    document.getElementById("status");
+    document.getElementById(
+        "status"
+    );
 
 
-/*
-==========================================================
-LOAD DATABASE
-==========================================================
-*/
+/* ==========================================================
+   LOAD DATABASE
+========================================================== */
 
 async function loadDatabase(){
 
@@ -204,6 +348,7 @@ async function loadDatabase(){
                 }
             );
 
+
         if(!response.ok){
 
             throw new Error(
@@ -213,29 +358,33 @@ async function loadDatabase(){
 
         }
 
+
         const text =
             await response.text();
 
+
         proxyLinks =
             text
-            .split(/\\r?\\n/)
-            .map(function(line){
+                .split(/\r?\n/)
+                .map(function(line){
 
-                return line.trim();
+                    return line.trim();
 
-            })
-            .filter(function(line){
+                })
+                .filter(function(line){
 
-                return (
-                    line &&
-                    !line.startsWith("#") &&
-                    /^https?:\/\//i.test(line)
-                );
+                    return (
+                        line &&
+                        !line.startsWith("#") &&
+                        /^https?:\/\//i.test(line)
+                    );
 
-            });
+                });
 
 
-        if(proxyLinks.length === 0){
+        if(
+            proxyLinks.length === 0
+        ){
 
             status.textContent =
                 "No links found.";
@@ -245,12 +394,9 @@ async function loadDatabase(){
         }
 
 
-        /*
-        Generic dropdown names.
-        URLs are not displayed.
-        */
+        select.innerHTML =
+            "";
 
-        select.innerHTML = "";
 
         proxyLinks.forEach(
             function(link,index){
@@ -260,12 +406,15 @@ async function loadDatabase(){
                         "option"
                     );
 
+
                 option.value =
                     index;
+
 
                 option.textContent =
                     "Link " +
                     (index + 1);
+
 
                 select.appendChild(
                     option
@@ -288,23 +437,26 @@ async function loadDatabase(){
         status.textContent =
             "Unable to load proxy database.";
 
-        console.error(error);
+        console.error(
+            error
+        );
 
     }
 
 }
 
 
-/*
-==========================================================
-SELECT LINK
-==========================================================
-*/
+/* ==========================================================
+   SELECT LINK
+========================================================== */
 
 function selectLink(){
 
     const index =
-        Number(select.value);
+        Number(
+            select.value
+        );
+
 
     if(
         Number.isNaN(index) ||
@@ -315,8 +467,10 @@ function selectLink(){
 
     }
 
+
     currentLink =
         proxyLinks[index];
+
 
     frame.src =
         currentLink;
@@ -330,14 +484,14 @@ select.addEventListener(
 );
 
 
-/*
-==========================================================
-ABOUT:BLANK OPENER
-==========================================================
-*/
+/* ==========================================================
+   ABOUT:BLANK
+========================================================== */
 
 document
-    .getElementById("openBlank")
+    .getElementById(
+        "openBlank"
+    )
     .addEventListener(
         "click",
         function(){
@@ -352,11 +506,6 @@ document
 
             }
 
-
-            /*
-            Open a new blank tab immediately
-            from the user's click.
-            */
 
             const win =
                 window.open(
@@ -377,101 +526,71 @@ document
 
 
             /*
-            Escape the selected URL safely
-            before inserting it into the new page.
-            */
-
-            const safeURL =
-                JSON.stringify(
-                    currentLink
-                );
-
-
-            /*
-            Build the About:Blank page.
+            Create a blank page and put the
+            selected proxy inside an iframe.
             */
 
             win.document.open();
 
+
             win.document.write(
-                `
-<!DOCTYPE html>
+                '<!DOCTYPE html>' +
 
-<html lang="en">
+                '<html lang="en">' +
 
-<head>
+                '<head>' +
 
-<meta charset="UTF-8">
+                '<meta charset="UTF-8">' +
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+                '<meta name="viewport" content="width=device-width,initial-scale=1.0">' +
 
-<title>Voidware Proxy</title>
+                '<title>Voidware Proxy</title>' +
 
-<style>
+                '<style>' +
 
-html,
-body{
+                'html,body{' +
+                    'margin:0;' +
+                    'padding:0;' +
+                    'width:100%;' +
+                    'height:100%;' +
+                    'overflow:hidden;' +
+                    'background:#000;' +
+                '}' +
 
-    margin:0;
-    padding:0;
+                '#proxyEmbed{' +
+                    'position:fixed;' +
+                    'inset:0;' +
+                    'width:100%;' +
+                    'height:100%;' +
+                    'border:0;' +
+                    'background:#000;' +
+                '}' +
 
-    width:100%;
-    height:100%;
+                '</style>' +
 
-    overflow:hidden;
+                '</head>' +
 
-    background:#000;
+                '<body>' +
 
-}
+                '<iframe ' +
+                    'id="proxyEmbed" ' +
+                    'allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *" ' +
+                    'allowfullscreen>' +
+                '</iframe>' +
 
-#proxyEmbed{
+                '<script>' +
 
-    position:fixed;
+                'document.getElementById("proxyEmbed").src=' +
+                JSON.stringify(currentLink) +
+                ';' +
 
-    top:0;
-    left:0;
+                '<\/script>' +
 
-    width:100%;
-    height:100%;
+                '</body>' +
 
-    border:0;
-
-    background:#000;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<iframe
-    id="proxyEmbed"
-    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
-    allowfullscreen>
-</iframe>
-
-<script>
-
-const iframe =
-    document.getElementById(
-        "proxyEmbed"
-    );
-
-iframe.src =
-    ${safeURL};
-
-<\\/script>
-
-</body>
-
-</html>
-                `
+                '</html>'
             );
+
 
             win.document.close();
 
@@ -479,14 +598,14 @@ iframe.src =
     );
 
 
-/*
-==========================================================
-FULLSCREEN
-==========================================================
-*/
+/* ==========================================================
+   FULLSCREEN
+========================================================== */
 
 document
-    .getElementById("fullscreen")
+    .getElementById(
+        "fullscreen"
+    )
     .addEventListener(
         "click",
         function(){
@@ -507,15 +626,14 @@ document
     );
 
 
-/*
-==========================================================
-START
-==========================================================
-*/
+/* ==========================================================
+   START
+========================================================== */
 
 loadDatabase();
 
-
 </script>
+
 </body>
+
 </html>
