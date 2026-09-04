@@ -1,863 +1,1327 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Voidware</title>
-
-<meta name="theme-color" content="#080510">
+<title>Voidware Game Maker</title>
+<meta name="theme-color" content="#07050c">
 
 <style>
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --bg: #07050c;
-  --panel: #100a17;
-  --panel2: #160d21;
-  --purple: #9b4dff;
-  --purple2: #6721c6;
-  --text: #f5f0ff;
-  --muted: #93889f;
-  --border: rgba(155,77,255,.22);
-}
-
-html {
-  scroll-behavior: smooth;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  min-height: 100vh;
-
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(125,45,220,.25),
-      transparent 42%
-    ),
-    radial-gradient(
-      circle at 0% 100%,
-      rgba(92,35,160,.12),
-      transparent 35%
-    ),
-    var(--bg);
-
-  color: var(--text);
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% -10%, rgba(125,45,220,.25), transparent 40%),
+        #07050c;
+    color: #f5f0ff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* =========================================
-   HEADER
-========================================= */
+/* HEADER */
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-
-  background:
-    rgba(7,5,12,.82);
-
-  backdrop-filter:
-    blur(18px);
-
-  border-bottom:
-    1px solid
-    rgba(255,255,255,.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(155,77,255,.2);
+    background: rgba(7,5,12,.88);
+    backdrop-filter: blur(16px);
 }
 
 .nav {
-  width:
-    min(
-      1200px,
-      calc(100% - 32px)
-    );
-
-  margin: auto;
-
-  min-height: 65px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    max-width: 1400px;
+    margin: auto;
+    padding: 15px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  font-size: 18px;
-
-  font-weight: 900;
-
-  letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 900;
+    letter-spacing: 3px;
 }
 
 .logo-icon {
-  width: 37px;
-  height: 37px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 11px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #9b4dff,
-      #5f20b8
-    );
-
-  box-shadow:
-    0 0 28px
-    rgba(145,70,255,.4);
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg,#9b4dff,#5f20b8);
+    box-shadow: 0 0 25px rgba(145,70,255,.35);
 }
 
-.nav-links {
-  display: flex;
-  gap: 8px;
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    background: rgba(155,77,255,.13);
+    border: 1px solid rgba(155,77,255,.25);
+    color: #f5f0ff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    transition: .2s;
 }
 
-.nav-link {
-  border: 0;
-
-  background: transparent;
-
-  color: #aaa0b5;
-
-  padding: 9px 12px;
-
-  border-radius: 9px;
-
-  cursor: pointer;
-
-  font-weight: 700;
+.back-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(155,77,255,.7);
+    background: rgba(155,77,255,.2);
 }
 
-.nav-link:hover {
-  color: white;
+/* MAIN */
 
-  background:
-    rgba(155,77,255,.1);
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 45px 22px;
 }
-
-/* =========================================
-   HERO
-========================================= */
 
 .hero {
-  width:
-    min(
-      1200px,
-      calc(100% - 32px)
-    );
-
-  margin: auto;
-
-  padding:
-    90px 0 70px;
-
-  text-align: center;
-}
-
-.hero-badge {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  padding: 7px 12px;
-
-  margin-bottom: 22px;
-
-  border:
-    1px solid
-    rgba(155,77,255,.3);
-
-  border-radius: 999px;
-
-  background:
-    rgba(155,77,255,.08);
-
-  color: #c9a9f7;
-
-  font-size: 12px;
-
-  font-weight: 800;
-}
-
-.hero-badge-dot {
-  width: 7px;
-  height: 7px;
-
-  border-radius: 50%;
-
-  background: #9b4dff;
-
-  box-shadow:
-    0 0 10px
-    #9b4dff;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
 .hero h1 {
-  font-size:
-    clamp(
-      55px,
-      10vw,
-      105px
-    );
-
-  line-height: .9;
-
-  letter-spacing:
-    -6px;
-
-  margin-bottom: 25px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #d5baff 45%,
-      #8640db 100%
-    );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
+    font-size: clamp(40px,7vw,70px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    background: linear-gradient(180deg,#fff,#c7a7ff,#8640db);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .hero p {
-  max-width: 650px;
-
-  margin:
-    0 auto 32px;
-
-  color: var(--muted);
-
-  font-size: 17px;
-
-  line-height: 1.7;
+    margin-top: 10px;
+    color: #93889f;
 }
 
-.hero-button {
-  display: inline-flex;
+/* MAKER GRID */
 
-  align-items: center;
-
-  gap: 8px;
-
-  border: 0;
-
-  padding:
-    13px 19px;
-
-  border-radius: 11px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--purple2)
-    );
-
-  color: white;
-
-  text-decoration: none;
-
-  font-weight: 900;
-
-  box-shadow:
-    0 10px 35px
-    rgba(103,33,198,.25);
-
-  transition:
-    transform .2s,
-    filter .2s;
+.maker-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 22px;
+    align-items: start;
 }
 
-.hero-button:hover {
-  transform:
-    translateY(-2px);
+/* CARDS */
 
-  filter:
-    brightness(1.12);
+.card {
+    border: 1px solid rgba(155,77,255,.25);
+    border-radius: 20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,14,37,.95),
+            rgba(12,7,18,.95)
+        );
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    overflow: hidden;
 }
 
-/* =========================================
-   SECTIONS
-========================================= */
-
-.content {
-  width:
-    min(
-      1200px,
-      calc(100% - 32px)
-    );
-
-  margin: auto;
-
-  padding-bottom: 80px;
+.card-header {
+    padding: 20px 22px;
+    border-bottom: 1px solid rgba(155,77,255,.15);
 }
 
-.section-title {
-  margin-bottom: 16px;
+.card-header h2 {
+    font-size: 18px;
 }
 
-.section-title h2 {
-  font-size: 25px;
-
-  letter-spacing: -.7px;
+.card-header p {
+    color: #93889f;
+    font-size: 13px;
+    margin-top: 5px;
 }
 
-.section-title p {
-  margin-top: 5px;
-
-  color: var(--muted);
-
-  font-size: 13px;
+.card-body {
+    padding: 20px;
 }
 
-/* =========================================
-   CATEGORY GRID
-========================================= */
+/* INPUTS */
 
-.category-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
-
-  gap: 18px;
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    color: #cfc3dc;
+    margin-bottom: 8px;
 }
 
-.category-card {
-  position: relative;
-
-  min-height: 260px;
-
-  padding: 26px;
-
-  overflow: hidden;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius: 18px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(24,14,37,.96),
-      rgba(11,7,17,.96)
-    );
-
-  text-decoration: none;
-
-  color: white;
-
-  transition:
-    transform .22s,
-    border-color .22s,
-    box-shadow .22s;
+input,
+textarea {
+    width: 100%;
+    border: 1px solid rgba(155,77,255,.25);
+    border-radius: 12px;
+    background: rgba(5,3,9,.8);
+    color: #f5f0ff;
+    outline: none;
+    transition: .2s;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.category-card::before {
-  content: "";
-
-  position: absolute;
-
-  width: 180px;
-  height: 180px;
-
-  top: -80px;
-  right: -60px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(155,77,255,.14);
-
-  filter:
-    blur(10px);
+input {
+    padding: 13px 14px;
+    margin-bottom: 18px;
 }
 
-.category-card:hover {
-  transform:
-    translateY(-5px);
-
-  border-color:
-    rgba(155,77,255,.65);
-
-  box-shadow:
-    0 20px 55px
-    rgba(0,0,0,.3);
+textarea {
+    min-height: 390px;
+    resize: vertical;
+    padding: 14px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 12px;
+    line-height: 1.55;
 }
 
-.category-icon {
-  position: relative;
-
-  width: 60px;
-  height: 60px;
-
-  display: grid;
-  place-items: center;
-
-  margin-bottom: 25px;
-
-  border-radius: 15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(155,77,255,.25),
-      rgba(103,33,198,.12)
-    );
-
-  border:
-    1px solid
-    rgba(155,77,255,.3);
-
-  font-size: 28px;
+input:focus,
+textarea:focus {
+    border-color: #9b4dff;
+    box-shadow: 0 0 0 3px rgba(155,77,255,.1);
 }
 
-.category-card h3 {
-  position: relative;
+/* BUTTONS */
 
-  font-size: 25px;
-
-  margin-bottom: 9px;
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
 }
 
-.category-card p {
-  position: relative;
-
-  max-width: 290px;
-
-  color: var(--muted);
-
-  line-height: 1.6;
-
-  font-size: 13px;
+button {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+    transition: .2s;
+    background: rgba(155,77,255,.13);
+    border: 1px solid rgba(155,77,255,.25);
 }
 
-.card-arrow {
-  position: absolute;
-
-  right: 23px;
-  bottom: 21px;
-
-  color: #a970ed;
-
-  font-size: 20px;
-
-  transition:
-    transform .2s;
+button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(155,77,255,.7);
+    background: rgba(155,77,255,.2);
 }
 
-.category-card:hover .card-arrow {
-  transform:
-    translateX(5px);
+.primary {
+    background: linear-gradient(135deg,#9146ff,#6721c6);
+    border-color: transparent;
 }
 
-/* =========================================
-   INFO
-========================================= */
-
-.info-section {
-  margin-top: 55px;
+.primary:hover {
+    box-shadow: 0 8px 30px rgba(115,40,220,.3);
 }
 
-.info-card {
-  padding: 25px;
-
-  border:
-    1px solid
-    rgba(155,77,255,.18);
-
-  border-radius: 15px;
-
-  background:
-    rgba(255,255,255,.025);
+.full {
+    grid-column: 1 / -1;
 }
 
-.info-card h3 {
-  margin-bottom: 8px;
+/* PREVIEW */
+
+.preview-card {
+    min-height: 700px;
 }
 
-.info-card p {
-  color: var(--muted);
-
-  font-size: 13px;
-
-  line-height: 1.7;
+.preview-wrapper {
+    padding: 15px;
 }
 
-/* =========================================
-   FOOTER
-========================================= */
-
-footer {
-  border-top:
-    1px solid
-    rgba(255,255,255,.06);
-
-  padding:
-    28px 16px;
-
-  text-align: center;
-
-  color: #655b6e;
-
-  font-size: 12px;
+.preview {
+    position: relative;
+    width: 100%;
+    height: 620px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(155,77,255,.25);
+    background: #000;
 }
 
-/* =========================================
-   MOBILE
-========================================= */
-
-@media(max-width:800px) {
-
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding-top: 65px;
-  }
-
-  .hero h1 {
-    letter-spacing: -4px;
-  }
-
+.preview iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: #000;
 }
 
-@media(max-width:550px) {
+.preview-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(110,40,190,.15),
+            transparent 55%
+        ),
+        #050309;
+    color: #93889f;
+    pointer-events: none;
+}
 
-  .nav {
-    min-height: 58px;
-  }
+.preview-placeholder strong {
+    display: block;
+    color: #f5f0ff;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
 
-  .logo {
-    font-size: 15px;
-  }
+/* PREVIEW CONTROLS */
 
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-  }
+.preview-controls {
+    display: flex;
+    gap: 10px;
+    padding: 0 15px 15px;
+}
 
-  .nav-links {
-    display: none;
-  }
+.preview-controls button {
+    flex: 1;
+}
 
-  .hero {
-    padding:
-      55px 0 55px;
-  }
+/* STATUS */
 
-  .hero h1 {
-    font-size: 62px;
-  }
+.status {
+    margin-top: 12px;
+    padding: 11px 13px;
+    border-radius: 10px;
+    background: rgba(155,77,255,.08);
+    border: 1px solid rgba(155,77,255,.15);
+    color: #a99cb5;
+    font-size: 12px;
+}
 
-  .hero p {
-    font-size: 14px;
-  }
+.status.success {
+    color: #cdb6ff;
+}
 
-  .content {
-    width:
-      calc(100% - 22px);
-  }
+/* GENERATED CODE */
 
+.output {
+    margin-top: 22px;
+}
+
+.output textarea {
+    min-height: 260px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1000px) {
+    .maker-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-card {
+        min-height: auto;
+    }
+}
+
+@media(max-width: 600px) {
+    .container {
+        padding: 30px 12px;
+    }
+
+    .buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .preview {
+        height: 500px;
+    }
+
+    .preview-controls {
+        flex-direction: column;
+    }
 }
 </style>
-</head>
 
+</head>
 
 <body>
 
-<!-- =========================================
-     HEADER
-========================================= -->
-
 <header>
-
-  <nav class="nav">
-
-    <div class="logo">
-
-      <div class="logo-icon">
-        V
-      </div>
-
-      VOIDWARE
-
+    <div class="nav">
+        <div class="logo">
+            <div class="logo-icon">V</div>
+            VOIDWARE
+        </div>
+        <a
+            class="back-link"
+            href="voidware1/voidware/games/index.html"
+        >
+            ← Back to Games
+        </a>
     </div>
-
-
-    <div class="nav-links">
-
-      <button
-        class="nav-link"
-        type="button"
-        onclick="goTo('games')"
-      >
-        Games
-      </button>
-
-      <button
-        class="nav-link"
-        type="button"
-        onclick="goTo('proxys')"
-      >
-        Proxys
-      </button>
-
-      <button
-        class="nav-link"
-        type="button"
-        onclick="goTo('apps')"
-      >
-        Apps
-      </button>
-
-    </div>
-
-  </nav>
-
 </header>
 
-
-<!-- =========================================
-     HERO
-========================================= -->
+<main class="container">
 
 <section class="hero">
+    <h1>GAME MAKER</h1>
+    <p>Create Voidware game pages from raw HTML or embed code.</p>
+</section>
 
-  <div class="hero-badge">
+<div class="maker-grid">
 
-    <span class="hero-badge-dot"></span>
+    <!-- INPUT -->
 
-    VOIDWARE HUB
+    <section class="card">
 
-  </div>
+        <div class="card-header">
+            <h2>Game Settings</h2>
+            <p>Enter the information for your game page.</p>
+        </div>
+
+        <div class="card-body">
+
+            <label for="gameName">Game Name</label>
+
+            <input
+                id="gameName"
+                type="text"
+                placeholder="A Dance of Fire and Ice"
+            >
+
+            <label for="gameFile">Output File Name</label>
+
+            <input
+                id="gameFile"
+                type="text"
+                placeholder="adofai.html"
+            >
+
+            <label for="gameCode">
+                Game HTML / Embed Code
+            </label>
+
+            <textarea
+                id="gameCode"
+                spellcheck="false"
+                placeholder="Paste your game HTML here..."
+            ></textarea>
+
+            <div class="buttons">
+
+                <button
+                    class="primary"
+                    onclick="generateGame()"
+                >
+                    ⚡ Generate Game
+                </button>
+
+                <button
+                    onclick="pasteGameCode()"
+                >
+                    📋 Paste Code
+                </button>
+
+                <button
+                    onclick="clearMaker()"
+                >
+                    Clear
+                </button>
+
+                <button
+                    onclick="copyGenerated()"
+                >
+                    📋 Copy HTML
+                </button>
+
+                <button
+                    class="full"
+                    onclick="openGeneratedAboutBlank()"
+                >
+                    ↗ Open in about:blank
+                </button>
+
+            </div>
+
+            <div
+                id="status"
+                class="status"
+            >
+                Ready. Paste your game code and press Generate Game.
+            </div>
+
+        </div>
+
+    </section>
 
 
-  <h1>
-    VOIDWARE
-  </h1>
+    <!-- PREVIEW -->
+
+    <section class="card preview-card">
+
+        <div class="card-header">
+            <h2>Live Preview</h2>
+            <p>Preview the generated game before saving it.</p>
+        </div>
+
+        <div class="preview-wrapper">
+
+            <div
+                id="preview"
+                class="preview"
+            >
+
+                <div
+                    id="placeholder"
+                    class="preview-placeholder"
+                >
+                    <div>
+                        <strong>No Game Loaded</strong>
+                        Generate a game to see its preview here.
+                    </div>
+                </div>
+
+                <iframe
+                    id="previewFrame"
+                    title="Game Preview"
+                    allow="fullscreen; autoplay; gamepad"
+                    allowfullscreen
+                ></iframe>
+
+            </div>
+
+        </div>
+
+        <div class="preview-controls">
+
+            <button
+                class="primary"
+                onclick="fullscreenPreview()"
+            >
+                ⛶ Fullscreen
+            </button>
+
+            <button
+                onclick="openPreviewAboutBlank()"
+            >
+                ↗ About:blank
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
 
 
-  <p>
-    Your central hub for games, proxys,
-    apps, and everything else in the
-    Voidware collection.
-  </p>
+<!-- GENERATED OUTPUT -->
 
+<section class="card output">
 
-  <a
-    href="#categories"
-    class="hero-button"
-  >
-    Explore Voidware
-    ↓
-  </a>
+    <div class="card-header">
+        <h2>Generated HTML</h2>
+        <p>
+            This is the complete page that will be saved as your game file.
+        </p>
+    </div>
+
+    <div class="card-body">
+
+        <textarea
+            id="generatedCode"
+            spellcheck="false"
+            readonly
+            placeholder="Generated HTML will appear here..."
+        ></textarea>
+
+    </div>
 
 </section>
 
-
-<!-- =========================================
-     CATEGORIES
-========================================= -->
-
-<main
-  id="categories"
-  class="content"
->
-
-  <div class="section-title">
-
-    <h2>
-      Explore
-    </h2>
-
-    <p>
-      Choose a section to get started.
-    </p>
-
-  </div>
-
-
-  <div class="category-grid">
-
-
-    <!-- GAMES -->
-
-    <a
-      class="category-card"
-      href="/voidware/games/index.html"
-    >
-
-      <div class="category-icon">
-        🎮
-      </div>
-
-      <h3>
-        Games
-      </h3>
-
-      <p>
-        Browse the Voidware game collection.
-        New games can be automatically added
-        to the library.
-      </p>
-
-      <div class="card-arrow">
-        →
-      </div>
-
-    </a>
-
-
-    <!-- PROXYS -->
-
-    <a
-      class="category-card"
-      href="/voidware/proxys/index.html"
-    >
-
-      <div class="category-icon">
-        🌐
-      </div>
-
-      <h3>
-        Proxys
-      </h3>
-
-      <p>
-        Access your collection of proxy
-        projects from one organized library.
-      </p>
-
-      <div class="card-arrow">
-        →
-      </div>
-
-    </a>
-
-
-    <!-- APPS -->
-
-    <a
-      class="category-card"
-      href="/voidware/apps/index.html"
-    >
-
-      <div class="category-icon">
-        📱
-      </div>
-
-      <h3>
-        Apps
-      </h3>
-
-      <p>
-        Browse useful apps and tools hosted
-        in the Voidware collection.
-      </p>
-
-      <div class="card-arrow">
-        →
-      </div>
-
-    </a>
-
-
-  </div>
-
-
-  <!-- INFO -->
-
-  <section class="info-section">
-
-    <div class="info-card">
-
-      <h3>
-        Welcome to Voidware
-      </h3>
-
-      <p>
-        Voidware is organized into separate
-        libraries so games, proxys, and apps
-        can each have their own search and
-        automatic update system.
-      </p>
-
-    </div>
-
-  </section>
-
 </main>
-
-
-<!-- =========================================
-     FOOTER
-========================================= -->
-
-<footer>
-
-  VOIDWARE
-
-  <br><br>
-
-  Built for the Void.
-
-</footer>
-
 
 <script>
 
-function goTo(section) {
-
-  var paths = {
-
-    games:
-      "/voidware/games/index.html",
-
-    proxys:
-      "/voidware/proxys/index.html",
-
-    apps:
-      "/voidware/apps/index.html"
-
-  };
+/* =========================================================
+   VOIDWARE GAME MAKER
+   ========================================================= */
 
 
-  if (paths[section]) {
+/* ---------------------------------------------------------
+   ELEMENTS
+--------------------------------------------------------- */
 
-    window.location.href =
-      paths[section];
+const gameNameInput =
+    document.getElementById("gameName");
 
-  }
+const gameFileInput =
+    document.getElementById("gameFile");
+
+const gameCodeInput =
+    document.getElementById("gameCode");
+
+const generatedCode =
+    document.getElementById("generatedCode");
+
+const previewFrame =
+    document.getElementById("previewFrame");
+
+const placeholder =
+    document.getElementById("placeholder");
+
+const statusBox =
+    document.getElementById("status");
+
+
+/* ---------------------------------------------------------
+   STATUS
+--------------------------------------------------------- */
+
+function setStatus(message, success = false) {
+
+    statusBox.textContent = message;
+
+    statusBox.classList.toggle(
+        "success",
+        success
+    );
+}
+
+
+/* ---------------------------------------------------------
+   CLEAN GAME CODE
+--------------------------------------------------------- */
+
+function cleanGameCode(input) {
+
+    let code = input || "";
+
+    /*
+     * Convert HTML entities.
+     */
+
+    const textarea =
+        document.createElement("textarea");
+
+    textarea.innerHTML = code;
+
+    code = textarea.value;
+
+
+    /*
+     * Remove Markdown link wrappers:
+     *
+     * [https://example.com/file.js](https://example.com/file.js)
+     */
+
+    code = code.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/gi,
+        "$2"
+    );
+
+
+    /*
+     * Remove escaped HTML characters.
+     */
+
+    code = code.replace(
+        /\\(?=<)/g,
+        ""
+    );
+
+
+    /*
+     * Remove escaped closing tags.
+     */
+
+    code = code.replace(
+        /\\(?=\/)/g,
+        ""
+    );
+
+
+    /*
+     * Remove escaped quotes only where
+     * they were clearly added by formatting.
+     */
+
+    code = code.replace(
+        /\\"/g,
+        '"'
+    );
+
+
+    /*
+     * Convert common escaped entities.
+     */
+
+    code = code
+        .replace(/&#x20;/gi, " ")
+        .replace(/&#32;/gi, " ")
+        .replace(/&nbsp;/gi, " ");
+
+
+    /*
+     * Remove accidental leading/trailing
+     * Markdown code fences.
+     */
+
+    code = code.replace(
+        /^\s*```(?:html)?\s*/i,
+        ""
+    );
+
+    code = code.replace(
+        /\s*```\s*$/i,
+        ""
+    );
+
+
+    return code.trim();
+}
+
+
+/* ---------------------------------------------------------
+   NORMALIZE URLS
+--------------------------------------------------------- */
+
+function normalizeUrls(code) {
+
+    /*
+     * Turn Markdown links into normal URLs.
+     */
+
+    code = code.replace(
+        /\[https?:\/\/([^\]]+)\]\((https?:\/\/[^)]+)\)/gi,
+        "$2"
+    );
+
+
+    /*
+     * Remove accidental backslashes before URLs.
+     */
+
+    code = code.replace(
+        /\\(https?:\/\/)/gi,
+        "$1"
+    );
+
+
+    return code;
+}
+
+
+/* ---------------------------------------------------------
+   GENERATE GAME PAGE
+--------------------------------------------------------- */
+
+function buildGamePage(name, gameCode) {
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>${escapeHTML(name)}</title>
+
+<meta
+    name="theme-color"
+    content="#07050c"
+>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #07050c;
+    color: #f5f0ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-page {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+.game-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.game-content iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.game-content > * {
+    max-width: 100%;
+}
+
+#gameContainer {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.voidware-controls {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 999999;
+    display: flex;
+    gap: 8px;
+    opacity: .35;
+    transition: .2s;
+}
+
+.voidware-controls:hover {
+    opacity: 1;
+}
+
+.voidware-controls button,
+.voidware-controls a {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(155,77,255,.4);
+    border-radius: 9px;
+    padding: 9px 13px;
+    background: rgba(12,7,18,.9);
+    color: white;
+    cursor: pointer;
+    font-weight: 800;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.voidware-controls button:hover,
+.voidware-controls a:hover {
+    background: rgba(155,77,255,.25);
+    border-color: #9b4dff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="game-page">
+
+<div
+    id="gameContent"
+    class="game-content"
+>
+
+${gameCode}
+
+</div>
+
+<div class="voidware-controls">
+
+    <a href="voidware1/voidware/games/index.html">
+        ← Back to Games
+    </a>
+
+    <button onclick="openBlank()">
+        ↗ About:blank
+    </button>
+
+    <button onclick="goFullscreen()">
+        ⛶ Fullscreen
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+function goFullscreen() {
+
+    const element =
+        document.documentElement;
+
+    if (element.requestFullscreen) {
+
+        element.requestFullscreen();
+
+    } else if (element.webkitRequestFullscreen) {
+
+        element.webkitRequestFullscreen();
+
+    }
 
 }
+
+
+function openBlank() {
+
+    const html =
+        document.documentElement.outerHTML;
+
+    const blob =
+        new Blob(
+            [html],
+            { type: "text/html" }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const win =
+        window.open("about:blank", "_blank");
+
+    if (win) {
+
+        win.location.href = url;
+
+    } else {
+
+        alert(
+            "The browser blocked the new window. Allow pop-ups and try again."
+        );
+
+    }
+
+}
+
+<\/script>
+
+</body>
+</html>`;
+}
+
+/* ---------------------------------------------------------
+   HTML ESCAPE
+--------------------------------------------------------- */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+/* ---------------------------------------------------------
+   GENERATE
+--------------------------------------------------------- */
+
+function generateGame() {
+
+    let name =
+        gameNameInput.value.trim();
+
+    let file =
+        gameFileInput.value.trim();
+
+    let rawCode =
+        gameCodeInput.value;
+
+
+    if (!name) {
+
+        name = "Voidware Game";
+
+    }
+
+
+    if (!file) {
+
+        file =
+            name
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "") +
+            ".html";
+
+    }
+
+
+    if (!file.toLowerCase().endsWith(".html")) {
+
+        file += ".html";
+
+    }
+
+
+    if (!rawCode.trim()) {
+
+        setStatus(
+            "Paste some game HTML first.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Clean the pasted source.
+     */
+
+    let cleaned =
+        cleanGameCode(rawCode);
+
+    cleaned =
+        normalizeUrls(cleaned);
+
+
+    /*
+     * Generate complete page.
+     */
+
+    const finalHTML =
+        buildGamePage(
+            name,
+            cleaned
+        );
+
+
+    /*
+     * Put generated HTML in output.
+     */
+
+    generatedCode.value =
+        finalHTML;
+
+
+    /*
+     * Preview it.
+     */
+
+    loadPreview(finalHTML);
+
+
+    setStatus(
+        "Game generated successfully: " +
+        file,
+        true
+    );
+
+}
+
+/* ---------------------------------------------------------
+   PREVIEW
+--------------------------------------------------------- */
+
+function loadPreview(html) {
+
+    placeholder.style.display =
+        "none";
+
+
+    /*
+     * Use srcdoc so the generated
+     * HTML stays inside the maker.
+     */
+
+    previewFrame.srcdoc =
+        html;
+
+}
+
+/* ---------------------------------------------------------
+   PREVIEW FULLSCREEN
+--------------------------------------------------------- */
+
+function fullscreenPreview() {
+
+    const preview =
+        document.getElementById("preview");
+
+    if (preview.requestFullscreen) {
+
+        preview.requestFullscreen();
+
+    } else if (
+        preview.webkitRequestFullscreen
+    ) {
+
+        preview.webkitRequestFullscreen();
+
+    }
+
+}
+
+/* ---------------------------------------------------------
+   OPEN PREVIEW ABOUT BLANK
+--------------------------------------------------------- */
+
+function openPreviewAboutBlank() {
+
+    const html =
+        generatedCode.value;
+
+    if (!html.trim()) {
+
+        setStatus(
+            "Generate the game first.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    openHTMLAboutBlank(html);
+
+}
+
+/* ---------------------------------------------------------
+   OPEN GENERATED ABOUT BLANK
+--------------------------------------------------------- */
+
+function openGeneratedAboutBlank() {
+
+    const html =
+        generatedCode.value;
+
+    if (!html.trim()) {
+
+        setStatus(
+            "Generate the game first.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    openHTMLAboutBlank(html);
+
+}
+
+/* ---------------------------------------------------------
+   ABOUT BLANK HANDLER
+--------------------------------------------------------- */
+
+function openHTMLAboutBlank(html) {
+
+    const win =
+        window.open(
+            "about:blank",
+            "_blank"
+        );
+
+
+    if (!win) {
+
+        setStatus(
+            "Pop-up blocked. Allow pop-ups and try again.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Write the generated document
+     * directly into the new tab.
+     */
+
+    win.document.open();
+
+    win.document.write(html);
+
+    win.document.close();
+
+
+    setStatus(
+        "Opened game in about:blank.",
+        true
+    );
+
+}
+
+/* ---------------------------------------------------------
+   PASTE GAME CODE
+--------------------------------------------------------- */
+
+async function pasteGameCode() {
+
+    try {
+
+        const text =
+            await navigator.clipboard.readText();
+
+        gameCodeInput.value =
+            text;
+
+        setStatus(
+            "Game code pasted from clipboard.",
+            true
+        );
+
+    } catch (error) {
+
+        setStatus(
+            "Could not read clipboard. Paste manually into the box.",
+            false
+        );
+
+    }
+
+}
+
+/* ---------------------------------------------------------
+   COPY GENERATED HTML
+--------------------------------------------------------- */
+
+async function copyGenerated() {
+
+    const html =
+        generatedCode.value;
+
+
+    if (!html.trim()) {
+
+        setStatus(
+            "Generate the game first.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            html
+        );
+
+        setStatus(
+            "Generated HTML copied to clipboard.",
+            true
+        );
+
+    } catch (error) {
+
+        /*
+         * Fallback for browsers where
+         * navigator.clipboard isn't available.
+         */
+
+        generatedCode.focus();
+
+        generatedCode.select();
+
+        document.execCommand("copy");
+
+        setStatus(
+            "Generated HTML copied to clipboard.",
+            true
+        );
+
+    }
+
+}
+
+/* ---------------------------------------------------------
+   CLEAR
+--------------------------------------------------------- */
+
+function clearMaker() {
+
+    gameNameInput.value = "";
+
+    gameFileInput.value = "";
+
+    gameCodeInput.value = "";
+
+    generatedCode.value = "";
+
+    previewFrame.srcdoc = "";
+
+    placeholder.style.display =
+        "flex";
+
+
+    setStatus(
+        "Maker cleared.",
+        false
+    );
+
+}
+
+/* ---------------------------------------------------------
+   KEYBOARD SHORTCUT
+--------------------------------------------------------- */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        /*
+         * Ctrl + Enter = Generate
+         */
+
+        if (
+            event.ctrlKey &&
+            event.key === "Enter"
+        ) {
+
+            event.preventDefault();
+
+            generateGame();
+
+        }
+
+    }
+);
 
 </script>
 
