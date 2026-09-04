@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +7,7 @@
 <title>Voidware Proxy Maker</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -15,19 +16,31 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
+
     background:
-        radial-gradient(circle at top, #24103d 0%, #10091c 45%, #07050d 100%);
+        radial-gradient(
+            circle at top,
+            #24103d 0%,
+            #10091c 45%,
+            #07050d 100%
+        );
+
     color: white;
 }
 
 header {
     height: 70px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 28px;
+
     background: rgba(10, 5, 18, 0.9);
+
     border-bottom: 1px solid #392052;
+
     position: sticky;
     top: 0;
     z-index: 20;
@@ -36,20 +49,27 @@ header {
 .logo {
     font-size: 25px;
     font-weight: bold;
+
     color: #b86cff;
+
     text-decoration: none;
 }
 
 nav {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 nav a {
     color: #d8c7e8;
+
     text-decoration: none;
+
     padding: 9px 13px;
+
     border-radius: 8px;
+
     transition: 0.2s;
 }
 
@@ -59,63 +79,103 @@ nav a:hover {
 }
 
 .container {
-    width: min(1100px, calc(100% - 30px));
+    width: min(
+        1100px,
+        calc(100% - 30px)
+    );
+
     margin: 35px auto 60px;
 }
 
 .hero {
     text-align: center;
+
     margin-bottom: 30px;
 }
 
 .hero h1 {
     margin: 0;
+
     font-size: 42px;
-    background: linear-gradient(90deg, #a855f7, #d8b4fe);
+
+    background:
+        linear-gradient(
+            90deg,
+            #a855f7,
+            #d8b4fe
+        );
+
     -webkit-background-clip: text;
+    background-clip: text;
+
     color: transparent;
 }
 
 .hero p {
     color: #aa9bb9;
+
     margin-top: 10px;
 }
 
 .panel {
-    background: rgba(18, 10, 30, 0.9);
-    border: 1px solid #3b2253;
+    background:
+        rgba(18, 10, 30, 0.9);
+
+    border:
+        1px solid #3b2253;
+
     border-radius: 16px;
+
     padding: 24px;
+
     margin-bottom: 22px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,0.3);
 }
 
 .panel h2 {
     margin-top: 0;
+
     color: #d8b4fe;
 }
 
 label {
     display: block;
+
     margin-bottom: 8px;
+
     color: #cdbddd;
+
     font-weight: bold;
 }
 
 input {
     width: 100%;
+
     padding: 13px 14px;
+
     border-radius: 9px;
-    border: 1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     background: #0d0815;
+
     color: white;
+
     outline: none;
+
     font-size: 15px;
 }
 
 input:focus {
     border-color: #a855f7;
-    box-shadow: 0 0 0 2px rgba(168,85,247,0.15);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(168,85,247,0.15);
 }
 
 .field {
@@ -124,261 +184,370 @@ input:focus {
 
 .path-box {
     margin-top: 8px;
+
     padding: 12px;
+
     border-radius: 8px;
+
     background: #0a0610;
-    border: 1px solid #30203f;
+
+    border:
+        1px solid #30203f;
+
     color: #a78bfa;
+
     font-family: monospace;
+
     word-break: break-all;
 }
 
 .buttons {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 10px;
 }
 
 button {
     border: none;
+
     border-radius: 9px;
+
     padding: 12px 18px;
+
     font-weight: bold;
+
     cursor: pointer;
+
     color: white;
+
     background: #7c3aed;
+
     transition: 0.2s;
 }
 
 button:hover {
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
+
     background: #9333ea;
-}
-
-button.secondary {
-    background: #241532;
-    border: 1px solid #493060;
-}
-
-button.secondary:hover {
-    background: #342047;
 }
 
 .status {
     margin-top: 15px;
+
     color: #a99ab7;
+
     min-height: 20px;
 }
 
 .preview {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(220px, 1fr)
+        );
+
     gap: 14px;
+
     margin-top: 18px;
 }
 
 .proxy-card {
     background: #10091a;
-    border: 1px solid #38214e;
+
+    border:
+        1px solid #38214e;
+
     border-radius: 12px;
+
     padding: 18px;
 }
 
 .proxy-card h3 {
-    margin: 0 0 8px;
+    margin:
+        0 0 8px;
+
     color: #d8b4fe;
 }
 
 .proxy-card p {
     margin: 0;
+
     color: #8f809e;
+
     font-size: 13px;
+
     word-break: break-all;
 }
 
 textarea {
     width: 100%;
+
     min-height: 450px;
+
     resize: vertical;
+
     padding: 15px;
+
     border-radius: 10px;
-    border: 1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     background: #08050d;
+
     color: #d8c7e8;
+
     font-family: monospace;
+
     font-size: 13px;
+
     line-height: 1.5;
+
     outline: none;
 }
 
 .empty {
     color: #84768e;
+
     padding: 20px 0;
 }
 
 .warning {
     padding: 13px;
+
     border-radius: 9px;
-    background: rgba(245, 158, 11, 0.08);
-    border: 1px solid rgba(245, 158, 11, 0.25);
+
+    background:
+        rgba(245,158,11,0.08);
+
+    border:
+        1px solid
+        rgba(245,158,11,0.25);
+
     color: #fbbf24;
+
     margin-top: 15px;
+
     display: none;
 }
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
+
     header {
         height: auto;
+
         padding: 15px;
+
         flex-direction: column;
+
         gap: 12px;
     }
 
     nav {
-        flex-wrap: wrap;
         justify-content: center;
     }
 
     .hero h1 {
         font-size: 32px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <a class="logo" href="/voidware/">Voidware</a>
 
-    <nav>
-        <a href="/voidware/">Home</a>
-        <a href="/voidware/games/index.html">Games</a>
-        <a href="/voidware/proxys/index.html">Proxys</a>
-        <a href="/voidware/apps/index.html">Apps</a>
-    </nav>
+<a
+    class="logo"
+    href="/voidware/"
+>
+    Voidware
+</a>
+
+<nav>
+
+<a href="/voidware/">
+    Home
+</a>
+
+<a href="/voidware/games/index.html">
+    Games
+</a>
+
+<a href="/voidware/proxys/index.html">
+    Proxys
+</a>
+
+<a href="/voidware/apps/index.html">
+    Apps
+</a>
+
+</nav>
+
 </header>
+
 
 <div class="container">
 
-    <div class="hero">
-        <h1>Proxy Maker</h1>
-        <p>Create a Voidware proxy page from a TXT database.</p>
-    </div>
 
-    <div class="panel">
+<div class="hero">
 
-        <h2>Page Settings</h2>
+<h1>
+    Proxy Maker
+</h1>
 
-        <div class="field">
-            <label for="pageName">Page Name</label>
+<p>
+    Create a Voidware proxy page from a TXT database.
+</p>
 
-            <input
-                id="pageName"
-                type="text"
-                placeholder="My Proxys"
-                value="Voidware Proxys"
-            >
-        </div>
-
-        <div class="field">
-
-            <label for="fileName">
-                TXT Database File
-            </label>
-
-            <input
-                id="fileName"
-                type="text"
-                placeholder="example.txt"
-                value="example.txt"
-            >
-
-            <div
-                class="path-box"
-                id="pathBox"
-            >
-                /voidware/proxys/database/example.txt
-            </div>
-
-        </div>
-
-        <div class="buttons">
-
-            <button id="loadButton">
-                Load Database
-            </button>
-
-            <button id="generateButton">
-                Generate Page
-            </button>
-
-        </div>
-
-        <div
-            class="status"
-            id="status"
-        ></div>
-
-        <div
-            class="warning"
-            id="warning"
-        ></div>
-
-    </div>
+</div>
 
 
-    <div class="panel">
+<!-- ======================================================
+     PAGE SETTINGS
+====================================================== -->
 
-        <h2>Database Preview</h2>
+<div class="panel">
 
-        <div
-            id="preview"
-            class="preview"
-        >
-
-            <div class="empty">
-                Load a TXT database to preview its links.
-            </div>
-
-        </div>
-
-    </div>
+<h2>
+    Page Settings
+</h2>
 
 
-    <div class="panel">
+<div class="field">
 
-        <h2>Generated HTML</h2>
+<label for="pageName">
+    Page Name
+</label>
 
-        <textarea
-            id="generatedCode"
-            spellcheck="false"
-            placeholder="Your generated HTML will appear here..."
-        ></textarea>
+<input
+    id="pageName"
+    type="text"
+    placeholder="My Proxys"
+    value="Voidware Proxys"
+>
 
-        <div
-            class="buttons"
-            style="margin-top:15px;"
-        >
+</div>
 
-            <button id="copyButton">
-                Copy Code
-            </button>
 
-        </div>
+<div class="field">
 
-    </div>
+<label for="fileName">
+    TXT Database File
+</label>
+
+<input
+    id="fileName"
+    type="text"
+    placeholder="example.txt"
+    value="example.txt"
+>
+
+<div
+    class="path-box"
+    id="pathBox"
+>
+    /voidware/proxys/database/example.txt
+</div>
+
+</div>
+
+
+<div class="buttons">
+
+<button id="loadButton">
+    Load Database
+</button>
+
+</div>
+
+
+<div
+    class="status"
+    id="status"
+>
+</div>
+
+
+<div
+    class="warning"
+    id="warning"
+></div>
+
+</div>
+
+
+<!-- ======================================================
+     DATABASE PREVIEW
+====================================================== -->
+
+<div class="panel">
+
+<h2>
+    Database Preview
+</h2>
+
+<div
+    id="preview"
+    class="preview"
+>
+
+<div class="empty">
+    Load a TXT database to preview its links.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ======================================================
+     GENERATED HTML
+====================================================== -->
+
+<div class="panel">
+
+<h2>
+    Generated HTML
+</h2>
+
+<textarea
+    id="generatedCode"
+    spellcheck="false"
+    placeholder="Your generated HTML will appear here..."
+></textarea>
+
+
+<div
+    class="buttons"
+    style="margin-top:15px;"
+>
+
+<button id="copyButton">
+    Copy Code
+</button>
+
+</div>
+
+</div>
+
 
 </div>
 
 
 <script>
 
-/*
-==========================================================
-VOIDWARE REPOSITORY
-==========================================================
-*/
+/* ==========================================================
+   REPOSITORY
+========================================================== */
 
 const GITHUB_API_BASE =
     "https://api.github.com/repos/voidware1/voidware/contents/proxys/database/";
@@ -389,79 +558,124 @@ const RAW_BASE =
 let loadedLinks = [];
 
 
-/*
-==========================================================
-UPDATE PATH
-==========================================================
-*/
+/* ==========================================================
+   UPDATE PATH
+========================================================== */
 
 function updatePath() {
 
     let file =
-        document.getElementById("fileName").value.trim();
+        document
+            .getElementById("fileName")
+            .value
+            .trim();
 
     if (!file) {
-        file = "example.txt";
+
+        file =
+            "example.txt";
+
     }
 
-    if (!file.toLowerCase().endsWith(".txt")) {
+    if (
+        !file
+            .toLowerCase()
+            .endsWith(".txt")
+    ) {
+
         file += ".txt";
+
     }
 
-    document.getElementById("pathBox").textContent =
-        "/voidware/proxys/database/" + file;
+    document
+        .getElementById("pathBox")
+        .textContent =
+        "/voidware/proxys/database/" +
+        file;
+
 }
 
 
-/*
-==========================================================
-LOAD DATABASE
-==========================================================
-*/
+/* ==========================================================
+   LOAD DATABASE
+========================================================== */
 
 async function loadLinks() {
 
     const input =
-        document.getElementById("fileName");
+        document.getElementById(
+            "fileName"
+        );
 
     const status =
-        document.getElementById("status");
+        document.getElementById(
+            "status"
+        );
 
     const warning =
-        document.getElementById("warning");
+        document.getElementById(
+            "warning"
+        );
 
     const preview =
-        document.getElementById("preview");
+        document.getElementById(
+            "preview"
+        );
 
     let file =
         input.value.trim();
 
+
     if (!file) {
-        file = "example.txt";
+
+        file =
+            "example.txt";
+
     }
 
-    if (!file.toLowerCase().endsWith(".txt")) {
+
+    if (
+        !file
+            .toLowerCase()
+            .endsWith(".txt")
+    ) {
+
         file += ".txt";
+
     }
 
-    input.value = file;
+
+    input.value =
+        file;
+
 
     updatePath();
+
 
     status.textContent =
         "Loading database...";
 
+
     warning.style.display =
         "none";
+
 
     preview.innerHTML =
         '<div class="empty">Loading...</div>';
 
+
     try {
+
+        /*
+        ------------------------------------------------------
+        GET FILE FROM GITHUB
+        ------------------------------------------------------
+        */
 
         const apiURL =
             GITHUB_API_BASE +
             encodeURIComponent(file);
+
 
         const response =
             await fetch(
@@ -470,6 +684,7 @@ async function loadLinks() {
                     cache: "no-store"
                 }
             );
+
 
         if (!response.ok) {
 
@@ -480,8 +695,10 @@ async function loadLinks() {
 
         }
 
+
         const fileData =
             await response.json();
+
 
         if (!fileData.content) {
 
@@ -491,14 +708,27 @@ async function loadLinks() {
 
         }
 
+
+        /*
+        ------------------------------------------------------
+        DECODE BASE64
+        ------------------------------------------------------
+        */
+
         const cleanBase64 =
-            fileData.content.replace(/\s/g, "");
+            fileData.content
+                .replace(/\s/g, "");
+
 
         const binary =
             atob(cleanBase64);
 
+
         const bytes =
-            new Uint8Array(binary.length);
+            new Uint8Array(
+                binary.length
+            );
+
 
         for (
             let i = 0;
@@ -511,34 +741,171 @@ async function loadLinks() {
 
         }
 
+
         const text =
-            new TextDecoder("utf-8").decode(bytes);
+            new TextDecoder(
+                "utf-8"
+            ).decode(bytes);
+
+
+        /*
+        ------------------------------------------------------
+        FIND LINKS
+        ------------------------------------------------------
+        */
 
         loadedLinks =
             text
-            .split(/\r?\n/)
-            .map(function(line) {
-                return line.trim();
-            })
-            .filter(function(line) {
+                .split(/\r?\n/)
+                .map(function(line) {
 
-                return (
-                    line &&
-                    !line.startsWith("#") &&
-                    /^https?:\/\//i.test(line)
-                );
+                    return line.trim();
 
-            });
+                })
+                .filter(function(line) {
+
+                    return (
+                        line &&
+                        !line.startsWith("#") &&
+                        /^https?:\/\//i.test(line)
+                    );
+
+                });
+
+
+        /*
+        ------------------------------------------------------
+        PREVIEW
+        ------------------------------------------------------
+        */
 
         renderPreview();
 
-        status.textContent =
-            "Loaded " +
-            loadedLinks.length +
-            " proxy link(s) from " +
+
+        /*
+        ------------------------------------------------------
+        AUTOMATICALLY GENERATE HTML
+        ------------------------------------------------------
+        */
+
+        const pageName =
+            document
+                .getElementById(
+                    "pageName"
+                )
+                .value
+                .trim() ||
+            "Voidware Proxys";
+
+
+        const databasePath =
+            "/voidware/proxys/database/" +
             file;
 
-        if (loadedLinks.length === 0) {
+
+        const generated =
+            buildGeneratedHTML(
+                pageName,
+                databasePath
+            );
+
+
+        /*
+        Put HTML into textarea
+        */
+
+        const generatedCode =
+            document.getElementById(
+                "generatedCode"
+            );
+
+
+        generatedCode.value =
+            generated;
+
+
+        /*
+        ------------------------------------------------------
+        AUTOMATICALLY COPY
+        ------------------------------------------------------
+        */
+
+        let copied =
+            false;
+
+
+        try {
+
+            await navigator
+                .clipboard
+                .writeText(
+                    generated
+                );
+
+            copied = true;
+
+        }
+        catch (clipboardError) {
+
+            /*
+            Fallback for browsers where
+            Clipboard API is unavailable.
+            */
+
+            try {
+
+                generatedCode.focus();
+
+                generatedCode.select();
+
+                copied =
+                    document.execCommand(
+                        "copy"
+                    );
+
+            }
+            catch (fallbackError) {
+
+                copied = false;
+
+            }
+
+        }
+
+
+        /*
+        ------------------------------------------------------
+        STATUS
+        ------------------------------------------------------
+        */
+
+        if (copied) {
+
+            status.textContent =
+                "Loaded " +
+                loadedLinks.length +
+                " link(s) • HTML generated and copied to clipboard!";
+
+        }
+        else {
+
+            status.textContent =
+                "Loaded " +
+                loadedLinks.length +
+                " link(s) • HTML generated. Clipboard access was blocked.";
+
+        }
+
+
+        /*
+        ------------------------------------------------------
+        EMPTY DATABASE
+        ------------------------------------------------------
+        */
+
+        if (
+            loadedLinks.length === 0
+        ) {
 
             warning.style.display =
                 "block";
@@ -548,40 +915,53 @@ async function loadLinks() {
 
         }
 
-    } catch (error) {
+    }
+    catch (error) {
 
         loadedLinks = [];
 
+
         preview.innerHTML =
             '<div class="empty">Unable to load the database.</div>';
+
 
         status.textContent =
             "Error: " +
             error.message;
 
+
         warning.style.display =
             "block";
 
+
         warning.textContent =
             "Make sure the TXT file exists in proxys/database/ and that the filename is correct.";
+
+
+        console.error(
+            error
+        );
 
     }
 
 }
 
 
-/*
-==========================================================
-PREVIEW
-==========================================================
-*/
+/* ==========================================================
+   PREVIEW
+========================================================== */
 
 function renderPreview() {
 
     const preview =
-        document.getElementById("preview");
+        document.getElementById(
+            "preview"
+        );
 
-    if (loadedLinks.length === 0) {
+
+    if (
+        loadedLinks.length === 0
+    ) {
 
         preview.innerHTML =
             '<div class="empty">No links found.</div>';
@@ -590,34 +970,58 @@ function renderPreview() {
 
     }
 
-    preview.innerHTML = "";
+
+    preview.innerHTML =
+        "";
+
 
     loadedLinks.forEach(
         function(link, index) {
 
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             card.className =
                 "proxy-card";
 
+
             const title =
-                document.createElement("h3");
+                document.createElement(
+                    "h3"
+                );
+
 
             title.textContent =
                 "Proxy " +
                 (index + 1);
 
+
             const url =
-                document.createElement("p");
+                document.createElement(
+                    "p"
+                );
+
 
             url.textContent =
                 link;
 
-            card.appendChild(title);
-            card.appendChild(url);
 
-            preview.appendChild(card);
+            card.appendChild(
+                title
+            );
+
+
+            card.appendChild(
+                url
+            );
+
+
+            preview.appendChild(
+                card
+            );
 
         }
     );
@@ -625,58 +1029,56 @@ function renderPreview() {
 }
 
 
-/*
-==========================================================
-GENERATE HTML
-==========================================================
-*/
+/* ==========================================================
+   GENERATE HTML
+========================================================== */
 
 function buildGeneratedHTML(
     pageName,
     databasePath
 ) {
 
-    const lines = [];
-
     const fileName =
-        getFileNameFromPath(databasePath);
+        getFileNameFromPath(
+            databasePath
+        );
+
 
     const rawDatabaseURL =
-        "https://raw.githubusercontent.com/voidware1/voidware/main/proxys/database/" +
-        encodeURIComponent(fileName);
+        RAW_BASE +
+        encodeURIComponent(
+            fileName
+        );
 
 
     /*
-    HEAD
+    ----------------------------------------------------------
+    IMPORTANT
+    ----------------------------------------------------------
+    This uses a template literal to generate the page.
+
+    Backslashes are intentionally escaped here so the
+    GENERATED page receives the correct JavaScript regex.
+    ----------------------------------------------------------
     */
 
-    lines.push("<!DOCTYPE html>");
-    lines.push('<html lang="en">');
+    const generatedHTML = `<!DOCTYPE html>
+<html lang="en">
 
-    lines.push("<head>");
+<head>
 
-    lines.push(
-        '<meta charset="UTF-8">'
-    );
+<meta charset="UTF-8">
 
-    lines.push(
-        '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
-    );
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    lines.push(
-        "<title>" +
-        escapeHTML(pageName) +
-        "</title>"
-    );
+<title>${escapeHTML(pageName)}</title>
 
 
-    /*
-    GENERATED PAGE CSS
-    */
+<style>
 
-    lines.push("<style>");
-
-    lines.push(`
 *{
     box-sizing:border-box;
 }
@@ -684,74 +1086,122 @@ function buildGeneratedHTML(
 body{
     margin:0;
     min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background:
-        radial-gradient(circle at top,#24103d 0%,#10091c 45%,#07050d 100%);
+        radial-gradient(
+            circle at top,
+            #24103d 0%,
+            #10091c 45%,
+            #07050d 100%
+        );
+
     color:white;
 }
 
 header{
     height:70px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 28px;
-    background:rgba(10,5,18,.9);
-    border-bottom:1px solid #392052;
+
+    background:
+        rgba(10,5,18,.9);
+
+    border-bottom:
+        1px solid #392052;
 }
 
 .logo{
     font-size:25px;
+
     font-weight:bold;
+
     color:#b86cff;
+
     text-decoration:none;
 }
 
 nav{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
 }
 
 nav a{
     color:#d8c7e8;
+
     text-decoration:none;
+
     padding:9px 13px;
+
     border-radius:8px;
 }
 
 nav a:hover{
     background:#26133b;
+
     color:white;
 }
 
 .container{
-    width:min(1100px,calc(100% - 30px));
+    width:min(
+        1100px,
+        calc(100% - 30px)
+    );
+
     margin:35px auto;
 }
 
 h1{
     text-align:center;
+
     color:#d8b4fe;
+
     margin-bottom:25px;
 }
 
 .panel{
-    background:rgba(18,10,30,.9);
-    border:1px solid #3b2253;
+    background:
+        rgba(18,10,30,.9);
+
+    border:
+        1px solid #3b2253;
+
     border-radius:15px;
+
     padding:20px;
 }
 
 select{
     width:100%;
+
     padding:13px;
+
     border-radius:9px;
-    border:1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     background:#0d0815;
+
     color:white;
+
     font-size:15px;
+
     outline:none;
+
     margin-bottom:12px;
 }
 
@@ -761,18 +1211,27 @@ select:focus{
 
 .buttons{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
+
     margin-bottom:15px;
 }
 
 button{
     border:0;
+
     border-radius:9px;
+
     padding:11px 16px;
+
     background:#7c3aed;
+
     color:white;
+
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -782,15 +1241,22 @@ button:hover{
 
 iframe{
     width:100%;
+
     height:600px;
-    border:1px solid #493060;
+
+    border:
+        1px solid #493060;
+
     border-radius:10px;
+
     background:#000;
 }
 
 .status{
     color:#9686a4;
+
     margin-bottom:12px;
+
     font-size:14px;
 }
 
@@ -798,8 +1264,11 @@ iframe{
 
     header{
         height:auto;
+
         padding:15px;
+
         flex-direction:column;
+
         gap:12px;
     }
 
@@ -808,131 +1277,128 @@ iframe{
     }
 
 }
-`);
 
-    lines.push("</style>");
-    lines.push("</head>");
+</style>
 
-
-    /*
-    BODY
-    */
-
-    lines.push("<body>");
-
-    lines.push("<header>");
-
-    lines.push(
-        '<a class="logo" href="/voidware/">Voidware</a>'
-    );
-
-    lines.push("<nav>");
-
-    lines.push(
-        '<a href="/voidware/">Home</a>'
-    );
-
-    lines.push(
-        '<a href="/voidware/games/index.html">Games</a>'
-    );
-
-    lines.push(
-        '<a href="/voidware/proxys/index.html">Proxys</a>'
-    );
-
-    lines.push(
-        '<a href="/voidware/apps/index.html">Apps</a>'
-    );
-
-    lines.push("</nav>");
-    lines.push("</header>");
+</head>
 
 
-    /*
-    MAIN
-    */
+<body>
 
-    lines.push(
-        '<div class="container">'
-    );
 
-    lines.push(
-        "<h1>" +
-        escapeHTML(pageName) +
-        "</h1>"
-    );
+<header>
 
-    lines.push(
-        '<div class="panel">'
-    );
+<a
+    class="logo"
+    href="/voidware/"
+>
+    Voidware
+</a>
 
-    lines.push(
-        '<div class="status" id="status">Loading links...</div>'
-    );
 
-    lines.push(
-        '<select id="linkSelect"></select>'
-    );
+<nav>
 
-    lines.push(
-        '<div class="buttons">'
-    );
+<a href="/voidware/">
+    Home
+</a>
 
-    lines.push(
-        '<button id="openBlank">Open in About:Blank</button>'
-    );
+<a href="/voidware/games/index.html">
+    Games
+</a>
 
-    lines.push(
-        '<button id="fullscreen">Fullscreen</button>'
-    );
+<a href="/voidware/proxys/index.html">
+    Proxys
+</a>
 
-    lines.push("</div>");
+<a href="/voidware/apps/index.html">
+    Apps
+</a>
 
-    lines.push(`
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<h1>
+    ${escapeHTML(pageName)}
+</h1>
+
+
+<div class="panel">
+
+
+<div
+    class="status"
+    id="status"
+>
+    Loading links...
+</div>
+
+
+<select
+    id="linkSelect"
+></select>
+
+
+<div class="buttons">
+
+<button id="openBlank">
+    Open in About:Blank
+</button>
+
+<button id="fullscreen">
+    Fullscreen
+</button>
+
+</div>
+
+
 <iframe
     id="proxyFrame"
     allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
     allowfullscreen>
 </iframe>
-`);
-
-    lines.push("</div>");
-    lines.push("</div>");
 
 
-    /*
-    GENERATED PAGE SCRIPT
-    */
+</div>
 
-    lines.push("<script>");
+</div>
 
-    lines.push(
-        "const DATABASE_URL=" +
-        JSON.stringify(rawDatabaseURL) +
-        ";"
-    );
 
-    lines.push(`
+<script>
+
+const DATABASE_URL =
+    ${JSON.stringify(rawDatabaseURL)};
+
 
 let proxyLinks = [];
 
 let currentLink = "";
 
+
 const select =
-    document.getElementById("linkSelect");
+    document.getElementById(
+        "linkSelect"
+    );
+
 
 const frame =
-    document.getElementById("proxyFrame");
+    document.getElementById(
+        "proxyFrame"
+    );
+
 
 const status =
-    document.getElementById("status");
+    document.getElementById(
+        "status"
+    );
 
 
-/*
-==========================================================
-LOAD DATABASE
-==========================================================
-*/
+/* ==========================================================
+   LOAD DATABASE
+========================================================== */
 
 async function loadDatabase(){
 
@@ -946,6 +1412,7 @@ async function loadDatabase(){
                 }
             );
 
+
         if(!response.ok){
 
             throw new Error(
@@ -955,29 +1422,33 @@ async function loadDatabase(){
 
         }
 
+
         const text =
             await response.text();
 
+
         proxyLinks =
             text
-            .split(/\\\\r?\\\\n/)
-            .map(function(line){
+                .split(/\\r?\\n/)
+                .map(function(line){
 
-                return line.trim();
+                    return line.trim();
 
-            })
-            .filter(function(line){
+                })
+                .filter(function(line){
 
-                return (
-                    line &&
-                    !line.startsWith("#") &&
-                    /^https?:\\\\/\\\\//i.test(line)
-                );
+                    return (
+                        line &&
+                        !line.startsWith("#") &&
+                        /^https?:\\/\\//i.test(line)
+                    );
 
-            });
+                });
 
 
-        if(proxyLinks.length === 0){
+        if(
+            proxyLinks.length === 0
+        ){
 
             status.textContent =
                 "No links found.";
@@ -987,12 +1458,9 @@ async function loadDatabase(){
         }
 
 
-        /*
-        Generic dropdown names.
-        URLs are not displayed.
-        */
+        select.innerHTML =
+            "";
 
-        select.innerHTML = "";
 
         proxyLinks.forEach(
             function(link,index){
@@ -1002,12 +1470,15 @@ async function loadDatabase(){
                         "option"
                     );
 
+
                 option.value =
                     index;
+
 
                 option.textContent =
                     "Link " +
                     (index + 1);
+
 
                 select.appendChild(
                     option
@@ -1030,23 +1501,26 @@ async function loadDatabase(){
         status.textContent =
             "Unable to load proxy database.";
 
-        console.error(error);
+        console.error(
+            error
+        );
 
     }
 
 }
 
 
-/*
-==========================================================
-SELECT LINK
-==========================================================
-*/
+/* ==========================================================
+   SELECT LINK
+========================================================== */
 
 function selectLink(){
 
     const index =
-        Number(select.value);
+        Number(
+            select.value
+        );
+
 
     if(
         Number.isNaN(index) ||
@@ -1057,8 +1531,10 @@ function selectLink(){
 
     }
 
+
     currentLink =
         proxyLinks[index];
+
 
     frame.src =
         currentLink;
@@ -1072,14 +1548,14 @@ select.addEventListener(
 );
 
 
-/*
-==========================================================
-ABOUT:BLANK OPENER
-==========================================================
-*/
+/* ==========================================================
+   ABOUT:BLANK
+========================================================== */
 
 document
-    .getElementById("openBlank")
+    .getElementById(
+        "openBlank"
+    )
     .addEventListener(
         "click",
         function(){
@@ -1094,11 +1570,6 @@ document
 
             }
 
-
-            /*
-            Open a new blank tab immediately
-            from the user's click.
-            */
 
             const win =
                 window.open(
@@ -1119,101 +1590,71 @@ document
 
 
             /*
-            Escape the selected URL safely
-            before inserting it into the new page.
-            */
-
-            const safeURL =
-                JSON.stringify(
-                    currentLink
-                );
-
-
-            /*
-            Build the About:Blank page.
+            Create a blank page and put the
+            selected proxy inside an iframe.
             */
 
             win.document.open();
 
+
             win.document.write(
-                \`
-<!DOCTYPE html>
+                '<!DOCTYPE html>' +
 
-<html lang="en">
+                '<html lang="en">' +
 
-<head>
+                '<head>' +
 
-<meta charset="UTF-8">
+                '<meta charset="UTF-8">' +
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+                '<meta name="viewport" content="width=device-width,initial-scale=1.0">' +
 
-<title>Voidware Proxy</title>
+                '<title>Voidware Proxy</title>' +
 
-<style>
+                '<style>' +
 
-html,
-body{
+                'html,body{' +
+                    'margin:0;' +
+                    'padding:0;' +
+                    'width:100%;' +
+                    'height:100%;' +
+                    'overflow:hidden;' +
+                    'background:#000;' +
+                '}' +
 
-    margin:0;
-    padding:0;
+                '#proxyEmbed{' +
+                    'position:fixed;' +
+                    'inset:0;' +
+                    'width:100%;' +
+                    'height:100%;' +
+                    'border:0;' +
+                    'background:#000;' +
+                '}' +
 
-    width:100%;
-    height:100%;
+                '</style>' +
 
-    overflow:hidden;
+                '</head>' +
 
-    background:#000;
+                '<body>' +
 
-}
+                '<iframe ' +
+                    'id="proxyEmbed" ' +
+                    'allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *" ' +
+                    'allowfullscreen>' +
+                '</iframe>' +
 
-#proxyEmbed{
+                '<script>' +
 
-    position:fixed;
+                'document.getElementById("proxyEmbed").src=' +
+                JSON.stringify(currentLink) +
+                ';' +
 
-    top:0;
-    left:0;
+                '<\\/script>' +
 
-    width:100%;
-    height:100%;
+                '</body>' +
 
-    border:0;
-
-    background:#000;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<iframe
-    id="proxyEmbed"
-    allow="accelerometer *; autoplay *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; microphone *; camera *; midi *; payment *; picture-in-picture *; screen-wake-lock *; sync-xhr *; web-share *"
-    allowfullscreen>
-</iframe>
-
-<script>
-
-const iframe =
-    document.getElementById(
-        "proxyEmbed"
-    );
-
-iframe.src =
-    \${safeURL};
-
-<\\\\/script>
-
-</body>
-
-</html>
-                \`
+                '</html>'
             );
+
 
             win.document.close();
 
@@ -1221,14 +1662,14 @@ iframe.src =
     );
 
 
-/*
-==========================================================
-FULLSCREEN
-==========================================================
-*/
+/* ==========================================================
+   FULLSCREEN
+========================================================== */
 
 document
-    .getElementById("fullscreen")
+    .getElementById(
+        "fullscreen"
+    )
     .addEventListener(
         "click",
         function(){
@@ -1249,41 +1690,31 @@ document
     );
 
 
-/*
-==========================================================
-START
-==========================================================
-*/
+/* ==========================================================
+   START
+========================================================== */
 
 loadDatabase();
 
-`);
+<\/script>
 
-    /*
-    IMPORTANT:
-    Prevent the generated script from being
-    prematurely closed.
-    */
+</body>
 
-    lines.push(
-        "<" + "/script>"
-    );
+</html>`;
 
-    lines.push("</body>");
-    lines.push("</html>");
 
-    return lines.join("\n");
+    return generatedHTML;
 
 }
 
 
-/*
-==========================================================
-HELPER FUNCTIONS
-==========================================================
-*/
+/* ==========================================================
+   GET FILE NAME
+========================================================== */
 
-function getFileNameFromPath(path) {
+function getFileNameFromPath(
+    path
+) {
 
     return path
         .split("/")
@@ -1292,106 +1723,42 @@ function getFileNameFromPath(path) {
 }
 
 
-function escapeHTML(text) {
+/* ==========================================================
+   ESCAPE HTML
+========================================================== */
 
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+function escapeHTML(
+    text
+) {
+
+    return String(text)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-/*
-==========================================================
-GENERATE BUTTON
-==========================================================
-*/
-
-function generatePage() {
-
-    const pageNameInput =
-        document.getElementById(
-            "pageName"
-        );
-
-    const fileInput =
-        document.getElementById(
-            "fileName"
-        );
-
-
-    const pageName =
-        pageNameInput.value.trim() ||
-        "Voidware Proxys";
-
-
-    let file =
-        fileInput.value.trim() ||
-        "example.txt";
-
-
-    if(
-        !file
-            .toLowerCase()
-            .endsWith(".txt")
-    ){
-
-        file += ".txt";
-
-    }
-
-
-    fileInput.value =
-        file;
-
-    updatePath();
-
-
-    /*
-    Every TXT file is located at:
-
-    /voidware/proxys/database/
-    */
-
-    const databasePath =
-        "/voidware/proxys/database/" +
-        file;
-
-
-    const generated =
-        buildGeneratedHTML(
-            pageName,
-            databasePath
-        );
-
-
-    document
-        .getElementById(
-            "generatedCode"
-        )
-        .value =
-        generated;
-
-
-    document
-        .getElementById(
-            "status"
-        )
-        .textContent =
-        "HTML page generated for " +
-        file;
-
-}
-
-
-/*
-==========================================================
-COPY
-==========================================================
-*/
+/* ==========================================================
+   COPY BUTTON
+========================================================== */
 
 async function copyCode() {
 
@@ -1401,13 +1768,17 @@ async function copyCode() {
         );
 
 
-    if(!textarea.value){
+    const status =
+        document.getElementById(
+            "status"
+        );
 
-        document
-            .getElementById(
-                "status"
-            )
-            .textContent =
+
+    if(
+        !textarea.value
+    ){
+
+        status.textContent =
             "Generate the page first.";
 
         return;
@@ -1417,43 +1788,49 @@ async function copyCode() {
 
     try{
 
-        await navigator.clipboard.writeText(
-            textarea.value
-        );
+        await navigator
+            .clipboard
+            .writeText(
+                textarea.value
+            );
 
-        document
-            .getElementById(
-                "status"
-            )
-            .textContent =
+
+        status.textContent =
             "Code copied!";
 
     }
     catch(error){
 
+        textarea.focus();
+
         textarea.select();
 
-        document.execCommand(
-            "copy"
-        );
 
-        document
-            .getElementById(
-                "status"
-            )
-            .textContent =
-            "Code copied!";
+        try {
+
+            document.execCommand(
+                "copy"
+            );
+
+            status.textContent =
+                "Code copied!";
+
+        }
+        catch(copyError){
+
+            status.textContent =
+                "Clipboard access was blocked.";
+
+        }
 
     }
 
 }
 
 
-/*
-==========================================================
-EVENTS
-==========================================================
-*/
+/* ==========================================================
+   EVENTS
+========================================================== */
 
 document
     .getElementById(
@@ -1477,16 +1854,6 @@ document
 
 document
     .getElementById(
-        "generateButton"
-    )
-    .addEventListener(
-        "click",
-        generatePage
-    );
-
-
-document
-    .getElementById(
         "copyButton"
     )
     .addEventListener(
@@ -1500,5 +1867,6 @@ updatePath();
 </script>
 
 </body>
-</html>
 
+</html>
+```
