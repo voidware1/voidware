@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Basketball Battles</title>
+
+<meta
+    name="theme-color"
+    content="#07050c"
+>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #07050c;
+    color: #f5f0ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-page {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+.game-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.game-content iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.game-content > * {
+    max-width: 100%;
+}
+
+#gameContainer {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+.voidware-controls {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 999999;
+    display: flex;
+    gap: 8px;
+    opacity: .35;
+    transition: .2s;
+}
+
+.voidware-controls:hover {
+    opacity: 1;
+}
+
+.voidware-controls button,
+.voidware-controls a {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(155,77,255,.4);
+    border-radius: 9px;
+    padding: 9px 13px;
+    background: rgba(12,7,18,.9);
+    color: white;
+    cursor: pointer;
+    font-weight: 800;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.voidware-controls button:hover,
+.voidware-controls a:hover {
+    background: rgba(155,77,255,.25);
+    border-color: #9b4dff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="game-page">
+
+<div
+    id="gameContent"
+    class="game-content"
+>
+
+<html>
+<body>
+<script>
+async function load(){
+	var response = await
+    fetch("https://cdn.jsdelivr.net/gh/faralong/test@main/basketballlegendss.html");
+    var html = await response.text();
+
+    
+    document.open()
+    document.write(html)
+    document.close()
+    
+}
+load()
+</script>
+</body>
+</html>
+
+</div>
+
+<div class="voidware-controls">
+
+    <a href="voidware1/voidware/games/index.html">
+        ← Back to Games
+    </a>
+
+    <button onclick="openBlank()">
+        ↗ About:blank
+    </button>
+
+    <button onclick="goFullscreen()">
+        ⛶ Fullscreen
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+function goFullscreen() {
+
+    const element =
+        document.documentElement;
+
+    if (element.requestFullscreen) {
+
+        element.requestFullscreen();
+
+    } else if (element.webkitRequestFullscreen) {
+
+        element.webkitRequestFullscreen();
+
+    }
+
+}
+
+
+function openBlank() {
+
+    const html =
+        document.documentElement.outerHTML;
+
+    const blob =
+        new Blob(
+            [html],
+            { type: "text/html" }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const win =
+        window.open("about:blank", "_blank");
+
+    if (win) {
+
+        win.location.href = url;
+
+    } else {
+
+        alert(
+            "The browser blocked the new window. Allow pop-ups and try again."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
